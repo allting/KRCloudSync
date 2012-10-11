@@ -20,9 +20,7 @@
 
 -(BOOL)hasResource:(NSURL*)url{
 	for(KRResourceProperty* res in _Resources){
-		NSString* component = [url lastPathComponent];
-		NSString* fileName = [res.URL lastPathComponent];
-		if([component isEqualToString:fileName])
+		if([self isEqualToURL:url otherURL:res.URL])
 			return YES;
 	}
 	return NO;
@@ -30,10 +28,18 @@
 
 -(KRResourceProperty*)findResource:(NSURL*)url{
 	for(KRResourceProperty* res in _Resources){
-		if([url isEqual:res.URL])
+		if([self isEqualToURL:url otherURL:res.URL])
 			return res;
 	}
 	return nil;
+}
+
+-(BOOL)isEqualToURL:(NSURL*)url otherURL:(NSURL*)otherURL{
+	NSString* fileName = [url lastPathComponent];
+	NSString* otherFileName = [otherURL lastPathComponent];
+	if([fileName isEqualToString:otherFileName])
+		return YES;
+	return NO;
 }
 
 -(BOOL)isModified:(KRResourceProperty *)resource otherResource:(KRResourceProperty*)otherResource{

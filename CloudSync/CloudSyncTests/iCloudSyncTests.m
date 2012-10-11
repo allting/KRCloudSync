@@ -44,6 +44,13 @@
 	STAssertTrue([manager isModified:TEST_RESOURCE otherResource:[_testResources objectAtIndex:2]], @"Must be different");
 }
 
+-(void)testFindResource{
+	KRiCloudResourceManager* manager = [[KRiCloudResourceManager alloc]initWithURLsAndProperties:_testResources];
+	
+	STAssertNotNil([manager findResource:_testURL], @"Must be exist");
+	STAssertNil([manager findResource:_testShouldNotFoundURL], @"Mustn't be exist");
+}
+
 -(NSArray*)createTestResources:(NSDate*)date size:(NSNumber*)size{
 	NSURL* TEST_URL1 = [NSURL fileURLWithPath:@"/var/private/test1.zip"];
 	NSURL* TEST_URL2 = [NSURL fileURLWithPath:@"/var/private/test.zip"];
