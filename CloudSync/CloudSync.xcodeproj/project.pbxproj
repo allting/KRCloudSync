@@ -16,6 +16,9 @@
 		DFFE0337162575DE0091DF16 /* libCloudSync.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE031E162575DD0091DF16 /* libCloudSync.a */; };
 		DFFE033D162575DE0091DF16 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DFFE033B162575DE0091DF16 /* InfoPlist.strings */; };
 		DFFE0340162575DE0091DF16 /* CloudSyncTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE033F162575DE0091DF16 /* CloudSyncTests.m */; };
+		DFFE034B16269CF70091DF16 /* iCloudSyncTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE034A16269CF70091DF16 /* iCloudSyncTests.m */; };
+		DFFE034E1626A04B0091DF16 /* iCloudResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE034D1626A04B0091DF16 /* iCloudResourceManager.m */; };
+		DFFE034F1626A04B0091DF16 /* iCloudResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE034D1626A04B0091DF16 /* iCloudResourceManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,10 @@
 		DFFE033C162575DE0091DF16 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DFFE033E162575DE0091DF16 /* CloudSyncTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CloudSyncTests.h; sourceTree = "<group>"; };
 		DFFE033F162575DE0091DF16 /* CloudSyncTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CloudSyncTests.m; sourceTree = "<group>"; };
+		DFFE034916269CF70091DF16 /* iCloudSyncTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCloudSyncTests.h; sourceTree = "<group>"; };
+		DFFE034A16269CF70091DF16 /* iCloudSyncTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCloudSyncTests.m; sourceTree = "<group>"; };
+		DFFE034C1626A04B0091DF16 /* iCloudResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCloudResourceManager.h; sourceTree = "<group>"; };
+		DFFE034D1626A04B0091DF16 /* iCloudResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCloudResourceManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +121,8 @@
 				DFFE0326162575DD0091DF16 /* CloudSync.h */,
 				DFFE0328162575DD0091DF16 /* CloudSync.m */,
 				DFFE0324162575DD0091DF16 /* Supporting Files */,
+				DFFE034C1626A04B0091DF16 /* iCloudResourceManager.h */,
+				DFFE034D1626A04B0091DF16 /* iCloudResourceManager.m */,
 			);
 			path = CloudSync;
 			sourceTree = "<group>";
@@ -131,6 +140,8 @@
 			children = (
 				DFFE033E162575DE0091DF16 /* CloudSyncTests.h */,
 				DFFE033F162575DE0091DF16 /* CloudSyncTests.m */,
+				DFFE034916269CF70091DF16 /* iCloudSyncTests.h */,
+				DFFE034A16269CF70091DF16 /* iCloudSyncTests.m */,
 				DFFE0339162575DE0091DF16 /* Supporting Files */,
 			);
 			path = CloudSyncTests;
@@ -244,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFFE0329162575DD0091DF16 /* CloudSync.m in Sources */,
+				DFFE034E1626A04B0091DF16 /* iCloudResourceManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +264,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFFE0340162575DE0091DF16 /* CloudSyncTests.m in Sources */,
+				DFFE034B16269CF70091DF16 /* iCloudSyncTests.m in Sources */,
+				DFFE034F1626A04B0091DF16 /* iCloudResourceManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
