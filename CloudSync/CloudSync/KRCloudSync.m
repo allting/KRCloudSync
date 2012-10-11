@@ -6,7 +6,7 @@
 //  Copyright (c) 2012년 allting. All rights reserved.
 //
 
-#import "CloudSync.h"
+#import "KRCloudSync.h"
 
 @implementation KRCloudSync
 

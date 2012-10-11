@@ -7,7 +7,7 @@
 //
 
 #import "CloudSyncTests.h"
-#import "CloudSync.h"
+#import "KRCloudSync.h"
 
 @implementation CloudSyncTests
 

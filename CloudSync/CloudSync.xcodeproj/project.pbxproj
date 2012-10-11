@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		DFFE0322162575DD0091DF16 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE0321162575DD0091DF16 /* Foundation.framework */; };
-		DFFE0327162575DD0091DF16 /* CloudSync.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE0326162575DD0091DF16 /* CloudSync.h */; };
-		DFFE0329162575DD0091DF16 /* CloudSync.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE0328162575DD0091DF16 /* CloudSync.m */; };
+		DFFE0327162575DD0091DF16 /* KRCloudSync.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE0326162575DD0091DF16 /* KRCloudSync.h */; };
+		DFFE0329162575DD0091DF16 /* KRCloudSync.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE0328162575DD0091DF16 /* KRCloudSync.m */; };
 		DFFE0331162575DE0091DF16 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE0330162575DE0091DF16 /* SenTestingKit.framework */; };
 		DFFE0333162575DE0091DF16 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE0332162575DE0091DF16 /* UIKit.framework */; };
 		DFFE0334162575DE0091DF16 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE0321162575DD0091DF16 /* Foundation.framework */; };
@@ -17,8 +17,8 @@
 		DFFE033D162575DE0091DF16 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DFFE033B162575DE0091DF16 /* InfoPlist.strings */; };
 		DFFE0340162575DE0091DF16 /* CloudSyncTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE033F162575DE0091DF16 /* CloudSyncTests.m */; };
 		DFFE034B16269CF70091DF16 /* iCloudSyncTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE034A16269CF70091DF16 /* iCloudSyncTests.m */; };
-		DFFE034E1626A04B0091DF16 /* iCloudResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE034D1626A04B0091DF16 /* iCloudResourceManager.m */; };
-		DFFE034F1626A04B0091DF16 /* iCloudResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE034D1626A04B0091DF16 /* iCloudResourceManager.m */; };
+		DFFE034E1626A04B0091DF16 /* KRiCloudResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE034D1626A04B0091DF16 /* KRiCloudResourceManager.m */; };
+		DFFE034F1626A04B0091DF16 /* KRiCloudResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE034D1626A04B0091DF16 /* KRiCloudResourceManager.m */; };
 		DFFE03521626ADA00091DF16 /* KRResourceProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE03511626ADA00091DF16 /* KRResourceProperty.m */; };
 		DFFE03531626ADA00091DF16 /* KRResourceProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE03511626ADA00091DF16 /* KRResourceProperty.m */; };
 /* End PBXBuildFile section */
@@ -40,7 +40,7 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				DFFE0327162575DD0091DF16 /* CloudSync.h in CopyFiles */,
+				DFFE0327162575DD0091DF16 /* KRCloudSync.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,8 +50,8 @@
 		DFFE031E162575DD0091DF16 /* libCloudSync.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCloudSync.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFFE0321162575DD0091DF16 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DFFE0325162575DD0091DF16 /* CloudSync-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CloudSync-Prefix.pch"; sourceTree = "<group>"; };
-		DFFE0326162575DD0091DF16 /* CloudSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CloudSync.h; sourceTree = "<group>"; };
-		DFFE0328162575DD0091DF16 /* CloudSync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CloudSync.m; sourceTree = "<group>"; };
+		DFFE0326162575DD0091DF16 /* KRCloudSync.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KRCloudSync.h; sourceTree = "<group>"; };
+		DFFE0328162575DD0091DF16 /* KRCloudSync.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KRCloudSync.m; sourceTree = "<group>"; };
 		DFFE032F162575DE0091DF16 /* CloudSyncTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CloudSyncTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFFE0330162575DE0091DF16 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		DFFE0332162575DE0091DF16 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -61,8 +61,8 @@
 		DFFE033F162575DE0091DF16 /* CloudSyncTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CloudSyncTests.m; sourceTree = "<group>"; };
 		DFFE034916269CF70091DF16 /* iCloudSyncTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCloudSyncTests.h; sourceTree = "<group>"; };
 		DFFE034A16269CF70091DF16 /* iCloudSyncTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCloudSyncTests.m; sourceTree = "<group>"; };
-		DFFE034C1626A04B0091DF16 /* iCloudResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCloudResourceManager.h; sourceTree = "<group>"; };
-		DFFE034D1626A04B0091DF16 /* iCloudResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCloudResourceManager.m; sourceTree = "<group>"; };
+		DFFE034C1626A04B0091DF16 /* KRiCloudResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRiCloudResourceManager.h; sourceTree = "<group>"; };
+		DFFE034D1626A04B0091DF16 /* KRiCloudResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRiCloudResourceManager.m; sourceTree = "<group>"; };
 		DFFE03501626ADA00091DF16 /* KRResourceProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRResourceProperty.h; sourceTree = "<group>"; };
 		DFFE03511626ADA00091DF16 /* KRResourceProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRResourceProperty.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,11 +122,11 @@
 		DFFE0323162575DD0091DF16 /* CloudSync */ = {
 			isa = PBXGroup;
 			children = (
-				DFFE0326162575DD0091DF16 /* CloudSync.h */,
-				DFFE0328162575DD0091DF16 /* CloudSync.m */,
+				DFFE0326162575DD0091DF16 /* KRCloudSync.h */,
+				DFFE0328162575DD0091DF16 /* KRCloudSync.m */,
 				DFFE0324162575DD0091DF16 /* Supporting Files */,
-				DFFE034C1626A04B0091DF16 /* iCloudResourceManager.h */,
-				DFFE034D1626A04B0091DF16 /* iCloudResourceManager.m */,
+				DFFE034C1626A04B0091DF16 /* KRiCloudResourceManager.h */,
+				DFFE034D1626A04B0091DF16 /* KRiCloudResourceManager.m */,
 				DFFE03501626ADA00091DF16 /* KRResourceProperty.h */,
 				DFFE03511626ADA00091DF16 /* KRResourceProperty.m */,
 			);
@@ -260,8 +260,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFFE0329162575DD0091DF16 /* CloudSync.m in Sources */,
-				DFFE034E1626A04B0091DF16 /* iCloudResourceManager.m in Sources */,
+				DFFE0329162575DD0091DF16 /* KRCloudSync.m in Sources */,
+				DFFE034E1626A04B0091DF16 /* KRiCloudResourceManager.m in Sources */,
 				DFFE03521626ADA00091DF16 /* KRResourceProperty.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,7 +272,7 @@
 			files = (
 				DFFE0340162575DE0091DF16 /* CloudSyncTests.m in Sources */,
 				DFFE034B16269CF70091DF16 /* iCloudSyncTests.m in Sources */,
-				DFFE034F1626A04B0091DF16 /* iCloudResourceManager.m in Sources */,
+				DFFE034F1626A04B0091DF16 /* KRiCloudResourceManager.m in Sources */,
 				DFFE03531626ADA00091DF16 /* KRResourceProperty.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

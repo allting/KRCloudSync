@@ -6,7 +6,7 @@
 //  Copyright (c) 2012년 allting. All rights reserved.
 //
 
-#import "iCloudResourceManager.h"
+#import "KRiCloudResourceManager.h"
 
 @implementation KRiCloudResourceManager
 

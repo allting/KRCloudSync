@@ -7,7 +7,7 @@
 //
 
 #import "iCloudSyncTests.h"
-#import "iCloudResourceManager.h"
+#import "KRiCloudResourceManager.h"
 #import "KRResourceProperty.h"
 
 @implementation iCloudSyncTests
