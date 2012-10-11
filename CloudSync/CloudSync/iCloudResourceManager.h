@@ -7,13 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KRResourceProperty.h"
 
 @interface iCloudResourceManager : NSObject
 
 @property (nonatomic) NSArray* URLs;
+@property (nonatomic) NSArray* Resources;
 
--(id)initWithURLs:(NSArray*)URLs;
+-(id)initWithURLsAndProperties:(NSArray*)Resources;
 
 -(BOOL)hasResource:(NSURL*)url;
+
+-(KRResourceProperty*)findResource:(NSURL*)url;
+-(BOOL)isModified:(KRResourceProperty *)resource otherResource:(KRResourceProperty*)otherResource;
 
 @end

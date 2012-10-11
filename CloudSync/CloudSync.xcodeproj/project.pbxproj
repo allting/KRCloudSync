@@ -19,6 +19,8 @@
 		DFFE034B16269CF70091DF16 /* iCloudSyncTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE034A16269CF70091DF16 /* iCloudSyncTests.m */; };
 		DFFE034E1626A04B0091DF16 /* iCloudResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE034D1626A04B0091DF16 /* iCloudResourceManager.m */; };
 		DFFE034F1626A04B0091DF16 /* iCloudResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE034D1626A04B0091DF16 /* iCloudResourceManager.m */; };
+		DFFE03521626ADA00091DF16 /* KRResourceProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE03511626ADA00091DF16 /* KRResourceProperty.m */; };
+		DFFE03531626ADA00091DF16 /* KRResourceProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE03511626ADA00091DF16 /* KRResourceProperty.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		DFFE034A16269CF70091DF16 /* iCloudSyncTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCloudSyncTests.m; sourceTree = "<group>"; };
 		DFFE034C1626A04B0091DF16 /* iCloudResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCloudResourceManager.h; sourceTree = "<group>"; };
 		DFFE034D1626A04B0091DF16 /* iCloudResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCloudResourceManager.m; sourceTree = "<group>"; };
+		DFFE03501626ADA00091DF16 /* KRResourceProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRResourceProperty.h; sourceTree = "<group>"; };
+		DFFE03511626ADA00091DF16 /* KRResourceProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRResourceProperty.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,8 @@
 				DFFE0324162575DD0091DF16 /* Supporting Files */,
 				DFFE034C1626A04B0091DF16 /* iCloudResourceManager.h */,
 				DFFE034D1626A04B0091DF16 /* iCloudResourceManager.m */,
+				DFFE03501626ADA00091DF16 /* KRResourceProperty.h */,
+				DFFE03511626ADA00091DF16 /* KRResourceProperty.m */,
 			);
 			path = CloudSync;
 			sourceTree = "<group>";
@@ -256,6 +262,7 @@
 			files = (
 				DFFE0329162575DD0091DF16 /* CloudSync.m in Sources */,
 				DFFE034E1626A04B0091DF16 /* iCloudResourceManager.m in Sources */,
+				DFFE03521626ADA00091DF16 /* KRResourceProperty.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +273,7 @@
 				DFFE0340162575DE0091DF16 /* CloudSyncTests.m in Sources */,
 				DFFE034B16269CF70091DF16 /* iCloudSyncTests.m in Sources */,
 				DFFE034F1626A04B0091DF16 /* iCloudResourceManager.m in Sources */,
+				DFFE03531626ADA00091DF16 /* KRResourceProperty.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
