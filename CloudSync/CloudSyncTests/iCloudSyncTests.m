@@ -12,47 +12,45 @@
 
 @implementation iCloudSyncTests
 
+- (void)setUp{
+    [super setUp];
+
+	self.testURL = [NSURL fileURLWithPath:@"/test/test.zip"];
+	self.testShouldNotFoundURL = [NSURL fileURLWithPath:@"/test/notfound.zip"];
+	
+	self.testDate = [NSDate date];
+	self.testSize = [NSNumber numberWithInteger:24012];
+	
+	self.testResources = [self createTestResources:_testDate size:_testSize];
+}
+
 -(void)testURLComparation{
-	NSURL* TEST_URL = [NSURL fileURLWithPath:@"/test/test.zip"];
-	NSURL* TEST_INVALID_URL = [NSURL fileURLWithPath:@"/test/test5.zip"];
+	KRiCloudResourceManager* manager = [[KRiCloudResourceManager alloc]initWithURLsAndProperties:_testResources];
 	
-	NSDate* TEST_DATE = [NSDate date];
-	NSInteger TEST_SIZE = 24012;
-	
-	NSArray* TEST_RESOURCES = [self createTestResources:TEST_DATE size:TEST_SIZE];
-	
-	KRiCloudResourceManager* manager = [[KRiCloudResourceManager alloc]initWithURLsAndProperties:TEST_RESOURCES];
-	
-	STAssertTrue([manager hasResource:TEST_URL], @"Test with file name only");
-	STAssertFalse([manager hasResource:TEST_INVALID_URL], @"Must be false with invalid url");
+	STAssertTrue([manager hasResource:_testURL], @"Test with file name only");
+	STAssertFalse([manager hasResource:_testShouldNotFoundURL], @"Must be false with invalid url");
 }
 
 -(void)testFileModification{
-	NSURL* TEST_URL = [NSURL fileURLWithPath:@"/test/test.zip"];
-	NSDate* TEST_DATE = [NSDate date];
-	NSInteger TEST_SIZE = 24012;
-
-	NSArray* TEST_RESOURCES = [self createTestResources:TEST_DATE size:TEST_SIZE];
-
-	KRResourceProperty* TEST_RESOURCE = [[KRResourceProperty alloc]initWithProperties:TEST_URL
-																		  createdDate:TEST_DATE
-																		 modifiedDate:TEST_DATE
-																				 size:[NSNumber numberWithInteger:TEST_SIZE]];
+	KRResourceProperty* TEST_RESOURCE = [[KRResourceProperty alloc]initWithProperties:_testURL
+																		  createdDate:_testDate
+																		 modifiedDate:_testDate
+																				 size:_testSize];
 	
-	KRiCloudResourceManager* manager = [[KRiCloudResourceManager alloc]initWithURLsAndProperties:TEST_RESOURCES];
+	KRiCloudResourceManager* manager = [[KRiCloudResourceManager alloc]initWithURLsAndProperties:_testResources];
 	
-	STAssertTrue([manager isModified:TEST_RESOURCE otherResource:[TEST_RESOURCES objectAtIndex:0]], @"Must be different");
-	STAssertFalse([manager isModified:TEST_RESOURCE otherResource:[TEST_RESOURCES objectAtIndex:1]], @"Must be equal");
-	STAssertTrue([manager isModified:TEST_RESOURCE otherResource:[TEST_RESOURCES objectAtIndex:2]], @"Must be different");
+	STAssertTrue([manager isModified:TEST_RESOURCE otherResource:[_testResources objectAtIndex:0]], @"Must be different");
+	STAssertFalse([manager isModified:TEST_RESOURCE otherResource:[_testResources objectAtIndex:1]], @"Must be equal");
+	STAssertTrue([manager isModified:TEST_RESOURCE otherResource:[_testResources objectAtIndex:2]], @"Must be different");
 }
 
--(NSArray*)createTestResources:(NSDate*)date size:(NSInteger)size{
+-(NSArray*)createTestResources:(NSDate*)date size:(NSNumber*)size{
 	NSURL* TEST_URL1 = [NSURL fileURLWithPath:@"/var/private/test1.zip"];
 	NSURL* TEST_URL2 = [NSURL fileURLWithPath:@"/var/private/test.zip"];
 	NSURL* TEST_URL3 = [NSURL fileURLWithPath:@"/var/private/test3.zip"];
 	
 	NSNumber* TEST_SIZE1 = [NSNumber numberWithInteger:39282];
-	NSNumber* TEST_SIZE2 = [NSNumber numberWithInteger:size];
+	NSNumber* TEST_SIZE2 = size;
 	NSNumber* TEST_SIZE3 = [NSNumber numberWithInteger:24848];
 	
 	KRResourceProperty* resource1 = [[KRResourceProperty alloc]initWithProperties:TEST_URL1

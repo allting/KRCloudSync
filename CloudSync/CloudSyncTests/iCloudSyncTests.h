@@ -10,4 +10,10 @@
 
 @interface iCloudSyncTests : SenTestCase
 
+@property (nonatomic) NSArray* testResources;
+@property (nonatomic) NSURL* testURL;
+@property (nonatomic) NSURL* testShouldNotFoundURL;
+@property (nonatomic) NSDate* testDate;
+@property (nonatomic) NSNumber* testSize;
+
 @end
