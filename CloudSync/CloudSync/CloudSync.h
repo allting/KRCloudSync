@@ -1,5 +1,5 @@
 //
-//  CloudSync.h
+//  KRCloudSync.h
 //  CloudSync
 //
 //  Created by allting on 12. 10. 10..
@@ -9,18 +9,18 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-	CloudSynciCloud,
-	CloudSyncDropbox
-}CloudSyncCloudType;
+	KRCloudSynciCloud,
+	KRCloudSyncDropbox
+}KRCloudSyncCloudType;
 
-typedef void (^CloudSyncProgressBlock)(float progress);
-typedef void (^CloudSyncCompletedBlock)(NSError* error);
+typedef void (^KRCloudSyncProgressBlock)(float progress);
+typedef void (^KRCloudSyncCompletedBlock)(NSError* error);
 
-@interface CloudSync : NSObject
+@interface KRCloudSync : NSObject
 
 -(BOOL)sync;
 -(void)syncWithiCloudUsingBlocks:(NSURL*)url
-		 progressBlock:(CloudSyncProgressBlock)progres
-		completedBlock:(NSError*)error;
+		 progressBlock:(KRCloudSyncProgressBlock)progres
+		completedBlock:(KRCloudSyncCompletedBlock)completed;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  iCloudResourceManager.m
+//  KRiCloudResourceManager.m
 //  CloudSync
 //
 //  Created by allting on 12. 10. 11..
@@ -8,7 +8,7 @@
 
 #import "iCloudResourceManager.h"
 
-@implementation iCloudResourceManager
+@implementation KRiCloudResourceManager
 
 -(id)initWithURLsAndProperties:(NSArray*)Resources{
 	self = [super init];

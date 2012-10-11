@@ -1,5 +1,5 @@
 //
-//  iCloudResourceManager.h
+//  KRiCloudResourceManager.h
 //  CloudSync
 //
 //  Created by allting on 12. 10. 11..
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "KRResourceProperty.h"
 
-@interface iCloudResourceManager : NSObject
+@interface KRiCloudResourceManager : NSObject
 
 @property (nonatomic) NSArray* URLs;
 @property (nonatomic) NSArray* Resources;

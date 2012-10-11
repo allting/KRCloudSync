@@ -1,5 +1,5 @@
 //
-//  CloudSync.m
+//  KRCloudSync.m
 //  CloudSync
 //
 //  Created by allting on 12. 10. 10..
@@ -8,14 +8,14 @@
 
 #import "CloudSync.h"
 
-@implementation CloudSync
+@implementation KRCloudSync
 
 -(BOOL)sync{
 	return YES;
 }
 
 -(void)syncWithiCloudUsingBlocks:(NSURL*)url
-		 progressBlock:(CloudSyncProgressBlock)progres
-		completedBlock:(NSError*)error{
+		 progressBlock:(KRCloudSyncProgressBlock)progres
+		completedBlock:(KRCloudSyncCompletedBlock)completed{
 }
 @end

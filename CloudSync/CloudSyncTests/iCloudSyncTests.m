@@ -21,7 +21,7 @@
 	
 	NSArray* TEST_RESOURCES = [self createTestResources:TEST_DATE size:TEST_SIZE];
 	
-	iCloudResourceManager* manager = [[iCloudResourceManager alloc]initWithURLsAndProperties:TEST_RESOURCES];
+	KRiCloudResourceManager* manager = [[KRiCloudResourceManager alloc]initWithURLsAndProperties:TEST_RESOURCES];
 	
 	STAssertTrue([manager hasResource:TEST_URL], @"Test with file name only");
 	STAssertFalse([manager hasResource:TEST_INVALID_URL], @"Must be false with invalid url");
@@ -39,7 +39,7 @@
 																		 modifiedDate:TEST_DATE
 																				 size:[NSNumber numberWithInteger:TEST_SIZE]];
 	
-	iCloudResourceManager* manager = [[iCloudResourceManager alloc]initWithURLsAndProperties:TEST_RESOURCES];
+	KRiCloudResourceManager* manager = [[KRiCloudResourceManager alloc]initWithURLsAndProperties:TEST_RESOURCES];
 	
 	STAssertTrue([manager isModified:TEST_RESOURCE otherResource:[TEST_RESOURCES objectAtIndex:0]], @"Must be different");
 	STAssertFalse([manager isModified:TEST_RESOURCE otherResource:[TEST_RESOURCES objectAtIndex:1]], @"Must be equal");

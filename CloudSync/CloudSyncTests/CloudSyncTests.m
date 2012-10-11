@@ -27,18 +27,18 @@
 
 - (void)testCloudSync
 {
-	CloudSync* cloudSync = [[CloudSync alloc]init];
+	KRCloudSync* cloudSync = [[KRCloudSync alloc]init];
     STAssertTrue([cloudSync sync], @"Test sync method");
 }
 
 -(void)testSyncUsingBlock{
 	NSURL* url = [NSURL fileURLWithPath:@"/test/test.zip"];
 	
-	CloudSync* cloudSync = [[CloudSync alloc]init];
-	CloudSyncProgressBlock progress = ^(float progress){
+	KRCloudSync* cloudSync = [[KRCloudSync alloc]init];
+	KRCloudSyncProgressBlock progress = ^(float progress){
 		
 	};
-	CloudSyncCompletedBlock completed = ^(NSError* error){
+	KRCloudSyncCompletedBlock completed = ^(NSError* error){
 		
 	};
 	
