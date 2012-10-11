@@ -31,4 +31,19 @@
     STAssertTrue([cloudSync sync], @"Test sync method");
 }
 
+-(void)testSyncUsingBlock{
+	NSURL* url = [NSURL fileURLWithPath:@"/test/test.zip"];
+	
+	CloudSync* cloudSync = [[CloudSync alloc]init];
+	CloudSyncProgressBlock progress = ^(float progress){
+		
+	};
+	CloudSyncCompletedBlock completed = ^(NSError* error){
+		
+	};
+	
+	[cloudSync syncWithiCloudUsingBlocks:url
+					   progressBlock:progress
+					  completedBlock:completed];
+}
 @end

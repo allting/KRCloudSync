@@ -13,4 +13,9 @@
 -(BOOL)sync{
 	return YES;
 }
+
+-(void)syncWithiCloudUsingBlocks:(NSURL*)url
+		 progressBlock:(CloudSyncProgressBlock)progres
+		completedBlock:(NSError*)error{
+}
 @end
