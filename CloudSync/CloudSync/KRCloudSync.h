@@ -19,6 +19,9 @@ typedef void (^KRCloudSyncCompletedBlock)(NSError* error);
 @interface KRCloudSync : NSObject
 
 -(BOOL)sync;
+
+-(void)syncUsingBlock:(KRCloudSyncCompletedBlock)completed;
+
 -(void)syncWithiCloudUsingBlocks:(NSURL*)url
 		 progressBlock:(KRCloudSyncProgressBlock)progres
 		completedBlock:(KRCloudSyncCompletedBlock)completed;

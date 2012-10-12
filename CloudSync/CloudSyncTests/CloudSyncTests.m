@@ -31,6 +31,14 @@
     STAssertTrue([cloudSync sync], @"Test sync method");
 }
 
+-(void)testSimpleSync{
+	KRCloudSync* cloudSync = [[KRCloudSync alloc]init];
+	
+	[cloudSync syncUsingBlock:^(NSError* error){
+		STAssertTrue(0==[error code], @"Must be succeeded");
+	}];
+}
+
 -(void)testSyncUsingBlock{
 	NSURL* url = [NSURL fileURLWithPath:@"/test/test.zip"];
 	

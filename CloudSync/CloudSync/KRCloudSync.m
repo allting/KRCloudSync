@@ -14,6 +14,13 @@
 	return YES;
 }
 
+-(void)syncUsingBlock:(KRCloudSyncCompletedBlock)completed{
+//	if(completed){
+//		NSError* error = [NSError errorWithDomain:@"com.mindhd.app" code:1000 userInfo:nil];
+//		completed(error);
+//	}
+}
+
 -(void)syncWithiCloudUsingBlocks:(NSURL*)url
 		 progressBlock:(KRCloudSyncProgressBlock)progres
 		completedBlock:(KRCloudSyncCompletedBlock)completed{
