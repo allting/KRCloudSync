@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KRCloudPreferences.h"
 
 typedef enum {
 	KRCloudSynciCloud,
@@ -17,6 +18,7 @@ typedef void (^KRCloudSyncProgressBlock)(float progress);
 typedef void (^KRCloudSyncCompletedBlock)(NSError* error);
 
 @interface KRCloudSync : NSObject
+@property (nonatomic) KRCloudPreferences* preferences;
 
 -(BOOL)sync;
 

@@ -21,6 +21,9 @@
 		DFFE034F1626A04B0091DF16 /* KRiCloudResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE034D1626A04B0091DF16 /* KRiCloudResourceManager.m */; };
 		DFFE03521626ADA00091DF16 /* KRResourceProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE03511626ADA00091DF16 /* KRResourceProperty.m */; };
 		DFFE03531626ADA00091DF16 /* KRResourceProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE03511626ADA00091DF16 /* KRResourceProperty.m */; };
+		DFFE03561627F37C0091DF16 /* KRCloudPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE03551627F37C0091DF16 /* KRCloudPreferences.m */; };
+		DFFE03571627F37C0091DF16 /* KRCloudPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE03551627F37C0091DF16 /* KRCloudPreferences.m */; };
+		DFFE035A1627F3A50091DF16 /* CloudPreferencesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE03591627F3A50091DF16 /* CloudPreferencesTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +68,10 @@
 		DFFE034D1626A04B0091DF16 /* KRiCloudResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRiCloudResourceManager.m; sourceTree = "<group>"; };
 		DFFE03501626ADA00091DF16 /* KRResourceProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRResourceProperty.h; sourceTree = "<group>"; };
 		DFFE03511626ADA00091DF16 /* KRResourceProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRResourceProperty.m; sourceTree = "<group>"; };
+		DFFE03541627F37B0091DF16 /* KRCloudPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRCloudPreferences.h; sourceTree = "<group>"; };
+		DFFE03551627F37C0091DF16 /* KRCloudPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRCloudPreferences.m; sourceTree = "<group>"; };
+		DFFE03581627F3A50091DF16 /* CloudPreferencesTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudPreferencesTests.h; sourceTree = "<group>"; };
+		DFFE03591627F3A50091DF16 /* CloudPreferencesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudPreferencesTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +136,8 @@
 				DFFE034D1626A04B0091DF16 /* KRiCloudResourceManager.m */,
 				DFFE03501626ADA00091DF16 /* KRResourceProperty.h */,
 				DFFE03511626ADA00091DF16 /* KRResourceProperty.m */,
+				DFFE03541627F37B0091DF16 /* KRCloudPreferences.h */,
+				DFFE03551627F37C0091DF16 /* KRCloudPreferences.m */,
 			);
 			path = CloudSync;
 			sourceTree = "<group>";
@@ -149,6 +158,8 @@
 				DFFE034916269CF70091DF16 /* iCloudSyncTests.h */,
 				DFFE034A16269CF70091DF16 /* iCloudSyncTests.m */,
 				DFFE0339162575DE0091DF16 /* Supporting Files */,
+				DFFE03581627F3A50091DF16 /* CloudPreferencesTests.h */,
+				DFFE03591627F3A50091DF16 /* CloudPreferencesTests.m */,
 			);
 			path = CloudSyncTests;
 			sourceTree = "<group>";
@@ -263,6 +274,7 @@
 				DFFE0329162575DD0091DF16 /* KRCloudSync.m in Sources */,
 				DFFE034E1626A04B0091DF16 /* KRiCloudResourceManager.m in Sources */,
 				DFFE03521626ADA00091DF16 /* KRResourceProperty.m in Sources */,
+				DFFE03561627F37C0091DF16 /* KRCloudPreferences.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +286,8 @@
 				DFFE034B16269CF70091DF16 /* iCloudSyncTests.m in Sources */,
 				DFFE034F1626A04B0091DF16 /* KRiCloudResourceManager.m in Sources */,
 				DFFE03531626ADA00091DF16 /* KRResourceProperty.m in Sources */,
+				DFFE03571627F37C0091DF16 /* KRCloudPreferences.m in Sources */,
+				DFFE035A1627F3A50091DF16 /* CloudPreferencesTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

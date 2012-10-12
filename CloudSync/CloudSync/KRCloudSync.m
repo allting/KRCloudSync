@@ -10,6 +10,14 @@
 
 @implementation KRCloudSync
 
+-(id)init{
+	self = [super init];
+	if(self){
+		_preferences = [[KRCloudPreferences alloc]init];
+	}
+	return self;
+}
+
 -(BOOL)sync{
 	return YES;
 }
@@ -19,6 +27,7 @@
 //		NSError* error = [NSError errorWithDomain:@"com.mindhd.app" code:1000 userInfo:nil];
 //		completed(error);
 //	}
+	
 }
 
 -(void)syncWithiCloudUsingBlocks:(NSURL*)url
