@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "KRCloudPreferences.h"
+#import "KRCloudFactory.h"
 
 typedef enum {
 	KRCloudSynciCloud,
@@ -19,6 +20,9 @@ typedef void (^KRCloudSyncCompletedBlock)(NSError* error);
 
 @interface KRCloudSync : NSObject
 @property (nonatomic) KRCloudPreferences* preferences;
+@property (nonatomic) KRCloudService* cloudService;
+
+-(id)initWithFactory:(KRCloudFactory*)factory;
 
 -(BOOL)sync;
 

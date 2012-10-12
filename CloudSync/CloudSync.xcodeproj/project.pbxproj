@@ -24,6 +24,12 @@
 		DFFE03561627F37C0091DF16 /* KRCloudPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE03551627F37C0091DF16 /* KRCloudPreferences.m */; };
 		DFFE03571627F37C0091DF16 /* KRCloudPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE03551627F37C0091DF16 /* KRCloudPreferences.m */; };
 		DFFE035A1627F3A50091DF16 /* CloudPreferencesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE03591627F3A50091DF16 /* CloudPreferencesTests.m */; };
+		DFFE035E1627FA050091DF16 /* KRCloudFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE035D1627FA050091DF16 /* KRCloudFactory.m */; };
+		DFFE035F1627FA050091DF16 /* KRCloudFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE035D1627FA050091DF16 /* KRCloudFactory.m */; };
+		DFFE03671627FB800091DF16 /* KRCloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE03661627FB800091DF16 /* KRCloudService.m */; };
+		DFFE03681627FB800091DF16 /* KRCloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE03661627FB800091DF16 /* KRCloudService.m */; };
+		DFFE036D1627FD3C0091DF16 /* iCloudServiceMock.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE036B1627FD3C0091DF16 /* iCloudServiceMock.m */; };
+		DFFE03701627FD980091DF16 /* CloudFactoryMock.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE036F1627FD980091DF16 /* CloudFactoryMock.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +78,14 @@
 		DFFE03551627F37C0091DF16 /* KRCloudPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRCloudPreferences.m; sourceTree = "<group>"; };
 		DFFE03581627F3A50091DF16 /* CloudPreferencesTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudPreferencesTests.h; sourceTree = "<group>"; };
 		DFFE03591627F3A50091DF16 /* CloudPreferencesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudPreferencesTests.m; sourceTree = "<group>"; };
+		DFFE035C1627FA050091DF16 /* KRCloudFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRCloudFactory.h; sourceTree = "<group>"; };
+		DFFE035D1627FA050091DF16 /* KRCloudFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRCloudFactory.m; sourceTree = "<group>"; };
+		DFFE03651627FB800091DF16 /* KRCloudService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRCloudService.h; sourceTree = "<group>"; };
+		DFFE03661627FB800091DF16 /* KRCloudService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRCloudService.m; sourceTree = "<group>"; };
+		DFFE036A1627FD3C0091DF16 /* iCloudServiceMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCloudServiceMock.h; sourceTree = "<group>"; };
+		DFFE036B1627FD3C0091DF16 /* iCloudServiceMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCloudServiceMock.m; sourceTree = "<group>"; };
+		DFFE036E1627FD980091DF16 /* CloudFactoryMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudFactoryMock.h; sourceTree = "<group>"; };
+		DFFE036F1627FD980091DF16 /* CloudFactoryMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudFactoryMock.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +143,8 @@
 		DFFE0323162575DD0091DF16 /* CloudSync */ = {
 			isa = PBXGroup;
 			children = (
+				DFFE03641627FB6E0091DF16 /* Service */,
+				DFFE035B1627F9F00091DF16 /* Factory */,
 				DFFE0326162575DD0091DF16 /* KRCloudSync.h */,
 				DFFE0328162575DD0091DF16 /* KRCloudSync.m */,
 				DFFE0324162575DD0091DF16 /* Supporting Files */,
@@ -153,6 +169,7 @@
 		DFFE0338162575DE0091DF16 /* CloudSyncTests */ = {
 			isa = PBXGroup;
 			children = (
+				DFFE03691627FCDB0091DF16 /* Mocks */,
 				DFFE033E162575DE0091DF16 /* CloudSyncTests.h */,
 				DFFE033F162575DE0091DF16 /* CloudSyncTests.m */,
 				DFFE034916269CF70091DF16 /* iCloudSyncTests.h */,
@@ -171,6 +188,35 @@
 				DFFE033B162575DE0091DF16 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DFFE035B1627F9F00091DF16 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				DFFE035C1627FA050091DF16 /* KRCloudFactory.h */,
+				DFFE035D1627FA050091DF16 /* KRCloudFactory.m */,
+			);
+			name = Factory;
+			sourceTree = "<group>";
+		};
+		DFFE03641627FB6E0091DF16 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				DFFE03651627FB800091DF16 /* KRCloudService.h */,
+				DFFE03661627FB800091DF16 /* KRCloudService.m */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		DFFE03691627FCDB0091DF16 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				DFFE036E1627FD980091DF16 /* CloudFactoryMock.h */,
+				DFFE036F1627FD980091DF16 /* CloudFactoryMock.m */,
+				DFFE036A1627FD3C0091DF16 /* iCloudServiceMock.h */,
+				DFFE036B1627FD3C0091DF16 /* iCloudServiceMock.m */,
+			);
+			name = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,6 +321,8 @@
 				DFFE034E1626A04B0091DF16 /* KRiCloudResourceManager.m in Sources */,
 				DFFE03521626ADA00091DF16 /* KRResourceProperty.m in Sources */,
 				DFFE03561627F37C0091DF16 /* KRCloudPreferences.m in Sources */,
+				DFFE035E1627FA050091DF16 /* KRCloudFactory.m in Sources */,
+				DFFE03671627FB800091DF16 /* KRCloudService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +336,10 @@
 				DFFE03531626ADA00091DF16 /* KRResourceProperty.m in Sources */,
 				DFFE03571627F37C0091DF16 /* KRCloudPreferences.m in Sources */,
 				DFFE035A1627F3A50091DF16 /* CloudPreferencesTests.m in Sources */,
+				DFFE035F1627FA050091DF16 /* KRCloudFactory.m in Sources */,
+				DFFE03681627FB800091DF16 /* KRCloudService.m in Sources */,
+				DFFE036D1627FD3C0091DF16 /* iCloudServiceMock.m in Sources */,
+				DFFE03701627FD980091DF16 /* CloudFactoryMock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

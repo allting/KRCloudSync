@@ -18,16 +18,19 @@
 	return self;
 }
 
+-(id)initWithFactory:(KRCloudFactory*)factory{
+	self = [super init];
+	if(self){
+		_cloudService = [factory cloudService];
+	}
+	return self;
+}
+
 -(BOOL)sync{
 	return YES;
 }
 
 -(void)syncUsingBlock:(KRCloudSyncCompletedBlock)completed{
-//	if(completed){
-//		NSError* error = [NSError errorWithDomain:@"com.mindhd.app" code:1000 userInfo:nil];
-//		completed(error);
-//	}
-	
 }
 
 -(void)syncWithiCloudUsingBlocks:(NSURL*)url

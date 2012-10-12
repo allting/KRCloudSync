@@ -8,6 +8,7 @@
 
 #import "CloudSyncTests.h"
 #import "KRCloudSync.h"
+#import "CloudFactoryMock.h"
 
 @implementation CloudSyncTests
 
@@ -36,6 +37,18 @@
 	
 	[cloudSync syncUsingBlock:^(NSError* error){
 	}];
+}
+
+-(void)testCloudServiceWithFactory{
+	KRCloudFactory* factory = [self createiCloudMockFactory];
+	KRCloudSync* cloudSync = [[KRCloudSync alloc]initWithFactory:factory];
+	
+	STAssertNotNil([cloudSync cloudService], @"Mustn't be nil");
+}
+
+-(KRCloudFactory*)createiCloudMockFactory{
+	CloudFactoryMock* factory = [[CloudFactoryMock alloc]init];
+	return factory;
 }
 
 -(void)testSyncUsingBlock{
