@@ -33,7 +33,8 @@
 }
 
 -(void)testSimpleSync{
-	KRCloudSync* cloudSync = [[KRCloudSync alloc]init];
+	KRCloudFactory* factory = [self createiCloudMockFactory];
+	KRCloudSync* cloudSync = [[KRCloudSync alloc]initWithFactory:factory];
 	
 	[cloudSync syncUsingBlock:^(NSError* error){
 	}];

@@ -21,6 +21,7 @@ typedef void (^KRCloudSyncCompletedBlock)(NSError* error);
 @interface KRCloudSync : NSObject
 @property (nonatomic) KRCloudPreferences* preferences;
 @property (nonatomic) KRCloudService* cloudService;
+@property (nonatomic) KRFileService* fileService;
 
 -(id)initWithFactory:(KRCloudFactory*)factory;
 

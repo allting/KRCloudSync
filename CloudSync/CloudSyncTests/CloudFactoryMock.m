@@ -8,6 +8,7 @@
 
 #import "CloudFactoryMock.h"
 #import "iCloudServiceMock.h"
+#import "FileServiceMock.h"
 
 @implementation CloudFactoryMock
 
@@ -15,6 +16,7 @@
 	self = [super init];
 	if(self){
 		self.cloudService = [[iCloudServiceMock alloc]init];
+		self.fileService = [[FileServiceMock alloc]init];
 	}
 	return self;
 }

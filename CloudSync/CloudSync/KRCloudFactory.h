@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "KRCloudService.h"
+#import "KRFileService.h"
 
 @interface KRCloudFactory : NSObject
 
 @property (nonatomic) KRCloudService* cloudService;
+@property (nonatomic) KRFileService* fileService;
 
 @end
