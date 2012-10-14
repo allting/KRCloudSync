@@ -150,10 +150,10 @@
 		DFFE0323162575DD0091DF16 /* CloudSync */ = {
 			isa = PBXGroup;
 			children = (
-				DFFE03641627FB6E0091DF16 /* Service */,
-				DFFE035B1627F9F00091DF16 /* Factory */,
 				DFFE0326162575DD0091DF16 /* KRCloudSync.h */,
 				DFFE0328162575DD0091DF16 /* KRCloudSync.m */,
+				DFFE03641627FB6E0091DF16 /* Service */,
+				DFFE035B1627F9F00091DF16 /* Factory */,
 				DFFE0324162575DD0091DF16 /* Supporting Files */,
 				DFFE034C1626A04B0091DF16 /* KRiCloudResourceManager.h */,
 				DFFE034D1626A04B0091DF16 /* KRiCloudResourceManager.m */,

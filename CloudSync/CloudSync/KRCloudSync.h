@@ -19,15 +19,15 @@ typedef void (^KRCloudSyncProgressBlock)(float progress);
 typedef void (^KRCloudSyncCompletedBlock)(NSError* error);
 
 @interface KRCloudSync : NSObject
+
 @property (nonatomic) KRCloudPreferences* preferences;
-@property (nonatomic) KRCloudService* cloudService;
-@property (nonatomic) KRFileService* fileService;
+@property (nonatomic) KRCloudFactory* factory;
 
 -(id)initWithFactory:(KRCloudFactory*)factory;
 
 -(BOOL)sync;
 
--(void)syncUsingBlock:(KRCloudSyncCompletedBlock)completed;
+-(BOOL)syncUsingBlock:(KRCloudSyncCompletedBlock)completed;
 
 -(void)syncWithiCloudUsingBlocks:(NSURL*)url
 		 progressBlock:(KRCloudSyncProgressBlock)progres

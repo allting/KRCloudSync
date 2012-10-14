@@ -21,8 +21,7 @@
 -(id)initWithFactory:(KRCloudFactory*)factory{
 	self = [super init];
 	if(self){
-		_cloudService = [factory cloudService];
-		_fileService = [factory fileService];
+		_factory = factory;
 	}
 	return self;
 }
@@ -31,17 +30,34 @@
 	return YES;
 }
 
--(void)syncUsingBlock:(KRCloudSyncCompletedBlock)completed{
-	NSAssert(_cloudService, @"Mustn't be nil");
-	NSAssert(_fileService, @"Mustn't be nil");
-	if(!_cloudService || !_fileService)
-		return;
+-(BOOL)syncUsingBlock:(KRCloudSyncCompletedBlock)completed{
+	NSAssert(completed, @"Mustn't be nil");
+	NSAssert(_factory, @"Mustn't be nil");
+	if(!completed || !_factory)
+		return NO;
 	
-//	NSArray* localResources = [self.fileService resources];
-//	
-//	[_cloudService resourcesUsingBlock:^(NSArray* remoteResouces){
-//		[self syncWithResources:remoteResouces local]
-//	}];
+	KRResourceLoader* resourceLoader = [[KRResourceLoader alloc]initWithFactory:_factory];
+	[resourceLoader loadUsingBlock:^(NSArray* remoteResources, NSArray* localResources, NSError* error){
+		if(error){
+			completed(error);
+			return;
+		}
+		
+		KRResourceComparer* resourceComparer = [[KRResourceComparer alloc]initWithFactory:_factory];
+		[resourceComparer compareUsingBlock:^(NSArray* comparedResources, NSError* error){
+			if(error){
+				completed(error);
+				return;
+			}
+			
+			KRSynchronizer* sync = [[KRSynchronizer alloc]initWithFactory:_factory];
+			[sync syncUsingBlock:comparedResources completed:^(NSArray* syncResults, NSError* error){
+				completed(error);
+			}];
+		}];
+	}];
+	
+	return YES;
 }
 
 -(void)syncWithiCloudUsingBlocks:(NSURL*)url
