@@ -33,6 +33,9 @@
 		DFFE03731629B00F0091DF16 /* KRFileService.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE03721629B00F0091DF16 /* KRFileService.m */; };
 		DFFE03741629B00F0091DF16 /* KRFileService.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE03721629B00F0091DF16 /* KRFileService.m */; };
 		DFFE0377162A90B80091DF16 /* FileServiceMock.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE0376162A90B70091DF16 /* FileServiceMock.m */; };
+		DFFE037A162AD2C20091DF16 /* KRResourceLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE0379162AD2C10091DF16 /* KRResourceLoader.m */; };
+		DFFE037D162AD2D50091DF16 /* KRResourceComparer.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE037C162AD2D50091DF16 /* KRResourceComparer.m */; };
+		DFFE0380162AD2E70091DF16 /* KRSynchronizer.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE037F162AD2E70091DF16 /* KRSynchronizer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +96,12 @@
 		DFFE03721629B00F0091DF16 /* KRFileService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRFileService.m; sourceTree = "<group>"; };
 		DFFE0375162A90B70091DF16 /* FileServiceMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileServiceMock.h; sourceTree = "<group>"; };
 		DFFE0376162A90B70091DF16 /* FileServiceMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileServiceMock.m; sourceTree = "<group>"; };
+		DFFE0378162AD2C00091DF16 /* KRResourceLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRResourceLoader.h; sourceTree = "<group>"; };
+		DFFE0379162AD2C10091DF16 /* KRResourceLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRResourceLoader.m; sourceTree = "<group>"; };
+		DFFE037B162AD2D50091DF16 /* KRResourceComparer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRResourceComparer.h; sourceTree = "<group>"; };
+		DFFE037C162AD2D50091DF16 /* KRResourceComparer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRResourceComparer.m; sourceTree = "<group>"; };
+		DFFE037E162AD2E60091DF16 /* KRSynchronizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRSynchronizer.h; sourceTree = "<group>"; };
+		DFFE037F162AD2E70091DF16 /* KRSynchronizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRSynchronizer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +161,12 @@
 			children = (
 				DFFE0326162575DD0091DF16 /* KRCloudSync.h */,
 				DFFE0328162575DD0091DF16 /* KRCloudSync.m */,
+				DFFE0378162AD2C00091DF16 /* KRResourceLoader.h */,
+				DFFE0379162AD2C10091DF16 /* KRResourceLoader.m */,
+				DFFE037B162AD2D50091DF16 /* KRResourceComparer.h */,
+				DFFE037C162AD2D50091DF16 /* KRResourceComparer.m */,
+				DFFE037E162AD2E60091DF16 /* KRSynchronizer.h */,
+				DFFE037F162AD2E70091DF16 /* KRSynchronizer.m */,
 				DFFE03641627FB6E0091DF16 /* Service */,
 				DFFE035B1627F9F00091DF16 /* Factory */,
 				DFFE0324162575DD0091DF16 /* Supporting Files */,
@@ -335,6 +350,9 @@
 				DFFE035E1627FA050091DF16 /* KRCloudFactory.m in Sources */,
 				DFFE03671627FB800091DF16 /* KRCloudService.m in Sources */,
 				DFFE03731629B00F0091DF16 /* KRFileService.m in Sources */,
+				DFFE037A162AD2C20091DF16 /* KRResourceLoader.m in Sources */,
+				DFFE037D162AD2D50091DF16 /* KRResourceComparer.m in Sources */,
+				DFFE0380162AD2E70091DF16 /* KRSynchronizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

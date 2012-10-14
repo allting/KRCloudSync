@@ -7,6 +7,9 @@
 //
 
 #import "KRCloudSync.h"
+#import "KRResourceLoader.h"
+#import "KRResourceComparer.h"
+#import "KRSynchronizer.h"
 
 @implementation KRCloudSync
 
@@ -44,14 +47,14 @@
 		}
 		
 		KRResourceComparer* resourceComparer = [[KRResourceComparer alloc]initWithFactory:_factory];
-		[resourceComparer compareUsingBlock:^(NSArray* comparedResources, NSError* error){
+		[resourceComparer compareUsingBlock:remoteResources localResources:localResources completedBlock:^(NSArray* comparedResources, NSError* error){
 			if(error){
 				completed(error);
 				return;
 			}
 			
 			KRSynchronizer* sync = [[KRSynchronizer alloc]initWithFactory:_factory];
-			[sync syncUsingBlock:comparedResources completed:^(NSArray* syncResults, NSError* error){
+			[sync syncUsingBlock:comparedResources completedBlock:^(NSArray* syncResources, NSError* error){
 				completed(error);
 			}];
 		}];
