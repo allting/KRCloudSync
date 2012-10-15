@@ -8,6 +8,7 @@
 
 #import "KRResourceComparer.h"
 #import "KRiCloudResourceManager.h"
+#import "KRSyncEntry.h"
 
 @implementation KRResourceComparer
 
@@ -19,8 +20,8 @@
 	return self;
 }
 
--(void)compareUsingBlock:(NSArray*)remoteResources
-		  localResources:(NSArray*)localResources
+-(void)compareUsingBlock:(NSArray*)localResources
+		  remoteResources:(NSArray*)remoteResources
 		  completedBlock:(KRResourceComparerCompletedBlock)completed{
 	NSAssert(completed, @"Mustn't be nil");
 	if(!completed)
@@ -30,12 +31,15 @@
 	
 	KRiCloudResourceManager* resourceManager = [[KRiCloudResourceManager alloc]init];
 	
-	for(KRResourceProperty* resource in remoteResources){
-		for(KRResourceProperty* otherResource in localResources){
-			if([resourceManager isEqualToURL:resource.URL otherURL:otherResource.URL]){
-				BOOL modified = [resourceManager isModified:resource otherResource:otherResource];
-				if(modified){
-					[array addObject:resource];
+	for(KRResourceProperty* resource in localResources){
+		for(KRResourceProperty* remoteResource in remoteResources){
+			if([resourceManager isEqualToURL:resource.URL otherURL:remoteResource.URL]){
+				NSComparisonResult result = [resource compare:remoteResource];
+				if(result!=NSOrderedSame){
+					KRSyncEntry* entry = [[KRSyncEntry alloc]initWithResources:resource
+																remoteResource:remoteResource
+															  comparisonResult:result];
+					[array addObject:entry];
 				}
 			}
 		}

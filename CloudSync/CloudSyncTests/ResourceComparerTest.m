@@ -24,8 +24,8 @@
 	KRResourceComparer* comparer = [[KRResourceComparer alloc]initWithFactory:factory];
 	STAssertNotNil(comparer, @"Mustn't be nil");
 	
-	[comparer compareUsingBlock:remoteResources
-				 localResources:localResources
+	[comparer compareUsingBlock:localResources
+				 remoteResources:remoteResources
 				 completedBlock:^(NSArray *comparedResources, NSError *error) {
 					 STAssertTrue(0==[comparedResources count], @"Must be equal");
 				 }];

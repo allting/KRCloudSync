@@ -24,4 +24,20 @@
 	return self;
 }
 
+-(NSComparisonResult)compare:(KRResourceProperty*)anohterResource{
+	NSComparisonResult result = [self isEqualToDate:_modifiedDate anotherDate:anohterResource.modifiedDate];
+	if(result != NSOrderedSame)
+		return result;
+	return [self isEqualToDate:_createdDate anotherDate:anohterResource.createdDate];
+}
+
+-(NSComparisonResult)isEqualToDate:(NSDate*)date anotherDate:(NSDate*)anotherDate{
+	NSTimeInterval interval = [date timeIntervalSinceDate:anotherDate];
+	if(1.f<=interval)
+		return NSOrderedAscending;
+	else if(interval<=-1.f)
+		return NSOrderedDescending;
+	return NSOrderedSame;
+}
+
 @end

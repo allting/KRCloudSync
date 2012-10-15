@@ -47,7 +47,9 @@
 		}
 		
 		KRResourceComparer* resourceComparer = [[KRResourceComparer alloc]initWithFactory:_factory];
-		[resourceComparer compareUsingBlock:remoteResources localResources:localResources completedBlock:^(NSArray* comparedResources, NSError* error){
+		[resourceComparer compareUsingBlock:localResources
+							remoteResources:remoteResources
+							 completedBlock:^(NSArray* comparedResources, NSError* error){
 			if(error){
 				completed(error);
 				return;

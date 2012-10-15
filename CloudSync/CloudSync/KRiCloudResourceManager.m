@@ -42,12 +42,12 @@
 	return NO;
 }
 
--(BOOL)isModified:(KRResourceProperty *)resource otherResource:(KRResourceProperty*)otherResource{
-	if(![otherResource.size isEqualToNumber:resource.size])
+-(BOOL)isModified:(KRResourceProperty *)resource anohterResource:(KRResourceProperty*)anohterResource{
+	if(![anohterResource.size isEqualToNumber:resource.size])
 		return YES;
-	if(![self isEqualToDate:otherResource.modifiedDate otherDate:resource.modifiedDate])
+	if(![self isEqualToDate:anohterResource.modifiedDate otherDate:resource.modifiedDate])
 		return YES;
-	if(![self isEqualToDate:otherResource.createdDate otherDate:resource.createdDate])
+	if(![self isEqualToDate:anohterResource.createdDate otherDate:resource.createdDate])
 		return YES;
 	return NO;
 }

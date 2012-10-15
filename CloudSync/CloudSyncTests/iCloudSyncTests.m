@@ -39,9 +39,9 @@
 	
 	KRiCloudResourceManager* manager = [[KRiCloudResourceManager alloc]initWithURLsAndProperties:_testResources];
 	
-	STAssertTrue([manager isModified:TEST_RESOURCE otherResource:[_testResources objectAtIndex:0]], @"Must be different");
-	STAssertFalse([manager isModified:TEST_RESOURCE otherResource:[_testResources objectAtIndex:1]], @"Must be equal");
-	STAssertTrue([manager isModified:TEST_RESOURCE otherResource:[_testResources objectAtIndex:2]], @"Must be different");
+	STAssertTrue([manager isModified:TEST_RESOURCE anohterResource:[_testResources objectAtIndex:0]], @"Must be different");
+	STAssertFalse([manager isModified:TEST_RESOURCE anohterResource:[_testResources objectAtIndex:1]], @"Must be equal");
+	STAssertTrue([manager isModified:TEST_RESOURCE anohterResource:[_testResources objectAtIndex:2]], @"Must be different");
 }
 
 -(void)testFindResource{
