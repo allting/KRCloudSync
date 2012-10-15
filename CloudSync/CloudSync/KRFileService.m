@@ -10,4 +10,8 @@
 
 @implementation KRFileService
 
+-(NSArray*)load{
+	return nil;
+}
+
 @end

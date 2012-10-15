@@ -18,6 +18,7 @@
 
 -(BOOL)hasResource:(NSURL*)url;
 
+-(BOOL)isEqualToURL:(NSURL*)url otherURL:(NSURL*)otherURL;
 -(KRResourceProperty*)findResource:(NSURL*)url;
 -(BOOL)isModified:(KRResourceProperty *)resource otherResource:(KRResourceProperty*)otherResource;
 

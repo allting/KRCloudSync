@@ -7,7 +7,12 @@
 //
 
 #import "FileServiceMock.h"
+#import "KRResourceProperty.h"
 
 @implementation FileServiceMock
+
+-(NSArray*)load{
+	return nil;
+}
 
 @end

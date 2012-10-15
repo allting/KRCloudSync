@@ -10,4 +10,8 @@
 
 @implementation KRCloudService
 
+-(NSArray*)load{
+	return nil;
+}
+
 @end

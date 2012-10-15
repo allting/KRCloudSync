@@ -1,15 +1,13 @@
 //
-//  FileServiceMock.h
+//  KRConflictResolver.m
 //  CloudSync
 //
 //  Created by allting on 12. 10. 14..
 //  Copyright (c) 2012년 allting. All rights reserved.
 //
 
-#import "KRFileService.h"
+#import "KRConflictResolver.h"
 
-@interface FileServiceMock : KRFileService
-
--(NSArray*)load;
+@implementation KRConflictResolver
 
 @end

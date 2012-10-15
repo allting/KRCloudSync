@@ -36,6 +36,11 @@
 		DFFE037A162AD2C20091DF16 /* KRResourceLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE0379162AD2C10091DF16 /* KRResourceLoader.m */; };
 		DFFE037D162AD2D50091DF16 /* KRResourceComparer.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE037C162AD2D50091DF16 /* KRResourceComparer.m */; };
 		DFFE0380162AD2E70091DF16 /* KRSynchronizer.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE037F162AD2E70091DF16 /* KRSynchronizer.m */; };
+		DFFE0384162AD9C10091DF16 /* KRConflictResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE0383162AD9C10091DF16 /* KRConflictResolver.m */; };
+		DFFE0387162AE5E80091DF16 /* ResourceComparerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE0386162AE5E80091DF16 /* ResourceComparerTest.m */; };
+		DFFE0388162AEE600091DF16 /* KRResourceLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE0379162AD2C10091DF16 /* KRResourceLoader.m */; };
+		DFFE0389162AEE600091DF16 /* KRResourceComparer.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE037C162AD2D50091DF16 /* KRResourceComparer.m */; };
+		DFFE038A162AEE600091DF16 /* KRSynchronizer.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE037F162AD2E70091DF16 /* KRSynchronizer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +107,10 @@
 		DFFE037C162AD2D50091DF16 /* KRResourceComparer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRResourceComparer.m; sourceTree = "<group>"; };
 		DFFE037E162AD2E60091DF16 /* KRSynchronizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRSynchronizer.h; sourceTree = "<group>"; };
 		DFFE037F162AD2E70091DF16 /* KRSynchronizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRSynchronizer.m; sourceTree = "<group>"; };
+		DFFE0382162AD9C10091DF16 /* KRConflictResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRConflictResolver.h; sourceTree = "<group>"; };
+		DFFE0383162AD9C10091DF16 /* KRConflictResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRConflictResolver.m; sourceTree = "<group>"; };
+		DFFE0385162AE5E80091DF16 /* ResourceComparerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceComparerTest.h; sourceTree = "<group>"; };
+		DFFE0386162AE5E80091DF16 /* ResourceComparerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceComparerTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,13 +178,14 @@
 				DFFE037F162AD2E70091DF16 /* KRSynchronizer.m */,
 				DFFE03641627FB6E0091DF16 /* Service */,
 				DFFE035B1627F9F00091DF16 /* Factory */,
-				DFFE0324162575DD0091DF16 /* Supporting Files */,
+				DFFE0381162AD87F0091DF16 /* ConflictResolve */,
 				DFFE034C1626A04B0091DF16 /* KRiCloudResourceManager.h */,
 				DFFE034D1626A04B0091DF16 /* KRiCloudResourceManager.m */,
 				DFFE03501626ADA00091DF16 /* KRResourceProperty.h */,
 				DFFE03511626ADA00091DF16 /* KRResourceProperty.m */,
 				DFFE03541627F37B0091DF16 /* KRCloudPreferences.h */,
 				DFFE03551627F37C0091DF16 /* KRCloudPreferences.m */,
+				DFFE0324162575DD0091DF16 /* Supporting Files */,
 			);
 			path = CloudSync;
 			sourceTree = "<group>";
@@ -199,6 +209,8 @@
 				DFFE0339162575DE0091DF16 /* Supporting Files */,
 				DFFE03581627F3A50091DF16 /* CloudPreferencesTests.h */,
 				DFFE03591627F3A50091DF16 /* CloudPreferencesTests.m */,
+				DFFE0385162AE5E80091DF16 /* ResourceComparerTest.h */,
+				DFFE0386162AE5E80091DF16 /* ResourceComparerTest.m */,
 			);
 			path = CloudSyncTests;
 			sourceTree = "<group>";
@@ -243,6 +255,15 @@
 				DFFE0376162A90B70091DF16 /* FileServiceMock.m */,
 			);
 			name = Mocks;
+			sourceTree = "<group>";
+		};
+		DFFE0381162AD87F0091DF16 /* ConflictResolve */ = {
+			isa = PBXGroup;
+			children = (
+				DFFE0382162AD9C10091DF16 /* KRConflictResolver.h */,
+				DFFE0383162AD9C10091DF16 /* KRConflictResolver.m */,
+			);
+			name = ConflictResolve;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -353,6 +374,7 @@
 				DFFE037A162AD2C20091DF16 /* KRResourceLoader.m in Sources */,
 				DFFE037D162AD2D50091DF16 /* KRResourceComparer.m in Sources */,
 				DFFE0380162AD2E70091DF16 /* KRSynchronizer.m in Sources */,
+				DFFE0384162AD9C10091DF16 /* KRConflictResolver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +382,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFFE0388162AEE600091DF16 /* KRResourceLoader.m in Sources */,
+				DFFE0389162AEE600091DF16 /* KRResourceComparer.m in Sources */,
+				DFFE038A162AEE600091DF16 /* KRSynchronizer.m in Sources */,
 				DFFE0340162575DE0091DF16 /* CloudSyncTests.m in Sources */,
 				DFFE034B16269CF70091DF16 /* iCloudSyncTests.m in Sources */,
 				DFFE034F1626A04B0091DF16 /* KRiCloudResourceManager.m in Sources */,
@@ -372,6 +397,7 @@
 				DFFE03701627FD980091DF16 /* CloudFactoryMock.m in Sources */,
 				DFFE03741629B00F0091DF16 /* KRFileService.m in Sources */,
 				DFFE0377162A90B80091DF16 /* FileServiceMock.m in Sources */,
+				DFFE0387162AE5E80091DF16 /* ResourceComparerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

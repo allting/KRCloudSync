@@ -10,4 +10,6 @@
 
 @interface KRCloudService : NSObject
 
+-(NSArray*)load;
+
 @end

@@ -13,8 +13,14 @@ typedef void (^KRResourceLoaderCompletedBlock)(NSArray* remoteResources, NSArray
 
 @interface KRResourceLoader : NSObject
 
+@property (nonatomic) KRCloudService* cloudService;
+@property (nonatomic) KRFileService* fileService;
+@property (nonatomic) NSArray* remoteResources;
+@property (nonatomic) NSArray* localResources;
+
 -(id)initWithFactory:(KRCloudFactory*)factory;
 
+-(BOOL)load;
 -(void)loadUsingBlock:(KRResourceLoaderCompletedBlock)completed;
 
 @end

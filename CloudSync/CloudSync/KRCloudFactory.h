@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "KRCloudService.h"
 #import "KRFileService.h"
+#import "KRConflictResolver.h"
 
 @interface KRCloudFactory : NSObject
 
 @property (nonatomic) KRCloudService* cloudService;
 @property (nonatomic) KRFileService* fileService;
+@property (nonatomic) KRConflictResolver* conflictResolver;
 
 @end

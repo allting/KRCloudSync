@@ -1,15 +1,13 @@
 //
-//  FileServiceMock.h
+//  ResourceComparerTest.h
 //  CloudSync
 //
 //  Created by allting on 12. 10. 14..
 //  Copyright (c) 2012년 allting. All rights reserved.
 //
 
-#import "KRFileService.h"
+#import <SenTestingKit/SenTestingKit.h>
 
-@interface FileServiceMock : KRFileService
-
--(NSArray*)load;
+@interface ResourceComparerTest : SenTestCase
 
 @end
