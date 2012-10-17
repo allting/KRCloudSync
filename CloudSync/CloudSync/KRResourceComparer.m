@@ -8,7 +8,7 @@
 
 #import "KRResourceComparer.h"
 #import "KRiCloudResourceManager.h"
-#import "KRSyncEntry.h"
+#import "KRSyncItem.h"
 
 @implementation KRResourceComparer
 
@@ -36,7 +36,7 @@
 			if([resourceManager isEqualToURL:resource.URL otherURL:remoteResource.URL]){
 				NSComparisonResult result = [resource compare:remoteResource];
 				if(result!=NSOrderedSame){
-					KRSyncEntry* entry = [[KRSyncEntry alloc]initWithResources:resource
+					KRSyncItem* entry = [[KRSyncItem alloc]initWithResources:resource
 																remoteResource:remoteResource
 															  comparisonResult:result];
 					[array addObject:entry];

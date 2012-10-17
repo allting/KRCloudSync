@@ -1,14 +1,14 @@
 //
-//  KRSyncEntry.m
+//  KRSyncItem.m
 //  CloudSync
 //
 //  Created by allting on 12. 10. 15..
 //  Copyright (c) 2012년 allting. All rights reserved.
 //
 
-#import "KRSyncEntry.h"
+#import "KRSyncItem.h"
 
-@implementation KRSyncEntry
+@implementation KRSyncItem
 
 -(id)initWithResources:(KRResourceProperty*)localResource
 		remoteResource:(KRResourceProperty*)remoteResource
@@ -17,17 +17,17 @@
 	if(self){
 		_localResource = localResource;
 		_remoteResource = remoteResource;
-		_direction = [self comparisonResultToSyncEntryDirection:result];
+		_direction = [self comparisonResultTosyncItemDirection:result];
 	}
 	return self;
 }
 
--(KRSyncEntryDirection)comparisonResultToSyncEntryDirection:(NSComparisonResult)result{
+-(KRSyncItemDirection)comparisonResultTosyncItemDirection:(NSComparisonResult)result{
 	if(NSOrderedAscending == result)
-		return KRSyncEntryDirectionToRemote;
+		return KRSyncItemDirectionToRemote;
 	else if(NSOrderedDescending == result)
-		return KRSyncEntryDirectionToLocal;
-	return KRSyncEntryDirectionNone;
+		return KRSyncItemDirectionToLocal;
+	return KRSyncItemDirectionNone;
 }
 
 @end

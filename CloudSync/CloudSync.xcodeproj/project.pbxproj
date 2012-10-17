@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DF37CA5F162C191700BD5725 /* KRSyncEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = DF37CA5E162C191700BD5725 /* KRSyncEntry.m */; };
-		DF37CA60162C191700BD5725 /* KRSyncEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = DF37CA5E162C191700BD5725 /* KRSyncEntry.m */; };
-		DF37CA64162C196500BD5725 /* SyncEntryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DF37CA63162C196500BD5725 /* SyncEntryTests.m */; };
+		DF37CA5F162C191700BD5725 /* KRSyncItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DF37CA5E162C191700BD5725 /* KRSyncItem.m */; };
+		DF37CA60162C191700BD5725 /* KRSyncItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DF37CA5E162C191700BD5725 /* KRSyncItem.m */; };
+		DF37CA64162C196500BD5725 /* SyncItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DF37CA63162C196500BD5725 /* SyncItemTests.m */; };
 		DFFE0322162575DD0091DF16 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE0321162575DD0091DF16 /* Foundation.framework */; };
 		DFFE0327162575DD0091DF16 /* KRCloudSync.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE0326162575DD0091DF16 /* KRCloudSync.h */; };
 		DFFE0329162575DD0091DF16 /* KRCloudSync.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE0328162575DD0091DF16 /* KRCloudSync.m */; };
@@ -70,10 +70,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		DF37CA5D162C191600BD5725 /* KRSyncEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRSyncEntry.h; sourceTree = "<group>"; };
-		DF37CA5E162C191700BD5725 /* KRSyncEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRSyncEntry.m; sourceTree = "<group>"; };
-		DF37CA62162C196500BD5725 /* SyncEntryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncEntryTests.h; sourceTree = "<group>"; };
-		DF37CA63162C196500BD5725 /* SyncEntryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncEntryTests.m; sourceTree = "<group>"; };
+		DF37CA5D162C191600BD5725 /* KRSyncItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRSyncItem.h; sourceTree = "<group>"; };
+		DF37CA5E162C191700BD5725 /* KRSyncItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRSyncItem.m; sourceTree = "<group>"; };
+		DF37CA62162C196500BD5725 /* SyncItemTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncItemTests.h; sourceTree = "<group>"; };
+		DF37CA63162C196500BD5725 /* SyncItemTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncItemTests.m; sourceTree = "<group>"; };
 		DFFE031E162575DD0091DF16 /* libCloudSync.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCloudSync.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFFE0321162575DD0091DF16 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DFFE0325162575DD0091DF16 /* CloudSync-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CloudSync-Prefix.pch"; sourceTree = "<group>"; };
@@ -183,8 +183,8 @@
 				DFFE037C162AD2D50091DF16 /* KRResourceComparer.m */,
 				DFFE037E162AD2E60091DF16 /* KRSynchronizer.h */,
 				DFFE037F162AD2E70091DF16 /* KRSynchronizer.m */,
-				DF37CA5D162C191600BD5725 /* KRSyncEntry.h */,
-				DF37CA5E162C191700BD5725 /* KRSyncEntry.m */,
+				DF37CA5D162C191600BD5725 /* KRSyncItem.h */,
+				DF37CA5E162C191700BD5725 /* KRSyncItem.m */,
 				DFFE03641627FB6E0091DF16 /* Service */,
 				DFFE035B1627F9F00091DF16 /* Factory */,
 				DFFE0381162AD87F0091DF16 /* ConflictResolve */,
@@ -220,8 +220,8 @@
 				DFFE03591627F3A50091DF16 /* CloudPreferencesTests.m */,
 				DFFE0385162AE5E80091DF16 /* ResourceComparerTest.h */,
 				DFFE0386162AE5E80091DF16 /* ResourceComparerTest.m */,
-				DF37CA62162C196500BD5725 /* SyncEntryTests.h */,
-				DF37CA63162C196500BD5725 /* SyncEntryTests.m */,
+				DF37CA62162C196500BD5725 /* SyncItemTests.h */,
+				DF37CA63162C196500BD5725 /* SyncItemTests.m */,
 			);
 			path = CloudSyncTests;
 			sourceTree = "<group>";
@@ -386,7 +386,7 @@
 				DFFE037D162AD2D50091DF16 /* KRResourceComparer.m in Sources */,
 				DFFE0380162AD2E70091DF16 /* KRSynchronizer.m in Sources */,
 				DFFE0384162AD9C10091DF16 /* KRConflictResolver.m in Sources */,
-				DF37CA5F162C191700BD5725 /* KRSyncEntry.m in Sources */,
+				DF37CA5F162C191700BD5725 /* KRSyncItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,8 +410,8 @@
 				DFFE03741629B00F0091DF16 /* KRFileService.m in Sources */,
 				DFFE0377162A90B80091DF16 /* FileServiceMock.m in Sources */,
 				DFFE0387162AE5E80091DF16 /* ResourceComparerTest.m in Sources */,
-				DF37CA60162C191700BD5725 /* KRSyncEntry.m in Sources */,
-				DF37CA64162C196500BD5725 /* SyncEntryTests.m in Sources */,
+				DF37CA60162C191700BD5725 /* KRSyncItem.m in Sources */,
+				DF37CA64162C196500BD5725 /* SyncItemTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

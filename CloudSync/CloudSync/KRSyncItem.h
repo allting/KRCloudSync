@@ -1,5 +1,5 @@
 //
-//  KRSyncEntry.h
+//  KRSyncItem.h
 //  CloudSync
 //
 //  Created by allting on 12. 10. 15..
@@ -10,14 +10,14 @@
 #import "KRResourceProperty.h"
 
 typedef enum {
-	KRSyncEntryDirectionNone,
-	KRSyncEntryDirectionToRemote,
-	KRSyncEntryDirectionToLocal
-}KRSyncEntryDirection;
+	KRSyncItemDirectionNone,
+	KRSyncItemDirectionToRemote,
+	KRSyncItemDirectionToLocal
+}KRSyncItemDirection;
 
-@interface KRSyncEntry : NSObject
+@interface KRSyncItem : NSObject
 
-@property (nonatomic, assign) KRSyncEntryDirection direction;
+@property (nonatomic, assign) KRSyncItemDirection direction;
 @property (nonatomic) KRResourceProperty* localResource;
 @property (nonatomic) KRResourceProperty* remoteResource;
 

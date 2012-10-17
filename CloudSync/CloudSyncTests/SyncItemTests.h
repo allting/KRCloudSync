@@ -1,5 +1,5 @@
 //
-//  SyncEntryTests.h
+//  SyncItemTests.h
 //  CloudSync
 //
 //  Created by allting on 12. 10. 15..
@@ -8,6 +8,6 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface SyncEntryTests : SenTestCase
+@interface SyncItemTests : SenTestCase
 
 @end
