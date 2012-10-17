@@ -33,9 +33,10 @@
 
 -(NSComparisonResult)isEqualToDate:(NSDate*)date anotherDate:(NSDate*)anotherDate{
 	NSTimeInterval interval = [date timeIntervalSinceDate:anotherDate];
-	if(1.f<=interval)
+	int roundInterval = lroundf(interval);
+	if(1<=roundInterval)
 		return NSOrderedAscending;
-	else if(interval<=-1.f)
+	else if(roundInterval<=-1)
 		return NSOrderedDescending;
 	return NSOrderedSame;
 }
