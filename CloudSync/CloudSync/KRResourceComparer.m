@@ -27,25 +27,34 @@
 	if(!completed)
 		return;
 
-	NSMutableArray* array = [NSMutableArray arrayWithCapacity:[remoteResources count]];
-	
-	KRiCloudResourceManager* resourceManager = [[KRiCloudResourceManager alloc]init];
+	NSArray* syncItems = [self compareResourcesAndCreateSyncItems:localResources remoteResources:remoteResources];
+	completed(syncItems, nil);
+}
+
+-(NSArray*)compareResourcesAndCreateSyncItems:(NSArray*)localResources remoteResources:(NSArray*)remoteResources{
+	NSMutableArray* syncItems = [NSMutableArray arrayWithCapacity:[remoteResources count]];
 	
 	for(KRResourceProperty* resource in localResources){
 		for(KRResourceProperty* remoteResource in remoteResources){
-			if([resourceManager isEqualToURL:resource.URL otherURL:remoteResource.URL]){
-				NSComparisonResult result = [resource compare:remoteResource];
-				if(result!=NSOrderedSame){
-					KRSyncItem* entry = [[KRSyncItem alloc]initWithResources:resource
-																remoteResource:remoteResource
-															  comparisonResult:result];
-					[array addObject:entry];
-				}
-			}
+			[self compareResourceAndCreateSyncItem:resource remoteResource:remoteResource array:syncItems];
 		}
 	}
 	
-	completed(array, nil);
+	return syncItems;
+}
+
+-(void)compareResourceAndCreateSyncItem:(KRResourceProperty*)localResource
+						 remoteResource:(KRResourceProperty*)remoteResource
+								  array:(NSMutableArray*)syncItems{
+	if([KRiCloudResourceManager isEqualToURL:localResource.URL otherURL:remoteResource.URL]){
+		NSComparisonResult result = [localResource compare:remoteResource];
+		if(result!=NSOrderedSame){
+			KRSyncItem* item = [[KRSyncItem alloc]initWithResources:localResource
+													 remoteResource:remoteResource
+												   comparisonResult:result];
+			[syncItems addObject:item];
+		}
+	}
 }
 
 @end

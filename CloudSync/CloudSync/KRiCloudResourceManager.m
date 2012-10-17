@@ -10,6 +10,14 @@
 
 @implementation KRiCloudResourceManager
 
++(BOOL)isEqualToURL:(NSURL*)url otherURL:(NSURL*)otherURL{
+	NSString* fileName = [url lastPathComponent];
+	NSString* otherFileName = [otherURL lastPathComponent];
+	if([fileName isEqualToString:otherFileName])
+		return YES;
+	return NO;
+}
+
 -(id)initWithURLsAndProperties:(NSArray*)Resources{
 	self = [super init];
 	if(self){
@@ -20,7 +28,7 @@
 
 -(BOOL)hasResource:(NSURL*)url{
 	for(KRResourceProperty* res in _Resources){
-		if([self isEqualToURL:url otherURL:res.URL])
+		if([KRiCloudResourceManager isEqualToURL:url otherURL:res.URL])
 			return YES;
 	}
 	return NO;
@@ -28,18 +36,10 @@
 
 -(KRResourceProperty*)findResource:(NSURL*)url{
 	for(KRResourceProperty* res in _Resources){
-		if([self isEqualToURL:url otherURL:res.URL])
+		if([KRiCloudResourceManager isEqualToURL:url otherURL:res.URL])
 			return res;
 	}
 	return nil;
-}
-
--(BOOL)isEqualToURL:(NSURL*)url otherURL:(NSURL*)otherURL{
-	NSString* fileName = [url lastPathComponent];
-	NSString* otherFileName = [otherURL lastPathComponent];
-	if([fileName isEqualToString:otherFileName])
-		return YES;
-	return NO;
 }
 
 -(BOOL)isModified:(KRResourceProperty *)resource anohterResource:(KRResourceProperty*)anohterResource{

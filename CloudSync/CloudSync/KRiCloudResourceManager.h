@@ -14,11 +14,12 @@
 @property (nonatomic) NSArray* URLs;
 @property (nonatomic) NSArray* Resources;
 
++(BOOL)isEqualToURL:(NSURL*)url otherURL:(NSURL*)otherURL;
+
 -(id)initWithURLsAndProperties:(NSArray*)Resources;
 
 -(BOOL)hasResource:(NSURL*)url;
 
--(BOOL)isEqualToURL:(NSURL*)url otherURL:(NSURL*)otherURL;
 -(KRResourceProperty*)findResource:(NSURL*)url;
 -(BOOL)isModified:(KRResourceProperty *)resource anohterResource:(KRResourceProperty*)anohterResource;
 
