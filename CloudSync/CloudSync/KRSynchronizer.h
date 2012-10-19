@@ -8,14 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import "KRCloudFactory.h"
-
-typedef void (^KRSynchronizerCompletedBlock)(NSArray* syncResources, NSError* error);
+#import "KRCloudService.h"
+#import "KRCloudSyncBlocks.h"
 
 @interface KRSynchronizer : NSObject
 
+@property (nonatomic) KRCloudService* cloudService;
+
 -(id)initWithFactory:(KRCloudFactory*)factory;
 
--(void)syncUsingBlock:(NSArray*)comparedResources
+-(BOOL)syncUsingBlock:(NSArray*)syncItems
 	   completedBlock:(KRSynchronizerCompletedBlock)completed;
 
 @end

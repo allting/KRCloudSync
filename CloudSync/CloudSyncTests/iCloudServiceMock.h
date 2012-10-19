@@ -10,4 +10,7 @@
 
 @interface iCloudServiceMock : KRCloudService
 
+-(BOOL)syncUsingBlock:(NSArray*)syncItems
+	   completedBlock:(KRSynchronizerCompletedBlock)completed;
+
 @end

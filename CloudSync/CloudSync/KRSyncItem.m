@@ -18,6 +18,7 @@
 		_localResource = localResource;
 		_remoteResource = remoteResource;
 		_direction = [self comparisonResultTosyncItemDirection:result];
+		_result = KRSyncItemResultNone;
 	}
 	return self;
 }

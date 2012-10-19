@@ -49,14 +49,14 @@
 		KRResourceComparer* resourceComparer = [[KRResourceComparer alloc]initWithFactory:_factory];
 		[resourceComparer compareUsingBlock:localResources
 							remoteResources:remoteResources
-							 completedBlock:^(NSArray* comparedResources, NSError* error){
+							 completedBlock:^(NSArray* syncItems, NSError* error){
 			if(error){
 				completed(error);
 				return;
 			}
 			
 			KRSynchronizer* sync = [[KRSynchronizer alloc]initWithFactory:_factory];
-			[sync syncUsingBlock:comparedResources completedBlock:^(NSArray* syncResources, NSError* error){
+			[sync syncUsingBlock:syncItems completedBlock:^(NSArray* syncResources, NSError* error){
 				completed(error);
 			}];
 		}];

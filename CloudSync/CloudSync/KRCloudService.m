@@ -14,4 +14,14 @@
 	return nil;
 }
 
+-(BOOL)syncUsingBlock:(NSArray*)syncItems
+	   completedBlock:(KRSynchronizerCompletedBlock)completed{
+	NSAssert(completed, @"Mustn't be nil");
+	if(!completed)
+		return NO;
+	
+	completed(syncItems, nil);
+	return YES;
+}
+
 @end

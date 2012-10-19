@@ -13,17 +13,19 @@
 -(id)initWithFactory:(KRCloudFactory*)factory{
 	self = [super init];
 	if(self){
-		
+		_cloudService = factory.cloudService;
 	}
 	return self;
 }
 
--(void)syncUsingBlock:(NSArray*)comparedResources
+-(BOOL)syncUsingBlock:(NSArray*)syncItems
 	   completedBlock:(KRSynchronizerCompletedBlock)completed{
+	NSAssert(_cloudService, @"Mustn't be nil");
 	NSAssert(completed, @"Mustn't be nil");
-	if(!completed)
-		return;
+	if(!_cloudService || !completed)
+		return NO;
 
+	return [_cloudService syncUsingBlock:syncItems completedBlock:completed];
 }
 
 @end

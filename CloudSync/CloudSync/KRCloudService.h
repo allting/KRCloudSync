@@ -7,9 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KRCloudSyncBlocks.h"
 
 @interface KRCloudService : NSObject
 
 -(NSArray*)load;
+
+-(BOOL)syncUsingBlock:(NSArray*)syncItems
+	   completedBlock:(KRSynchronizerCompletedBlock)completed;
 
 @end

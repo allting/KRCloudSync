@@ -15,11 +15,18 @@ typedef enum {
 	KRSyncItemDirectionToLocal
 }KRSyncItemDirection;
 
+typedef enum {
+	KRSyncItemResultNone,
+	KRSyncItemResultCompleted,
+	KRSyncItemResultConflicted
+}KRSyncItemResult;
+
 @interface KRSyncItem : NSObject
 
 @property (nonatomic, assign) KRSyncItemDirection direction;
 @property (nonatomic) KRResourceProperty* localResource;
 @property (nonatomic) KRResourceProperty* remoteResource;
+@property (nonatomic, assign) KRSyncItemResult result;
 
 -(id)initWithResources:(KRResourceProperty*)localResource
 		remoteResource:(KRResourceProperty*)remoteResource
