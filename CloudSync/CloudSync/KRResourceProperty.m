@@ -24,11 +24,11 @@
 	return self;
 }
 
--(NSComparisonResult)compare:(KRResourceProperty*)anohterResource{
-	NSComparisonResult result = [self isEqualToDate:_modifiedDate anotherDate:anohterResource.modifiedDate];
+-(NSComparisonResult)compare:(KRResourceProperty*)anotherResource{
+	NSComparisonResult result = [self isEqualToDate:_modifiedDate anotherDate:anotherResource.modifiedDate];
 	if(result != NSOrderedSame)
 		return result;
-	return [self isEqualToDate:_createdDate anotherDate:anohterResource.createdDate];
+	return [self isEqualToDate:_createdDate anotherDate:anotherResource.createdDate];
 }
 
 -(NSComparisonResult)isEqualToDate:(NSDate*)date anotherDate:(NSDate*)anotherDate{

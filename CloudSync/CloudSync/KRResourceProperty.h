@@ -19,6 +19,6 @@
 		   modifiedDate:(NSDate*)modifiedDate
 				   size:(NSNumber*)size;
 
--(NSComparisonResult)compare:(KRResourceProperty*)anohterResource;
+-(NSComparisonResult)compare:(KRResourceProperty*)anotherResource;
 
 @end
