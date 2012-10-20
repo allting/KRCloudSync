@@ -25,43 +25,25 @@
 }
 
 -(NSArray*)createRemoteResources{
-	NSArray* TEST_URLS = [self createDefaultRemoteURLs];
-	NSArray* TEST_CREATED_DATE = [self createDateArrayWithTimeInterval:1];
-	NSArray* TEST_MODIFIED_DATE = [self createDateArrayWithTimeInterval:1];
-	NSArray* TEST_SIZES = [self createDefaultFileSize];
-	NSMutableArray* array = [NSMutableArray arrayWithCapacity:[TEST_URLS count]];
-	for(NSInteger i=0; i<[TEST_URLS count]; i++){
-		KRResourceProperty* resource = [[KRResourceProperty alloc]initWithProperties:[TEST_URLS objectAtIndex:i]
-																		 createdDate:[TEST_CREATED_DATE objectAtIndex:i]
-																		modifiedDate:[TEST_MODIFIED_DATE objectAtIndex:i]
-																				size:[TEST_SIZES objectAtIndex:i]];
-		
-		[array addObject:resource];
-	}
-	return array;
+	return [self createRemoteResourcesWithModifiedTimeInterval:1];
 }
 
 -(NSArray*)createModifiedRemoteResources{
-	NSArray* TEST_URLS = [self createDefaultRemoteURLs];
-	NSArray* TEST_CREATED_DATE = [self createDateArrayWithTimeInterval:1];
-	NSArray* TEST_MODIFIED_DATE = [self createDateArrayWithTimeInterval:2];
-	NSArray* TEST_SIZES = [self createDefaultFileSize];
-	NSMutableArray* array = [NSMutableArray arrayWithCapacity:[TEST_URLS count]];
-	for(NSInteger i=0; i<[TEST_URLS count]; i++){
-		KRResourceProperty* resource = [[KRResourceProperty alloc]initWithProperties:[TEST_URLS objectAtIndex:i]
-																		 createdDate:[TEST_CREATED_DATE objectAtIndex:i]
-																		modifiedDate:[TEST_MODIFIED_DATE objectAtIndex:i]
-																				size:[TEST_SIZES objectAtIndex:i]];
-		
-		[array addObject:resource];
-	}
-	return array;
+	return [self createRemoteResourcesWithModifiedTimeInterval:2];
 }
 
 -(NSArray*)createLocalResources{
+	return [self createLocalResourcesWithModifiedTimeInterval:1];
+}
+
+-(NSArray*)createModifiedLocalResources{
+	return [self createLocalResourcesWithModifiedTimeInterval:2];
+}
+
+-(NSArray*)createRemoteResourcesWithModifiedTimeInterval:(NSTimeInterval)interval{
 	NSArray* TEST_URLS = [self createDefaultLocalURLs];
 	NSArray* TEST_CREATED_DATE = [self createDateArrayWithTimeInterval:1];
-	NSArray* TEST_MODIFIED_DATE = [self createDateArrayWithTimeInterval:1];
+	NSArray* TEST_MODIFIED_DATE = [self createDateArrayWithTimeInterval:interval];
 	NSArray* TEST_SIZES = [self createDefaultFileSize];
 	
 	NSMutableArray* array = [NSMutableArray arrayWithCapacity:[TEST_URLS count]];
@@ -76,10 +58,10 @@
 	return array;
 }
 
--(NSArray*)createModifiedLocalResources{
-	NSArray* TEST_URLS = [self createDefaultLocalURLs];
+-(NSArray*)createLocalResourcesWithModifiedTimeInterval:(NSTimeInterval)interval{
+	NSArray* TEST_URLS = [self createDefaultRemoteURLs];
 	NSArray* TEST_CREATED_DATE = [self createDateArrayWithTimeInterval:1];
-	NSArray* TEST_MODIFIED_DATE = [self createDateArrayWithTimeInterval:2];
+	NSArray* TEST_MODIFIED_DATE = [self createDateArrayWithTimeInterval:interval];
 	NSArray* TEST_SIZES = [self createDefaultFileSize];
 	
 	NSMutableArray* array = [NSMutableArray arrayWithCapacity:[TEST_URLS count]];

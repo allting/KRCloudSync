@@ -26,4 +26,20 @@
 	}];
 }
 
+/*
+-(void)testSynchronizerConflict{
+	CloudFactoryMock* factory = [[CloudFactoryMock alloc]init];
+	NSArray* localResources = [factory createLocalResourcesWithModifiedTimeInterval:3];
+	NSArray* remoteResources = [factory createRemoteResourcesWithModifiedTimeInterval:5];
+	NSArray* syncItems = [factory createSyncItems:localResources remoteResources:remoteResources];
+	
+	KRSynchronizer* sync = [[KRSynchronizer alloc]initWithFactory:factory];
+	[sync syncUsingBlock:syncItems completedBlock:^(NSArray* syncItems, NSError* error){
+		STAssertNotNil(error, @"Mustn't be nil");
+		for(KRSyncItem* item in syncItems){
+			STAssertEquals([item result], KRSyncItemResultConflicted, @"Must be equal");
+		}
+	}];
+}
+*/
 @end
