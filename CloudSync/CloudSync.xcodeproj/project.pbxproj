@@ -12,6 +12,24 @@
 		DF37CA64162C196500BD5725 /* SyncItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DF37CA63162C196500BD5725 /* SyncItemTests.m */; };
 		DF99A8F41630EF4B00374D4E /* SynchronizerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DF99A8F31630EF4B00374D4E /* SynchronizerTests.m */; };
 		DF99A8F716339B0B00374D4E /* KRiCloudService.m in Sources */ = {isa = PBXBuildFile; fileRef = DF99A8F616339B0B00374D4E /* KRiCloudService.m */; };
+		DF99A90E16339DC900374D4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE0332162575DE0091DF16 /* UIKit.framework */; };
+		DF99A90F16339DC900374D4E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE0321162575DD0091DF16 /* Foundation.framework */; };
+		DF99A91116339DC900374D4E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF99A91016339DC900374D4E /* CoreGraphics.framework */; };
+		DF99A91716339DC900374D4E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DF99A91516339DC900374D4E /* InfoPlist.strings */; };
+		DF99A91916339DC900374D4E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DF99A91816339DC900374D4E /* main.m */; };
+		DF99A91D16339DC900374D4E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DF99A91C16339DC900374D4E /* AppDelegate.m */; };
+		DF99A91F16339DC900374D4E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DF99A91E16339DC900374D4E /* Default.png */; };
+		DF99A92116339DC900374D4E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DF99A92016339DC900374D4E /* Default@2x.png */; };
+		DF99A92316339DC900374D4E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DF99A92216339DC900374D4E /* Default-568h@2x.png */; };
+		DF99A92616339DC900374D4E /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF99A92416339DC900374D4E /* MainStoryboard_iPhone.storyboard */; };
+		DF99A92916339DC900374D4E /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF99A92716339DC900374D4E /* MainStoryboard_iPad.storyboard */; };
+		DF99A92C16339DC900374D4E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF99A92B16339DC900374D4E /* ViewController.m */; };
+		DF99A93316339DCA00374D4E /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE0330162575DE0091DF16 /* SenTestingKit.framework */; };
+		DF99A93416339DCA00374D4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE0332162575DE0091DF16 /* UIKit.framework */; };
+		DF99A93516339DCA00374D4E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE0321162575DD0091DF16 /* Foundation.framework */; };
+		DF99A93D16339DCA00374D4E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DF99A93B16339DCA00374D4E /* InfoPlist.strings */; };
+		DF99A94016339DCA00374D4E /* CloudSyncSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DF99A93F16339DCA00374D4E /* CloudSyncSampleTests.m */; };
+		DF99A94816339E3000374D4E /* libCloudSync.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE031E162575DD0091DF16 /* libCloudSync.a */; };
 		DFFE0322162575DD0091DF16 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE0321162575DD0091DF16 /* Foundation.framework */; };
 		DFFE0327162575DD0091DF16 /* KRCloudSync.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE0326162575DD0091DF16 /* KRCloudSync.h */; };
 		DFFE0329162575DD0091DF16 /* KRCloudSync.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE0328162575DD0091DF16 /* KRCloudSync.m */; };
@@ -49,6 +67,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		DF99A93616339DCA00374D4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFFE0315162575DD0091DF16 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DF99A90B16339DC800374D4E;
+			remoteInfo = CloudSyncSample;
+		};
 		DFFE0335162575DE0091DF16 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DFFE0315162575DD0091DF16 /* Project object */;
@@ -81,6 +106,26 @@
 		DF99A8F31630EF4B00374D4E /* SynchronizerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynchronizerTests.m; sourceTree = "<group>"; };
 		DF99A8F516339B0B00374D4E /* KRiCloudService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRiCloudService.h; sourceTree = "<group>"; };
 		DF99A8F616339B0B00374D4E /* KRiCloudService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRiCloudService.m; sourceTree = "<group>"; };
+		DF99A90C16339DC800374D4E /* CloudSyncSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudSyncSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF99A91016339DC900374D4E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DF99A91416339DC900374D4E /* CloudSyncSample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CloudSyncSample-Info.plist"; sourceTree = "<group>"; };
+		DF99A91616339DC900374D4E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DF99A91816339DC900374D4E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DF99A91A16339DC900374D4E /* CloudSyncSample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CloudSyncSample-Prefix.pch"; sourceTree = "<group>"; };
+		DF99A91B16339DC900374D4E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DF99A91C16339DC900374D4E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DF99A91E16339DC900374D4E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		DF99A92016339DC900374D4E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		DF99A92216339DC900374D4E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		DF99A92516339DC900374D4E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		DF99A92816339DC900374D4E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		DF99A92A16339DC900374D4E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		DF99A92B16339DC900374D4E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DF99A93216339DCA00374D4E /* CloudSyncSampleTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CloudSyncSampleTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF99A93A16339DCA00374D4E /* CloudSyncSampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CloudSyncSampleTests-Info.plist"; sourceTree = "<group>"; };
+		DF99A93C16339DCA00374D4E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DF99A93E16339DCA00374D4E /* CloudSyncSampleTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CloudSyncSampleTests.h; sourceTree = "<group>"; };
+		DF99A93F16339DCA00374D4E /* CloudSyncSampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CloudSyncSampleTests.m; sourceTree = "<group>"; };
 		DFFE031E162575DD0091DF16 /* libCloudSync.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCloudSync.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFFE0321162575DD0091DF16 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DFFE0325162575DD0091DF16 /* CloudSync-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CloudSync-Prefix.pch"; sourceTree = "<group>"; };
@@ -128,6 +173,27 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		DF99A90916339DC800374D4E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF99A94816339E3000374D4E /* libCloudSync.a in Frameworks */,
+				DF99A90E16339DC900374D4E /* UIKit.framework in Frameworks */,
+				DF99A90F16339DC900374D4E /* Foundation.framework in Frameworks */,
+				DF99A91116339DC900374D4E /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF99A92E16339DCA00374D4E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF99A93316339DCA00374D4E /* SenTestingKit.framework in Frameworks */,
+				DF99A93416339DCA00374D4E /* UIKit.framework in Frameworks */,
+				DF99A93516339DCA00374D4E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DFFE031B162575DD0091DF16 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -150,11 +216,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF99A91216339DC900374D4E /* CloudSyncSample */ = {
+			isa = PBXGroup;
+			children = (
+				DF99A91B16339DC900374D4E /* AppDelegate.h */,
+				DF99A91C16339DC900374D4E /* AppDelegate.m */,
+				DF99A92416339DC900374D4E /* MainStoryboard_iPhone.storyboard */,
+				DF99A92716339DC900374D4E /* MainStoryboard_iPad.storyboard */,
+				DF99A92A16339DC900374D4E /* ViewController.h */,
+				DF99A92B16339DC900374D4E /* ViewController.m */,
+				DF99A91316339DC900374D4E /* Supporting Files */,
+			);
+			path = CloudSyncSample;
+			sourceTree = "<group>";
+		};
+		DF99A91316339DC900374D4E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DF99A91416339DC900374D4E /* CloudSyncSample-Info.plist */,
+				DF99A91516339DC900374D4E /* InfoPlist.strings */,
+				DF99A91816339DC900374D4E /* main.m */,
+				DF99A91A16339DC900374D4E /* CloudSyncSample-Prefix.pch */,
+				DF99A91E16339DC900374D4E /* Default.png */,
+				DF99A92016339DC900374D4E /* Default@2x.png */,
+				DF99A92216339DC900374D4E /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DF99A93816339DCA00374D4E /* CloudSyncSampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				DF99A93E16339DCA00374D4E /* CloudSyncSampleTests.h */,
+				DF99A93F16339DCA00374D4E /* CloudSyncSampleTests.m */,
+				DF99A93916339DCA00374D4E /* Supporting Files */,
+			);
+			path = CloudSyncSampleTests;
+			sourceTree = "<group>";
+		};
+		DF99A93916339DCA00374D4E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DF99A93A16339DCA00374D4E /* CloudSyncSampleTests-Info.plist */,
+				DF99A93B16339DCA00374D4E /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		DFFE0313162575DD0091DF16 = {
 			isa = PBXGroup;
 			children = (
 				DFFE0323162575DD0091DF16 /* CloudSync */,
 				DFFE0338162575DE0091DF16 /* CloudSyncTests */,
+				DF99A91216339DC900374D4E /* CloudSyncSample */,
+				DF99A93816339DCA00374D4E /* CloudSyncSampleTests */,
 				DFFE0320162575DD0091DF16 /* Frameworks */,
 				DFFE031F162575DD0091DF16 /* Products */,
 			);
@@ -165,6 +280,8 @@
 			children = (
 				DFFE031E162575DD0091DF16 /* libCloudSync.a */,
 				DFFE032F162575DE0091DF16 /* CloudSyncTests.octest */,
+				DF99A90C16339DC800374D4E /* CloudSyncSample.app */,
+				DF99A93216339DCA00374D4E /* CloudSyncSampleTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -175,6 +292,7 @@
 				DFFE0321162575DD0091DF16 /* Foundation.framework */,
 				DFFE0330162575DE0091DF16 /* SenTestingKit.framework */,
 				DFFE0332162575DE0091DF16 /* UIKit.framework */,
+				DF99A91016339DC900374D4E /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -292,6 +410,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		DF99A90B16339DC800374D4E /* CloudSyncSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DF99A94516339DCA00374D4E /* Build configuration list for PBXNativeTarget "CloudSyncSample" */;
+			buildPhases = (
+				DF99A90816339DC800374D4E /* Sources */,
+				DF99A90916339DC800374D4E /* Frameworks */,
+				DF99A90A16339DC800374D4E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CloudSyncSample;
+			productName = CloudSyncSample;
+			productReference = DF99A90C16339DC800374D4E /* CloudSyncSample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DF99A93116339DCA00374D4E /* CloudSyncSampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DF99A94616339DCA00374D4E /* Build configuration list for PBXNativeTarget "CloudSyncSampleTests" */;
+			buildPhases = (
+				DF99A92D16339DCA00374D4E /* Sources */,
+				DF99A92E16339DCA00374D4E /* Frameworks */,
+				DF99A92F16339DCA00374D4E /* Resources */,
+				DF99A93016339DCA00374D4E /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DF99A93716339DCA00374D4E /* PBXTargetDependency */,
+			);
+			name = CloudSyncSampleTests;
+			productName = CloudSyncSampleTests;
+			productReference = DF99A93216339DCA00374D4E /* CloudSyncSampleTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		DFFE031D162575DD0091DF16 /* CloudSync */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DFFE0343162575DE0091DF16 /* Build configuration list for PBXNativeTarget "CloudSync" */;
@@ -351,11 +505,34 @@
 			targets = (
 				DFFE031D162575DD0091DF16 /* CloudSync */,
 				DFFE032E162575DE0091DF16 /* CloudSyncTests */,
+				DF99A90B16339DC800374D4E /* CloudSyncSample */,
+				DF99A93116339DCA00374D4E /* CloudSyncSampleTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		DF99A90A16339DC800374D4E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF99A91716339DC900374D4E /* InfoPlist.strings in Resources */,
+				DF99A91F16339DC900374D4E /* Default.png in Resources */,
+				DF99A92116339DC900374D4E /* Default@2x.png in Resources */,
+				DF99A92316339DC900374D4E /* Default-568h@2x.png in Resources */,
+				DF99A92616339DC900374D4E /* MainStoryboard_iPhone.storyboard in Resources */,
+				DF99A92916339DC900374D4E /* MainStoryboard_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF99A92F16339DCA00374D4E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF99A93D16339DCA00374D4E /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DFFE032C162575DE0091DF16 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -367,6 +544,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		DF99A93016339DCA00374D4E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
 		DFFE032D162575DE0091DF16 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -383,6 +573,24 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DF99A90816339DC800374D4E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF99A91916339DC900374D4E /* main.m in Sources */,
+				DF99A91D16339DC900374D4E /* AppDelegate.m in Sources */,
+				DF99A92C16339DC900374D4E /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF99A92D16339DCA00374D4E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF99A94016339DCA00374D4E /* CloudSyncSampleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DFFE031A162575DD0091DF16 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -432,6 +640,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		DF99A93716339DCA00374D4E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DF99A90B16339DC800374D4E /* CloudSyncSample */;
+			targetProxy = DF99A93616339DCA00374D4E /* PBXContainerItemProxy */;
+		};
 		DFFE0336162575DE0091DF16 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DFFE031D162575DD0091DF16 /* CloudSync */;
@@ -440,6 +653,38 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		DF99A91516339DC900374D4E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DF99A91616339DC900374D4E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DF99A92416339DC900374D4E /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DF99A92516339DC900374D4E /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		DF99A92716339DC900374D4E /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DF99A92816339DC900374D4E /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		DF99A93B16339DCA00374D4E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DF99A93C16339DCA00374D4E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		DFFE033B162575DE0091DF16 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -451,6 +696,77 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		DF99A94116339DCA00374D4E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CloudSyncSample/CloudSyncSample-Prefix.pch";
+				INFOPLIST_FILE = "CloudSyncSample/CloudSyncSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DF99A94216339DCA00374D4E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CloudSyncSample/CloudSyncSample-Prefix.pch";
+				INFOPLIST_FILE = "CloudSyncSample/CloudSyncSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		DF99A94316339DCA00374D4E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CloudSyncSample.app/CloudSyncSample";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CloudSyncSample/CloudSyncSample-Prefix.pch";
+				INFOPLIST_FILE = "CloudSyncSampleTests/CloudSyncSampleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		DF99A94416339DCA00374D4E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CloudSyncSample.app/CloudSyncSample";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CloudSyncSample/CloudSyncSample-Prefix.pch";
+				INFOPLIST_FILE = "CloudSyncSampleTests/CloudSyncSampleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		DFFE0341162575DE0091DF16 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -504,6 +820,7 @@
 				DSTROOT = /tmp/CloudSync.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CloudSync/CloudSync-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -516,6 +833,7 @@
 				DSTROOT = /tmp/CloudSync.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CloudSync/CloudSync-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -555,6 +873,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DF99A94516339DCA00374D4E /* Build configuration list for PBXNativeTarget "CloudSyncSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF99A94116339DCA00374D4E /* Debug */,
+				DF99A94216339DCA00374D4E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DF99A94616339DCA00374D4E /* Build configuration list for PBXNativeTarget "CloudSyncSampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF99A94316339DCA00374D4E /* Debug */,
+				DF99A94416339DCA00374D4E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		DFFE0318162575DD0091DF16 /* Build configuration list for PBXProject "CloudSync" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
