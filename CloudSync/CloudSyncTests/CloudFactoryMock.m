@@ -76,6 +76,10 @@
 	return array;
 }
 
+-(NSArray*)createEmptyResources{
+	return [NSArray array];
+}
+
 -(NSArray*)createDefaultRemoteURLs{
 	NSArray* urls = @[
 	[NSURL fileURLWithPath:@"/private/test/documents/test1.zip"],

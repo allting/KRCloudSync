@@ -24,7 +24,7 @@
 		if(error)
 			NSLog(@"Failed to sync : %@", error);
 		else
-			NSLog(@"Succeeded to sync : %@", error);
+			NSLog(@"Succeeded to sync");
 	}];
 }
 

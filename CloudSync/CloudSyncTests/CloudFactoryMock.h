@@ -20,6 +20,8 @@
 -(NSArray*)createRemoteResourcesWithModifiedTimeInterval:(NSTimeInterval)interval;
 -(NSArray*)createLocalResourcesWithModifiedTimeInterval:(NSTimeInterval)interval;
 
+-(NSArray*)createEmptyResources;
+
 -(NSArray*)createSyncItems:(NSArray*)localResources remoteResources:(NSArray*)remoteResources;
 
 @end

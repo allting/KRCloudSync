@@ -28,7 +28,7 @@
 	[comparer compareUsingBlock:localResources
 				 remoteResources:remoteResources
 				 completedBlock:^(NSArray *syncItems, NSError *error) {
-					 STAssertTrue(0==[syncItems count], @"Must be equal");
+					 STAssertTrue([remoteResources count]==[syncItems count], @"Must be equal");
 				 }];
 }
 
@@ -62,6 +62,42 @@
 				remoteResources:remoteResources
 				 completedBlock:^(NSArray *syncItems, NSError *error) {
 					 STAssertTrue([localResources count]==[syncItems count], @"Must be equal");
+					 for(KRSyncItem* item in syncItems){
+						 STAssertEquals([item direction], KRSyncItemDirectionToLocal, @"Must be equal to LocalDirection");
+					 }
+				 }];
+}
+
+-(void)testWithEmptyRemoteResouces{
+	CloudFactoryMock* factory = [[CloudFactoryMock alloc]init];
+	NSArray* remoteResources = [factory createEmptyResources];
+	NSArray* localResources = [factory createLocalResources];
+	
+	KRResourceComparer* comparer = [[KRResourceComparer alloc]initWithFactory:factory];
+	STAssertNotNil(comparer, @"Mustn't be nil");
+	
+	[comparer compareUsingBlock:localResources
+				remoteResources:remoteResources
+				 completedBlock:^(NSArray *syncItems, NSError *error) {
+					 STAssertTrue([localResources count]==[syncItems count], @"Must be equal");
+					 for(KRSyncItem* item in syncItems){
+						 STAssertEquals([item direction], KRSyncItemDirectionToRemote, @"Must be equal to LocalDirection");
+					 }
+				 }];
+}
+
+-(void)testWithEmptyLocalResouces{
+	CloudFactoryMock* factory = [[CloudFactoryMock alloc]init];
+	NSArray* remoteResources = [factory createRemoteResources];
+	NSArray* localResources = [factory createEmptyResources];
+	
+	KRResourceComparer* comparer = [[KRResourceComparer alloc]initWithFactory:factory];
+	STAssertNotNil(comparer, @"Mustn't be nil");
+	
+	[comparer compareUsingBlock:localResources
+				remoteResources:remoteResources
+				 completedBlock:^(NSArray *syncItems, NSError *error) {
+					 STAssertTrue([remoteResources count]==[syncItems count], @"Must be equal");
 					 for(KRSyncItem* item in syncItems){
 						 STAssertEquals([item direction], KRSyncItemDirectionToLocal, @"Must be equal to LocalDirection");
 					 }

@@ -32,29 +32,64 @@
 }
 
 -(NSArray*)compareResourcesAndCreateSyncItems:(NSArray*)localResources remoteResources:(NSArray*)remoteResources{
-	NSMutableArray* syncItems = [NSMutableArray arrayWithCapacity:[remoteResources count]];
+	NSSet* keyResources = [self createKeyResources:localResources remoteResources:remoteResources];
 	
-	for(KRResourceProperty* resource in localResources){
-		for(KRResourceProperty* remoteResource in remoteResources){
-			[self compareResourceAndCreateSyncItem:resource remoteResource:remoteResource array:syncItems];
-		}
+	NSMutableArray* syncItems = [NSMutableArray arrayWithCapacity:[remoteResources count]];
+
+	for(NSString* key in keyResources){
+		KRResourceProperty* localResource = [self findResourceWithKeyInResources:key resources:localResources];
+		KRResourceProperty* remoteResource = [self findResourceWithKeyInResources:key resources:remoteResources];
+		NSComparisonResult result = NSOrderedSame;
+		if(!localResource)
+			result = NSOrderedDescending;
+		else if(!remoteResource)
+			result = NSOrderedAscending;
+		else
+			result = [localResource compare:remoteResource];
+		
+		KRSyncItem* item = [[KRSyncItem alloc]initWithResources:localResource
+												 remoteResource:remoteResource
+											   comparisonResult:result];
+		[syncItems addObject:item];
 	}
 	
 	return syncItems;
 }
 
--(void)compareResourceAndCreateSyncItem:(KRResourceProperty*)localResource
-						 remoteResource:(KRResourceProperty*)remoteResource
-								  array:(NSMutableArray*)syncItems{
+-(NSSet*)createKeyResources:(NSArray*)localResources remoteResources:(NSArray*)remoteResources{
+	NSMutableSet* keys = [NSMutableSet setWithCapacity:[localResources count]+[remoteResources count]];
+	for(KRResourceProperty* res in localResources){
+		NSString* key = [res.URL lastPathComponent];
+		[keys addObject:key];
+	}
+	
+	for(KRResourceProperty* res in remoteResources){
+		NSString* key = [res.URL lastPathComponent];
+		[keys addObject:key];
+	}
+	return keys;
+}
+
+-(KRResourceProperty*)findResourceWithKeyInResources:(NSString*)key resources:(NSArray*)resources{
+	for(KRResourceProperty* resource in resources){
+		NSString* name = [resource.URL lastPathComponent];
+		if([key isEqualToString:name])
+			return resource;
+	}
+	return nil;
+}
+
+-(KRSyncItem*)compareResourceAndCreateSyncItem:(KRResourceProperty*)localResource
+						 remoteResource:(KRResourceProperty*)remoteResource{
 	if([KRiCloudResourceManager isEqualToURL:localResource.URL otherURL:remoteResource.URL]){
 		NSComparisonResult result = [localResource compare:remoteResource];
 		if(result!=NSOrderedSame){
-			KRSyncItem* item = [[KRSyncItem alloc]initWithResources:localResource
+			return [[KRSyncItem alloc]initWithResources:localResource
 													 remoteResource:remoteResource
 												   comparisonResult:result];
-			[syncItems addObject:item];
 		}
 	}
+	return nil;
 }
 
 @end
