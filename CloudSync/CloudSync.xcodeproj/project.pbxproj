@@ -30,6 +30,8 @@
 		DF99A93D16339DCA00374D4E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DF99A93B16339DCA00374D4E /* InfoPlist.strings */; };
 		DF99A94016339DCA00374D4E /* CloudSyncSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DF99A93F16339DCA00374D4E /* CloudSyncSampleTests.m */; };
 		DF99A94816339E3000374D4E /* libCloudSync.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE031E162575DD0091DF16 /* libCloudSync.a */; };
+		DF99A9501633BF8500374D4E /* KRLocalFileService.m in Sources */ = {isa = PBXBuildFile; fileRef = DF99A94F1633BF8400374D4E /* KRLocalFileService.m */; };
+		DF99A9531633C1F700374D4E /* KRiCloudFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DF99A9521633C1F700374D4E /* KRiCloudFactory.m */; };
 		DFFE0322162575DD0091DF16 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE0321162575DD0091DF16 /* Foundation.framework */; };
 		DFFE0327162575DD0091DF16 /* KRCloudSync.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE0326162575DD0091DF16 /* KRCloudSync.h */; };
 		DFFE0329162575DD0091DF16 /* KRCloudSync.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE0328162575DD0091DF16 /* KRCloudSync.m */; };
@@ -73,6 +75,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = DF99A90B16339DC800374D4E;
 			remoteInfo = CloudSyncSample;
+		};
+		DF99A9491633AD0500374D4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFFE0315162575DD0091DF16 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DFFE031D162575DD0091DF16;
+			remoteInfo = CloudSync;
 		};
 		DFFE0335162575DE0091DF16 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -126,6 +135,10 @@
 		DF99A93C16339DCA00374D4E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DF99A93E16339DCA00374D4E /* CloudSyncSampleTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CloudSyncSampleTests.h; sourceTree = "<group>"; };
 		DF99A93F16339DCA00374D4E /* CloudSyncSampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CloudSyncSampleTests.m; sourceTree = "<group>"; };
+		DF99A94E1633BF8400374D4E /* KRLocalFileService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRLocalFileService.h; sourceTree = "<group>"; };
+		DF99A94F1633BF8400374D4E /* KRLocalFileService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRLocalFileService.m; sourceTree = "<group>"; };
+		DF99A9511633C1F700374D4E /* KRiCloudFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRiCloudFactory.h; sourceTree = "<group>"; };
+		DF99A9521633C1F700374D4E /* KRiCloudFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRiCloudFactory.m; sourceTree = "<group>"; };
 		DFFE031E162575DD0091DF16 /* libCloudSync.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCloudSync.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFFE0321162575DD0091DF16 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DFFE0325162575DD0091DF16 /* CloudSync-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CloudSync-Prefix.pch"; sourceTree = "<group>"; };
@@ -368,6 +381,8 @@
 			children = (
 				DFFE035C1627FA050091DF16 /* KRCloudFactory.h */,
 				DFFE035D1627FA050091DF16 /* KRCloudFactory.m */,
+				DF99A9511633C1F700374D4E /* KRiCloudFactory.h */,
+				DF99A9521633C1F700374D4E /* KRiCloudFactory.m */,
 			);
 			name = Factory;
 			sourceTree = "<group>";
@@ -381,6 +396,8 @@
 				DFFE03721629B00F0091DF16 /* KRFileService.m */,
 				DF99A8F516339B0B00374D4E /* KRiCloudService.h */,
 				DF99A8F616339B0B00374D4E /* KRiCloudService.m */,
+				DF99A94E1633BF8400374D4E /* KRLocalFileService.h */,
+				DF99A94F1633BF8400374D4E /* KRLocalFileService.m */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -421,6 +438,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				DF99A94A1633AD0500374D4E /* PBXTargetDependency */,
 			);
 			name = CloudSyncSample;
 			productName = CloudSyncSample;
@@ -608,6 +626,8 @@
 				DFFE0384162AD9C10091DF16 /* KRConflictResolver.m in Sources */,
 				DF37CA5F162C191700BD5725 /* KRSyncItem.m in Sources */,
 				DF99A8F716339B0B00374D4E /* KRiCloudService.m in Sources */,
+				DF99A9501633BF8500374D4E /* KRLocalFileService.m in Sources */,
+				DF99A9531633C1F700374D4E /* KRiCloudFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +664,11 @@
 			isa = PBXTargetDependency;
 			target = DF99A90B16339DC800374D4E /* CloudSyncSample */;
 			targetProxy = DF99A93616339DCA00374D4E /* PBXContainerItemProxy */;
+		};
+		DF99A94A1633AD0500374D4E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DFFE031D162575DD0091DF16 /* CloudSync */;
+			targetProxy = DF99A9491633AD0500374D4E /* PBXContainerItemProxy */;
 		};
 		DFFE0336162575DE0091DF16 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

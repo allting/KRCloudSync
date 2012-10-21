@@ -10,6 +10,7 @@
 #import "KRResourceLoader.h"
 #import "KRResourceComparer.h"
 #import "KRSynchronizer.h"
+#import "KRiCloudFactory.h"
 
 @implementation KRCloudSync
 
@@ -17,6 +18,7 @@
 	self = [super init];
 	if(self){
 		_preferences = [[KRCloudPreferences alloc]init];
+		_factory = [[KRiCloudFactory alloc]init];
 	}
 	return self;
 }

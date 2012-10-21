@@ -28,11 +28,18 @@
 	return YES;
 }
 
--(void)loadUsingBlock:(KRResourceLoaderCompletedBlock)completed{
+-(BOOL)loadUsingBlock:(KRResourceLoaderCompletedBlock)completed{
 	NSAssert(completed, @"Mustn't be nil");
-	if(!completed)
-		return;
+	NSAssert(_cloudService, @"Mustn't be nil");
+	NSAssert(_fileService, @"Mustn't be nil");
+	if(!completed || !_cloudService || !_fileService)
+		return NO;
 	
+	NSArray* localResources = [_fileService load];
+	[_cloudService loadResourcesUsingBlock:^(NSArray* remoteResources, NSError* error){
+		completed(remoteResources, localResources, error);
+	}];
+	return YES;
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "KRCloudSync.h"
 
 @interface ViewController ()
 
@@ -18,6 +19,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+	KRCloudSync* syncer = [[KRCloudSync alloc]init];
+	[syncer syncUsingBlock:^(NSError* error){
+		if(error)
+			NSLog(@"Failed to sync : %@", error);
+		else
+			NSLog(@"Succeeded to sync : %@", error);
+	}];
 }
 
 - (void)didReceiveMemoryWarning

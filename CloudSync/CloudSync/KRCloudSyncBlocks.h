@@ -9,6 +9,7 @@
 #ifndef CloudSync_KRCloudSyncBlocks_h
 #define CloudSync_KRCloudSyncBlocks_h
 
+typedef void (^KRResourcesCompletedBlock)(NSArray* resources, NSError* error);
 typedef void (^KRSynchronizerCompletedBlock)(NSArray* syncResources, NSError* error);
 
 

@@ -21,6 +21,6 @@ typedef void (^KRResourceLoaderCompletedBlock)(NSArray* remoteResources, NSArray
 -(id)initWithFactory:(KRCloudFactory*)factory;
 
 -(BOOL)load;
--(void)loadUsingBlock:(KRResourceLoaderCompletedBlock)completed;
+-(BOOL)loadUsingBlock:(KRResourceLoaderCompletedBlock)completed;
 
 @end

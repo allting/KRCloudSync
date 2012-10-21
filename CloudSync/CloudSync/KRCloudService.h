@@ -11,6 +11,8 @@
 
 @interface KRCloudService : NSObject
 
+-(BOOL)loadResourcesUsingBlock:(KRResourcesCompletedBlock)completed;
+
 -(BOOL)syncUsingBlock:(NSArray*)syncItems
 	   completedBlock:(KRSynchronizerCompletedBlock)completed;
 

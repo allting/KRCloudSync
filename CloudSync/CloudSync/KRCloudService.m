@@ -10,6 +10,10 @@
 
 @implementation KRCloudService
 
+-(BOOL)loadResourcesUsingBlock:(KRResourcesCompletedBlock)completed{
+	return NO;
+}
+
 -(BOOL)syncUsingBlock:(NSArray*)syncItems
 	   completedBlock:(KRSynchronizerCompletedBlock)completed{
 	NSAssert(completed, @"Mustn't be nil");

@@ -10,4 +10,13 @@
 
 @implementation KRCloudFactory
 
+-(id)init{
+	self = [super init];
+	if(self){
+		self.cloudService = [[KRCloudService alloc]init];
+		self.fileService = [[KRFileService alloc]init];
+	}
+	return self;
+}
+
 @end
