@@ -18,10 +18,14 @@ typedef enum {
 typedef void (^KRCloudSyncProgressBlock)(float progress);
 typedef void (^KRCloudSyncCompletedBlock)(NSError* error);
 
+typedef void (^KRiCloudAvailableBlock)(BOOL available);
+
 @interface KRCloudSync : NSObject
 
 @property (nonatomic) KRCloudPreferences* preferences;
 @property (nonatomic) KRCloudFactory* factory;
+
++(BOOL)isAvailableiCloudUsingBlock:(KRiCloudAvailableBlock)availableBlock;
 
 -(id)initWithFactory:(KRCloudFactory*)factory;
 

@@ -7,6 +7,7 @@
 //
 
 #import "KRiCloudService.h"
+#import "KRiCloud.h"
 
 @implementation KRiCloudService
 
@@ -15,7 +16,17 @@
 	if(!completed)
 		return NO;
 	
-	completed(nil, nil);
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K like '*.*')", NSMetadataItemFSNameKey];
+	
+	KRiCloud* cloud = [KRiCloud sharedInstance];
+	[cloud loadFiles:nil predicate:predicate completedBlock:^(id key, NSMetadataQuery* query, NSError* error){
+		NSLog(@"Map Count:%d", [query resultCount]);
+		for(NSMetadataItem *item in [query results]){
+			NSLog(@"Map:%@", item);
+		}
+		completed(nil, nil);
+	}];
+	
 	return YES;
 }
 

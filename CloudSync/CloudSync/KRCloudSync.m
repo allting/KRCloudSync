@@ -14,6 +14,27 @@
 
 @implementation KRCloudSync
 
++(BOOL)isAvailableiCloudUsingBlock:(KRiCloudAvailableBlock)availableBlock{
+	NSAssert(availableBlock, @"Mustn't be nil");
+	if(!availableBlock)
+		return NO;
+	
+	dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+	dispatch_async(globalQueue, ^{
+		NSFileManager *fileManager = [NSFileManager defaultManager];
+		NSURL *ubiquityContainer = [fileManager URLForUbiquityContainerIdentifier:nil];
+		
+		dispatch_queue_t mainQueue = dispatch_get_main_queue();
+		dispatch_async(mainQueue, ^{
+			if(ubiquityContainer)
+				availableBlock(YES);
+			else
+				availableBlock(NO);
+		});
+	});
+	return YES;
+}
+
 -(id)init{
 	self = [super init];
 	if(self){

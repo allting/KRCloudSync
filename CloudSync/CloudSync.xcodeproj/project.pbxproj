@@ -32,6 +32,7 @@
 		DF99A94816339E3000374D4E /* libCloudSync.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE031E162575DD0091DF16 /* libCloudSync.a */; };
 		DF99A9501633BF8500374D4E /* KRLocalFileService.m in Sources */ = {isa = PBXBuildFile; fileRef = DF99A94F1633BF8400374D4E /* KRLocalFileService.m */; };
 		DF99A9531633C1F700374D4E /* KRiCloudFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DF99A9521633C1F700374D4E /* KRiCloudFactory.m */; };
+		DFA04A2A16342354008FFF55 /* KRiCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = DFA04A2916342354008FFF55 /* KRiCloud.m */; };
 		DFFE0322162575DD0091DF16 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE0321162575DD0091DF16 /* Foundation.framework */; };
 		DFFE0327162575DD0091DF16 /* KRCloudSync.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE0326162575DD0091DF16 /* KRCloudSync.h */; };
 		DFFE0329162575DD0091DF16 /* KRCloudSync.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE0328162575DD0091DF16 /* KRCloudSync.m */; };
@@ -139,6 +140,9 @@
 		DF99A94F1633BF8400374D4E /* KRLocalFileService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRLocalFileService.m; sourceTree = "<group>"; };
 		DF99A9511633C1F700374D4E /* KRiCloudFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRiCloudFactory.h; sourceTree = "<group>"; };
 		DF99A9521633C1F700374D4E /* KRiCloudFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRiCloudFactory.m; sourceTree = "<group>"; };
+		DFA04A2816342354008FFF55 /* KRiCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRiCloud.h; sourceTree = "<group>"; };
+		DFA04A2916342354008FFF55 /* KRiCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRiCloud.m; sourceTree = "<group>"; };
+		DFA04A2C163428CF008FFF55 /* CloudSyncSample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CloudSyncSample.entitlements; sourceTree = "<group>"; };
 		DFFE031E162575DD0091DF16 /* libCloudSync.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCloudSync.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFFE0321162575DD0091DF16 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DFFE0325162575DD0091DF16 /* CloudSync-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CloudSync-Prefix.pch"; sourceTree = "<group>"; };
@@ -232,6 +236,7 @@
 		DF99A91216339DC900374D4E /* CloudSyncSample */ = {
 			isa = PBXGroup;
 			children = (
+				DFA04A2C163428CF008FFF55 /* CloudSyncSample.entitlements */,
 				DF99A91B16339DC900374D4E /* AppDelegate.h */,
 				DF99A91C16339DC900374D4E /* AppDelegate.m */,
 				DF99A92416339DC900374D4E /* MainStoryboard_iPhone.storyboard */,
@@ -398,6 +403,8 @@
 				DF99A8F616339B0B00374D4E /* KRiCloudService.m */,
 				DF99A94E1633BF8400374D4E /* KRLocalFileService.h */,
 				DF99A94F1633BF8400374D4E /* KRLocalFileService.m */,
+				DFA04A2816342354008FFF55 /* KRiCloud.h */,
+				DFA04A2916342354008FFF55 /* KRiCloud.m */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -628,6 +635,7 @@
 				DF99A8F716339B0B00374D4E /* KRiCloudService.m in Sources */,
 				DF99A9501633BF8500374D4E /* KRLocalFileService.m in Sources */,
 				DF99A9531633C1F700374D4E /* KRiCloudFactory.m in Sources */,
+				DFA04A2A16342354008FFF55 /* KRiCloud.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,6 +732,7 @@
 		DF99A94116339DCA00374D4E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CloudSyncSample/CloudSyncSample.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -742,6 +751,7 @@
 		DF99A94216339DCA00374D4E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CloudSyncSample/CloudSyncSample.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -905,6 +915,7 @@
 				DF99A94216339DCA00374D4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DF99A94616339DCA00374D4E /* Build configuration list for PBXNativeTarget "CloudSyncSampleTests" */ = {
 			isa = XCConfigurationList;
@@ -913,6 +924,7 @@
 				DF99A94416339DCA00374D4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DFFE0318162575DD0091DF16 /* Build configuration list for PBXProject "CloudSync" */ = {
 			isa = XCConfigurationList;
