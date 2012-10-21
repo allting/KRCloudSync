@@ -1,14 +1,14 @@
 //
-//  KRCloudService.m
+//  KRiCloudService.m
 //  CloudSync
 //
-//  Created by allting on 12. 10. 12..
+//  Created by allting on 12. 10. 21..
 //  Copyright (c) 2012년 allting. All rights reserved.
 //
 
-#import "KRCloudService.h"
+#import "KRiCloudService.h"
 
-@implementation KRCloudService
+@implementation KRiCloudService
 
 -(BOOL)syncUsingBlock:(NSArray*)syncItems
 	   completedBlock:(KRSynchronizerCompletedBlock)completed{
