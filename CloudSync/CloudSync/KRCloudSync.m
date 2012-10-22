@@ -65,7 +65,7 @@
 	KRResourceLoader* resourceLoader = [[KRResourceLoader alloc]initWithFactory:_factory];
 	[resourceLoader loadUsingBlock:^(NSArray* remoteResources, NSArray* localResources, NSError* error){
 		if(error){
-			completed(error);
+			completed(nil, error);
 			return;
 		}
 		
@@ -74,13 +74,13 @@
 							remoteResources:remoteResources
 							 completedBlock:^(NSArray* syncItems, NSError* error){
 			if(error){
-				completed(error);
+				completed(nil, error);
 				return;
 			}
 			
 			KRSynchronizer* sync = [[KRSynchronizer alloc]initWithFactory:_factory];
-			[sync syncUsingBlock:syncItems completedBlock:^(NSArray* syncResources, NSError* error){
-				completed(error);
+			[sync syncUsingBlock:syncItems completedBlock:^(NSArray* syncItemsResult, NSError* error){
+				completed(syncItemsResult, error);
 			}];
 		}];
 	}];

@@ -16,7 +16,7 @@ typedef enum {
 }KRCloudSyncCloudType;
 
 typedef void (^KRCloudSyncProgressBlock)(float progress);
-typedef void (^KRCloudSyncCompletedBlock)(NSError* error);
+typedef void (^KRCloudSyncCompletedBlock)(NSArray* syncItems, NSError* error);
 
 typedef void (^KRiCloudAvailableBlock)(BOOL available);
 

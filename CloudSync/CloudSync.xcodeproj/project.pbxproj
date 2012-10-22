@@ -33,6 +33,22 @@
 		DF99A9501633BF8500374D4E /* KRLocalFileService.m in Sources */ = {isa = PBXBuildFile; fileRef = DF99A94F1633BF8400374D4E /* KRLocalFileService.m */; };
 		DF99A9531633C1F700374D4E /* KRiCloudFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DF99A9521633C1F700374D4E /* KRiCloudFactory.m */; };
 		DFA04A2A16342354008FFF55 /* KRiCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = DFA04A2916342354008FFF55 /* KRiCloud.m */; };
+		DFA04A6A16345637008FFF55 /* KRResourceLoader.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE0378162AD2C00091DF16 /* KRResourceLoader.h */; };
+		DFA04A6B16345637008FFF55 /* KRResourceComparer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE037B162AD2D50091DF16 /* KRResourceComparer.h */; };
+		DFA04A6C16345637008FFF55 /* KRSynchronizer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE037E162AD2E60091DF16 /* KRSynchronizer.h */; };
+		DFA04A6D16345637008FFF55 /* KRSyncItem.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF37CA5D162C191600BD5725 /* KRSyncItem.h */; };
+		DFA04A6E16345637008FFF55 /* KRCloudSyncBlocks.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF99A8F01630EE4200374D4E /* KRCloudSyncBlocks.h */; };
+		DFA04A6F16345637008FFF55 /* KRCloudService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE03651627FB800091DF16 /* KRCloudService.h */; };
+		DFA04A7016345637008FFF55 /* KRFileService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE03711629B00F0091DF16 /* KRFileService.h */; };
+		DFA04A7116345637008FFF55 /* KRiCloudService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF99A8F516339B0B00374D4E /* KRiCloudService.h */; };
+		DFA04A7216345637008FFF55 /* KRLocalFileService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF99A94E1633BF8400374D4E /* KRLocalFileService.h */; };
+		DFA04A7316345637008FFF55 /* KRiCloud.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFA04A2816342354008FFF55 /* KRiCloud.h */; };
+		DFA04A7416345637008FFF55 /* KRCloudFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE035C1627FA050091DF16 /* KRCloudFactory.h */; };
+		DFA04A7516345637008FFF55 /* KRiCloudFactory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DF99A9511633C1F700374D4E /* KRiCloudFactory.h */; };
+		DFA04A7616345637008FFF55 /* KRConflictResolver.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE0382162AD9C10091DF16 /* KRConflictResolver.h */; };
+		DFA04A7716345637008FFF55 /* KRiCloudResourceManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE034C1626A04B0091DF16 /* KRiCloudResourceManager.h */; };
+		DFA04A7816345637008FFF55 /* KRResourceProperty.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE03501626ADA00091DF16 /* KRResourceProperty.h */; };
+		DFA04A7916345637008FFF55 /* KRCloudPreferences.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE03541627F37B0091DF16 /* KRCloudPreferences.h */; };
 		DFFE0322162575DD0091DF16 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE0321162575DD0091DF16 /* Foundation.framework */; };
 		DFFE0327162575DD0091DF16 /* KRCloudSync.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE0326162575DD0091DF16 /* KRCloudSync.h */; };
 		DFFE0329162575DD0091DF16 /* KRCloudSync.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE0328162575DD0091DF16 /* KRCloudSync.m */; };
@@ -100,6 +116,22 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				DFA04A6A16345637008FFF55 /* KRResourceLoader.h in CopyFiles */,
+				DFA04A6B16345637008FFF55 /* KRResourceComparer.h in CopyFiles */,
+				DFA04A6C16345637008FFF55 /* KRSynchronizer.h in CopyFiles */,
+				DFA04A6D16345637008FFF55 /* KRSyncItem.h in CopyFiles */,
+				DFA04A6E16345637008FFF55 /* KRCloudSyncBlocks.h in CopyFiles */,
+				DFA04A6F16345637008FFF55 /* KRCloudService.h in CopyFiles */,
+				DFA04A7016345637008FFF55 /* KRFileService.h in CopyFiles */,
+				DFA04A7116345637008FFF55 /* KRiCloudService.h in CopyFiles */,
+				DFA04A7216345637008FFF55 /* KRLocalFileService.h in CopyFiles */,
+				DFA04A7316345637008FFF55 /* KRiCloud.h in CopyFiles */,
+				DFA04A7416345637008FFF55 /* KRCloudFactory.h in CopyFiles */,
+				DFA04A7516345637008FFF55 /* KRiCloudFactory.h in CopyFiles */,
+				DFA04A7616345637008FFF55 /* KRConflictResolver.h in CopyFiles */,
+				DFA04A7716345637008FFF55 /* KRiCloudResourceManager.h in CopyFiles */,
+				DFA04A7816345637008FFF55 /* KRResourceProperty.h in CopyFiles */,
+				DFA04A7916345637008FFF55 /* KRCloudPreferences.h in CopyFiles */,
 				DFFE0327162575DD0091DF16 /* KRCloudSync.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -823,7 +855,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -843,7 +875,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

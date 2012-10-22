@@ -36,7 +36,7 @@
 	KRCloudFactory* factory = [self createiCloudMockFactory];
 	KRCloudSync* cloudSync = [[KRCloudSync alloc]initWithFactory:factory];
 	
-	[cloudSync syncUsingBlock:^(NSError* error){
+	[cloudSync syncUsingBlock:^(NSArray* syncItems, NSError* error){
 	}];
 }
 
@@ -52,7 +52,7 @@
 	KRCloudSyncProgressBlock progress = ^(float progress){
 		
 	};
-	KRCloudSyncCompletedBlock completed = ^(NSError* error){
+	KRCloudSyncCompletedBlock completed = ^(NSArray* syncItems, NSError* error){
 		
 	};
 	
