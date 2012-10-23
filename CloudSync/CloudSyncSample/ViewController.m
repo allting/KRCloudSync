@@ -25,7 +25,7 @@
 			NSLog(@"Can't use iCloud");
 		}else{
 			KRCloudSync* syncer = [[KRCloudSync alloc]init];
-			[syncer syncUsingBlock:^(NSError* error){
+			[syncer syncUsingBlock:^(NSArray* syncItems, NSError* error){
 				if(error)
 					NSLog(@"Failed to sync : %@", error);
 				else
