@@ -19,7 +19,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-	
+	[self syncDocumentFiles];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(void)syncDocumentFiles{
 	[KRCloudSync isAvailableiCloudUsingBlock:^(BOOL available){
 		if(!available){
 			NSLog(@"Can't use iCloud");
@@ -34,11 +43,4 @@
 		}
 	}];
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end

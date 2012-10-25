@@ -24,7 +24,7 @@
 	for(NSString* file in files){
 		NSString* path = [documentPath stringByAppendingPathComponent:file];
 		NSError* error = nil;
-		NSDictionary* attributes = [fileManager attributesOfFileSystemForPath:path error:&error];
+		NSDictionary* attributes = [fileManager attributesOfItemAtPath:path error:&error];
 		if([error code])
 			continue;
 		

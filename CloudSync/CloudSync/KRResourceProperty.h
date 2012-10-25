@@ -24,4 +24,6 @@
 
 -(NSComparisonResult)compare:(KRResourceProperty*)anotherResource;
 
+-(NSString*)description;
+
 @end

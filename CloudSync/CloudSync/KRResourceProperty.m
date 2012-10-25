@@ -54,4 +54,9 @@
 	return NSOrderedSame;
 }
 
+-(NSString*)description{
+	return [NSString stringWithFormat:@"URL:%@,DisplayName:%@,CreatedDate:%@,ModifiedDate:%@,Size:%@",
+											_URL, _displayName, _createdDate, _modifiedDate, _size];
+}
+
 @end

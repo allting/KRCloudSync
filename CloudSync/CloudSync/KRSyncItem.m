@@ -31,4 +31,25 @@
 	return KRSyncItemDirectionNone;
 }
 
+-(NSString*)description{
+	NSString* direction = nil;
+	if(_direction==KRSyncItemDirectionNone)
+		direction = @"None";
+	else if(_direction==KRSyncItemDirectionToLocal)
+		direction = @"ToLocal";
+	else
+		direction = @"ToRemote";
+	
+	NSString* result = nil;
+	if(KRSyncItemResultNone==_result)
+		result = @"None";
+	else if(KRSyncItemResultConflicted==_result)
+		result = @"Conflicted";
+	else
+		result = @"Completed";
+	
+	return [NSString stringWithFormat:@"direction:%@,result:%@,localResources:%@,remoteResources:%@",
+										direction, result, _localResource, _remoteResource];
+}
+
 @end

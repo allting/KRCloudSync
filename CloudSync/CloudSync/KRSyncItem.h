@@ -32,4 +32,6 @@ typedef enum {
 		remoteResource:(KRResourceProperty*)remoteResource
 	  comparisonResult:(NSComparisonResult)result;
 
+-(NSString*)description;
+
 @end
