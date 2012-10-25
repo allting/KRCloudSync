@@ -8,6 +8,7 @@
 
 #import "KRiCloudService.h"
 #import "KRiCloud.h"
+#import "KRResourceProperty.h"
 
 @implementation KRiCloudService
 
@@ -20,11 +21,13 @@
 	
 	KRiCloud* cloud = [KRiCloud sharedInstance];
 	[cloud loadFiles:nil predicate:predicate completedBlock:^(id key, NSMetadataQuery* query, NSError* error){
-		NSLog(@"Map Count:%d", [query resultCount]);
+		NSMutableArray* resources  = [NSMutableArray arrayWithCapacity:[query resultCount]];
 		for(NSMetadataItem *item in [query results]){
-			NSLog(@"Map:%@", item);
+			KRResourceProperty* resource = [[KRResourceProperty alloc]initWithMetadataItem:item];
+			[resources addObject:resource];
 		}
-		completed(nil, nil);
+		
+		completed(resources, nil);
 	}];
 	
 	return YES;

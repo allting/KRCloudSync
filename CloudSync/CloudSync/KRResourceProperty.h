@@ -13,11 +13,14 @@
 @property (nonatomic) NSDate* createdDate;
 @property (nonatomic) NSDate* modifiedDate;
 @property (nonatomic) NSNumber* size;
+@property (nonatomic) NSString* displayName;
 
 -(id)initWithProperties:(NSURL*)url
 			createdDate:(NSDate*)createDate
 		   modifiedDate:(NSDate*)modifiedDate
 				   size:(NSNumber*)size;
+
+-(id)initWithMetadataItem:(NSMetadataItem*)item;
 
 -(NSComparisonResult)compare:(KRResourceProperty*)anotherResource;
 
