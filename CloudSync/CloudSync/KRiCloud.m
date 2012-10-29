@@ -108,6 +108,10 @@
                         byAccessor:^(NSURL *updatedURL) {
 							NSError* error = nil;
 							NSFileManager* fileManager = [NSFileManager defaultManager];
+							
+							if([fileManager fileExistsAtPath:[updatedURL path]])
+								[fileManager removeItemAtURL:updatedURL error:&error];
+							
 							[fileManager copyItemAtURL:url toURL:updatedURL error:&error];
 							
 							block(key, error);
@@ -123,13 +127,17 @@
 	
 	NSError* outError = nil;
     NSFileCoordinator* fc = [[NSFileCoordinator alloc] initWithFilePresenter:self];
-    [fc coordinateReadingItemAtURL:destinationURL
+    [fc coordinateReadingItemAtURL:url
                            options:NSFileCoordinatorReadingWithoutChanges
                              error:&outError
                         byAccessor:^(NSURL *updatedURL) {
 							NSError* error = nil;
 							NSFileManager* fileManager = [NSFileManager defaultManager];
-							[fileManager copyItemAtURL:url toURL:updatedURL error:&error];
+							
+							if([fileManager fileExistsAtPath:[destinationURL path]])
+								[fileManager removeItemAtURL:destinationURL error:&error];
+							
+							[fileManager copyItemAtURL:updatedURL toURL:destinationURL error:&error];
 							
 							block(key, error);
 						}];
