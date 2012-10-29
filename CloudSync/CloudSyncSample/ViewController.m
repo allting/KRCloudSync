@@ -38,7 +38,7 @@
 				if(error)
 					NSLog(@"Failed to sync : %@", error);
 				else
-					NSLog(@"Succeeded to sync");
+					NSLog(@"Succeeded to sync - item count:%d", [syncItems count]);
 			}];
 		}
 	}];

@@ -39,7 +39,7 @@
 	if(!completed)
 		return NO;
 	
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K like '*.*')", NSMetadataItemFSNameKey];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K like '*')", NSMetadataItemFSNameKey];
 	
 	KRiCloud* cloud = [KRiCloud sharedInstance];
 	[cloud loadFiles:nil
@@ -89,8 +89,8 @@
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	NSURL *ubiquityContainer = [fileManager URLForUbiquityContainerIdentifier:nil];
 
-	NSString* fileName = [localURL lastPathComponent];
-	return [ubiquityContainer URLByAppendingPathComponent:fileName];
+	NSString* filePath = [NSString stringWithFormat:@"Documents/%@", [localURL lastPathComponent]];
+	return [ubiquityContainer URLByAppendingPathComponent:filePath];
 }
 
 @end
