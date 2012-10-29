@@ -45,6 +45,9 @@
 }
 
 -(NSComparisonResult)isEqualToDate:(NSDate*)date anotherDate:(NSDate*)anotherDate{
+	if(!anotherDate)
+		return NSOrderedSame;
+	
 	NSTimeInterval interval = [date timeIntervalSinceDate:anotherDate];
 	int roundInterval = lroundf(interval);
 	if(1<=roundInterval)

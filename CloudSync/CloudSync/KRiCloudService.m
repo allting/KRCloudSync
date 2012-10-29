@@ -66,8 +66,10 @@
 	for(KRSyncItem* item in syncItems){
 		if(KRSyncItemDirectionNone == item.direction)
 			continue;
-		if(KRSyncItemDirectionToRemote == item.direction)
+		else if(KRSyncItemDirectionToRemote == item.direction)
 			[self syncToRemote:item];
+		else
+			[self syncToLocal:item];
 	}
 	completed(syncItems, nil);
 	return YES;
@@ -77,8 +79,7 @@
 	NSURL* remoteURL = [self createRemoteURL:item.localResource.URL];
 	
 	KRiCloud* cloud = [KRiCloud sharedInstance];
-	[cloud saveFileToUbiquityContainer:nil
-								   url:item.localResource.URL
+	[cloud saveToUbiquityContainer:nil url:item.localResource.URL
 						destinationURL:remoteURL
 						completedBlock:^(id key, NSError* error) {
 		NSLog(@"syncToRemote - Error:%@", error);
@@ -91,6 +92,24 @@
 
 	NSString* filePath = [NSString stringWithFormat:@"Documents/%@", [localURL lastPathComponent]];
 	return [ubiquityContainer URLByAppendingPathComponent:filePath];
+}
+
+-(void)syncToLocal:(KRSyncItem*)item{
+	NSURL* localURL = [self createLocalURL:item.remoteResource.URL];
+	
+	KRiCloud* cloud = [KRiCloud sharedInstance];
+	[cloud saveToDocument:nil url:item.remoteResource.URL
+						 destinationURL:localURL
+						 completedBlock:^(id key, NSError* error) {
+							NSLog(@"syncToRemote - Error:%@", error);
+						}];
+}
+
+-(NSURL*)createLocalURL:(NSURL*)url{
+	NSString* fileName = [url lastPathComponent];
+	NSString* documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+	NSString* path = [documentPath stringByAppendingPathComponent:fileName];
+	return [NSURL fileURLWithPath:path];
 }
 
 @end

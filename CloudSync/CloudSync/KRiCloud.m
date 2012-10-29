@@ -95,7 +95,7 @@
 	}
 }
 
--(BOOL)saveFileToUbiquityContainer:(id)key url:(NSURL*)url destinationURL:(NSURL*)destinationURL completedBlock:(KRiCloudSaveFileCompletedBlock)block{
+-(BOOL)saveToUbiquityContainer:(id)key url:(NSURL*)url destinationURL:(NSURL*)destinationURL completedBlock:(KRiCloudSaveFileCompletedBlock)block{
 	NSAssert(block, @"Mustn't be nil");
 	if(!block)
 		return NO;
@@ -113,19 +113,27 @@
 							block(key, error);
 						}];
 
-/*
-	dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-	dispatch_async(globalQueue, ^{
-		NSError* error = nil;
-		NSFileManager *fileManager = [NSFileManager defaultManager];
-		[fileManager setUbiquitous:YES itemAtURL:url destinationURL:destinationURL error:&error];
-		
-		dispatch_queue_t mainQueue = dispatch_get_main_queue();
-		dispatch_async(mainQueue, ^{
-			block(key, error);
-		});
-	});
-*/
+    return YES;
+}
+
+-(BOOL)saveToDocument:(id)key url:(NSURL*)url destinationURL:(NSURL*)destinationURL completedBlock:(KRiCloudSaveFileCompletedBlock)block{
+	NSAssert(block, @"Mustn't be nil");
+	if(!block)
+		return NO;
+	
+	NSError* outError = nil;
+    NSFileCoordinator* fc = [[NSFileCoordinator alloc] initWithFilePresenter:self];
+    [fc coordinateReadingItemAtURL:destinationURL
+                           options:NSFileCoordinatorReadingWithoutChanges
+                             error:&outError
+                        byAccessor:^(NSURL *updatedURL) {
+							NSError* error = nil;
+							NSFileManager* fileManager = [NSFileManager defaultManager];
+							[fileManager copyItemAtURL:url toURL:updatedURL error:&error];
+							
+							block(key, error);
+						}];
+	
     return YES;
 }
 

@@ -29,8 +29,14 @@ typedef void (^KRiCloudSaveFileCompletedBlock)(id, NSError*);
 	   predicate:(NSPredicate*)predicate
   completedBlock:(KRiCloudLoadFilesCompletedBlock)block;
 
--(BOOL)saveFileToUbiquityContainer:(id)key
-							   url:(NSURL*)url
-					destinationURL:(NSURL*)destinationURL
-					completedBlock:(KRiCloudSaveFileCompletedBlock)block;
+-(BOOL)saveToUbiquityContainer:(id)key
+						   url:(NSURL*)url
+				destinationURL:(NSURL*)destinationURL
+				completedBlock:(KRiCloudSaveFileCompletedBlock)block;
+
+-(BOOL)saveToDocument:(id)key
+				  url:(NSURL*)url
+	   destinationURL:(NSURL*)destinationURL
+	   completedBlock:(KRiCloudSaveFileCompletedBlock)block;
+
 @end
