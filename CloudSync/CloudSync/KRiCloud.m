@@ -33,6 +33,9 @@
 	if(self){
 		_ubiquityContainer = nil;
 		_loadFilesContexts = [NSMutableDictionary dictionaryWithCapacity:3];
+		_presentedItemOperationQueue = [[NSOperationQueue alloc] init];
+		[_presentedItemOperationQueue setName:[NSString stringWithFormat:@"presenter queue -- %@", self]];
+		[_presentedItemOperationQueue setMaxConcurrentOperationCount:1];
 	}
 	return self;
 }
@@ -40,9 +43,14 @@
 -(void)dealloc{
 	_ubiquityContainer = nil;
 	_loadFilesContexts = nil;
+	_presentedItemOperationQueue = nil;
 }
 
 -(BOOL)loadFiles:(id)key predicate:(NSPredicate*)predicate completedBlock:(KRiCloudLoadFilesCompletedBlock)block{
+	NSAssert(block, @"Mustn't be nil");
+	if(!block)
+		return NO;
+	
 	NSMetadataQuery* query = [[NSMetadataQuery alloc] init];
 	[query setSearchScopes:[NSArray arrayWithObject:NSMetadataQueryUbiquitousDocumentsScope]];
 	[query setPredicate:predicate];
@@ -64,7 +72,7 @@
 	return YES;
 }
 
-#pragma mark - Private methods
+#pragma mark - loadFiles internal methods
 - (void)queryDidFinishGatheringForLoading:(NSNotification *)notification {
 	NSMetadataQuery* query = [notification object];
     [query disableUpdates];
@@ -86,5 +94,36 @@
 		context.block(context.key, context.query, nil);
 	}
 }
+
+-(BOOL)saveFileToUbiquityContainer:(id)key url:(NSURL*)url destinationURL:(NSURL*)destinationURL completedBlock:(KRiCloudSaveFileCompletedBlock)block{
+	NSAssert(block, @"Mustn't be nil");
+	if(!block)
+		return NO;
+	
+	NSError* outError = nil;
+    NSFileCoordinator* fc = [[NSFileCoordinator alloc] initWithFilePresenter:self];
+    [fc coordinateWritingItemAtURL:destinationURL
+                           options:NSFileCoordinatorWritingForReplacing
+                             error:&outError
+                        byAccessor:^(NSURL *updatedURL) {
+							NSError* error = nil;
+							NSFileManager* fileManager = [NSFileManager defaultManager];
+							[fileManager copyItemAtURL:url toURL:updatedURL error:&error];
+							block(key, error);
+						}];
+    return YES;
+}
+
+#pragma mark NSFilePresenter protocol
+
+- (NSURL *)presentedItemURL{
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	return [fileManager URLForUbiquityContainerIdentifier:nil];
+}
+
+- (NSOperationQueue *)presentedItemOperationQueue{
+    return _presentedItemOperationQueue;
+}
+
 
 @end

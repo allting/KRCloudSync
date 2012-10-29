@@ -9,16 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "KRCloudPreferences.h"
 #import "KRCloudFactory.h"
+#import "KRCloudSyncBlocks.h"
 
 typedef enum {
 	KRCloudSynciCloud,
 	KRCloudSyncDropbox
 }KRCloudSyncCloudType;
-
-typedef void (^KRCloudSyncProgressBlock)(float progress);
-typedef void (^KRCloudSyncCompletedBlock)(NSArray* syncItems, NSError* error);
-
-typedef void (^KRiCloudAvailableBlock)(BOOL available);
 
 @interface KRCloudSync : NSObject
 

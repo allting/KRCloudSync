@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "KRCloudService.h"
+#import "KRCloudSyncBlocks.h"
 
 @interface KRiCloudService : KRCloudService
+
++(BOOL)isAvailableiCloudUsingBlock:(KRiCloudAvailableBlock)availableBlock;
 
 -(BOOL)loadResourcesUsingBlock:(KRResourcesCompletedBlock)completed;
 
