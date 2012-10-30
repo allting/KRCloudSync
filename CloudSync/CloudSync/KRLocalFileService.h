@@ -10,6 +10,10 @@
 
 @interface KRLocalFileService : KRFileService
 
+@property (nonatomic) NSString* documentPath;
+
+-(id)initWithLocalPath:(NSString*)path;
+
 -(NSArray*)load;
 
 @end

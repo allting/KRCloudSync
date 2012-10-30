@@ -12,7 +12,11 @@
 
 @interface KRiCloudService : KRCloudService
 
+@property (nonatomic) NSString* documentPath;
+
 +(BOOL)isAvailableiCloudUsingBlock:(KRiCloudAvailableBlock)availableBlock;
+
+-(id)initWithLocalPath:(NSString*)path;
 
 -(BOOL)loadResourcesUsingBlock:(KRResourcesCompletedBlock)completed;
 

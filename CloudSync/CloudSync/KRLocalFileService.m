@@ -11,8 +11,23 @@
 
 @implementation KRLocalFileService
 
+-(id)initWithLocalPath:(NSString*)path{
+	self = [super init];
+	if(self){
+		self.documentPath = path;
+	}
+	return self;
+}
+
+-(NSString*)documentPath{
+	if(0==[_documentPath length])
+		return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+	
+	return _documentPath;
+}
+
 -(NSArray*)load{
-	NSString* documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+	NSString* documentPath = self.documentPath;
 	NSFileManager* fileManager = [NSFileManager defaultManager];
 	
 	NSError* error = nil;

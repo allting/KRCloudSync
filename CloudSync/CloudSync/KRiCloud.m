@@ -134,6 +134,8 @@
 							NSError* error = nil;
 							NSFileManager* fileManager = [NSFileManager defaultManager];
 							
+							[self createDestinationDirectory:destinationURL];
+							
 							if([fileManager fileExistsAtPath:[destinationURL path]])
 								[fileManager removeItemAtURL:destinationURL error:&error];
 							
@@ -143,6 +145,23 @@
 						}];
 	
     return YES;
+}
+
+-(BOOL)createDestinationDirectory:(NSURL*)fileURL{
+	NSString* path = [fileURL path];
+	path = [path stringByDeletingLastPathComponent];
+	return [self createDirectory:path];
+}
+
+-(BOOL)createDirectory:(NSString*)path{
+	NSError* error = nil;
+	BOOL success = [[NSFileManager defaultManager] createDirectoryAtPath:path
+											 withIntermediateDirectories:YES
+															  attributes:nil
+																   error:&error];
+	if(!success || error)
+		return NO;
+	return YES;
 }
 
 #pragma mark NSFilePresenter protocol

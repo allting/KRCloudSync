@@ -34,6 +34,21 @@
 	return YES;
 }
 
+-(id)initWithLocalPath:(NSString*)path{
+	self = [super init];
+	if(self){
+		self.documentPath = path;
+	}
+	return self;
+}
+
+-(NSString*)documentPath{
+	if(0==[_documentPath length])
+		return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+	
+	return _documentPath;
+}
+
 -(BOOL)loadResourcesUsingBlock:(KRResourcesCompletedBlock)completed{
 	NSAssert(completed, @"Mustn't be nil");
 	if(!completed)
@@ -107,7 +122,7 @@
 
 -(NSURL*)createLocalURL:(NSURL*)url{
 	NSString* fileName = [url lastPathComponent];
-	NSString* documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+	NSString* documentPath = self.documentPath;
 	NSString* path = [documentPath stringByAppendingPathComponent:fileName];
 	return [NSURL fileURLWithPath:path];
 }

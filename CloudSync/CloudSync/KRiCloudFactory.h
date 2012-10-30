@@ -10,4 +10,6 @@
 
 @interface KRiCloudFactory : KRCloudFactory
 
+-(id)initWithLocalPath:(NSString*)path;
+
 @end

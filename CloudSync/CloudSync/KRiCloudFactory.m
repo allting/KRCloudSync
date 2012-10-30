@@ -21,4 +21,14 @@
 	return self;
 }
 
+-(id)initWithLocalPath:(NSString*)path{
+	self = [super init];
+	if(self){
+		self.cloudService = [[KRiCloudService alloc]initWithLocalPath:path];
+		self.fileService = [[KRLocalFileService alloc]initWithLocalPath:path];
+	}
+	return self;
+}
+
+
 @end

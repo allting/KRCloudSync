@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "KRCloudSync.h"
+#import "KRiCloudFactory.h"
 
 @interface ViewController ()
 
@@ -33,7 +34,11 @@
 		if(!available){
 			NSLog(@"Can't use iCloud");
 		}else{
-			KRCloudSync* syncer = [[KRCloudSync alloc]init];
+			NSString* iCloudDocumentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+			iCloudDocumentPath = [iCloudDocumentPath stringByAppendingPathComponent:@"iCloud"];
+			KRiCloudFactory* factory = [[KRiCloudFactory alloc]initWithLocalPath:iCloudDocumentPath];
+			
+			KRCloudSync* syncer = [[KRCloudSync alloc]initWithFactory:factory];
 			[syncer syncUsingBlock:^(NSArray* syncItems, NSError* error){
 				if(error)
 					NSLog(@"Failed to sync : %@", error);
