@@ -107,12 +107,8 @@
                              error:&outError
                         byAccessor:^(NSURL *updatedURL) {
 							NSError* error = nil;
-							NSFileManager* fileManager = [NSFileManager defaultManager];
 							
-							if([fileManager fileExistsAtPath:[updatedURL path]])
-								[fileManager removeItemAtURL:updatedURL error:&error];
-							
-							[fileManager copyItemAtURL:url toURL:updatedURL error:&error];
+							[self overwriteFile:url destinationURL:updatedURL error:&error];
 							
 							block(key, error);
 						}];
@@ -132,14 +128,9 @@
                              error:&outError
                         byAccessor:^(NSURL *updatedURL) {
 							NSError* error = nil;
-							NSFileManager* fileManager = [NSFileManager defaultManager];
-							
+
 							[self createDestinationDirectory:destinationURL];
-							
-							if([fileManager fileExistsAtPath:[destinationURL path]])
-								[fileManager removeItemAtURL:destinationURL error:&error];
-							
-							[fileManager copyItemAtURL:updatedURL toURL:destinationURL error:&error];
+							[self overwriteFile:updatedURL destinationURL:destinationURL error:&error];
 							
 							block(key, error);
 						}];
@@ -162,6 +153,16 @@
 	if(!success || error)
 		return NO;
 	return YES;
+}
+
+-(BOOL)overwriteFile:(NSURL*)sourceURL destinationURL:(NSURL*)destinationURL error:(NSError**)outError{
+	NSError* error = nil;
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	
+	if([fileManager fileExistsAtPath:[destinationURL path]])
+		[fileManager removeItemAtURL:destinationURL error:&error];
+	
+	return [fileManager copyItemAtURL:sourceURL toURL:destinationURL error:&error];
 }
 
 #pragma mark NSFilePresenter protocol
