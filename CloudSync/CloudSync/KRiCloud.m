@@ -129,30 +129,12 @@
                         byAccessor:^(NSURL *updatedURL) {
 							NSError* error = nil;
 
-							[self createDestinationDirectory:destinationURL];
 							[self overwriteFile:updatedURL destinationURL:destinationURL error:&error];
 							
 							block(key, error);
 						}];
 	
     return YES;
-}
-
--(BOOL)createDestinationDirectory:(NSURL*)fileURL{
-	NSString* path = [fileURL path];
-	path = [path stringByDeletingLastPathComponent];
-	return [self createDirectory:path];
-}
-
--(BOOL)createDirectory:(NSString*)path{
-	NSError* error = nil;
-	BOOL success = [[NSFileManager defaultManager] createDirectoryAtPath:path
-											 withIntermediateDirectories:YES
-															  attributes:nil
-																   error:&error];
-	if(!success || error)
-		return NO;
-	return YES;
 }
 
 -(BOOL)overwriteFile:(NSURL*)sourceURL destinationURL:(NSURL*)destinationURL error:(NSError**)outError{

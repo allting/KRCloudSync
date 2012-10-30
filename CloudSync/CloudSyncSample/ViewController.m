@@ -34,7 +34,7 @@
 		if(!available){
 			NSLog(@"Can't use iCloud");
 		}else{
-			KRCloudFactory* factory = [self createFactoryWithLocalPath:@"iCloud"];
+			KRCloudFactory* factory = [self createFactoryAndDirectory:@"iCloud"];
 			
 			KRCloudSync* syncer = [[KRCloudSync alloc]initWithFactory:factory];
 			[syncer syncUsingBlock:^(NSArray* syncItems, NSError* error){
@@ -47,10 +47,25 @@
 	}];
 }
 
--(KRiCloudFactory*)createFactoryWithLocalPath:(NSString*)path{
+-(KRiCloudFactory*)createFactoryAndDirectory:(NSString*)path{
 	NSString* iCloudDocumentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 	iCloudDocumentPath = [iCloudDocumentPath stringByAppendingPathComponent:path];
+	
+	[self createDirectory:iCloudDocumentPath];
+	
 	return [[KRiCloudFactory alloc]initWithLocalPath:iCloudDocumentPath];
 }
+
+-(BOOL)createDirectory:(NSString*)path{
+	NSError* error = nil;
+	BOOL success = [[NSFileManager defaultManager] createDirectoryAtPath:path
+											 withIntermediateDirectories:YES
+															  attributes:nil
+																   error:&error];
+	if(!success || error)
+		return NO;
+	return YES;
+}
+
 
 @end
