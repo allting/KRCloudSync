@@ -20,7 +20,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-	[self syncDocumentFiles];
+	[self sync];
 }
 
 - (void)didReceiveMemoryWarning
@@ -29,20 +29,26 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)syncDocumentFiles{
+-(void)sync{
 	[KRCloudSync isAvailableiCloudUsingBlock:^(BOOL available){
 		if(!available){
 			NSLog(@"Can't use iCloud");
 		}else{
-			KRCloudFactory* factory = [self createFactoryAndDirectory:@"iCloud"];
-			
-			KRCloudSync* syncer = [[KRCloudSync alloc]initWithFactory:factory];
-			[syncer syncUsingBlock:^(NSArray* syncItems, NSError* error){
-				if(error)
-					NSLog(@"Failed to sync : %@", error);
-				else
-					NSLog(@"Succeeded to sync - item count:%d", [syncItems count]);
-			}];
+			[self syncDocumentFiles];
+		}
+	}];
+}
+
+-(void)syncDocumentFiles{
+	KRCloudFactory* factory = [self createFactoryAndDirectory:@"iCloud"];
+	
+	KRCloudSync* syncer = [[KRCloudSync alloc]initWithFactory:factory];
+	[syncer syncUsingBlock:^(NSArray* syncItems, NSError* error){
+		if(error)
+			NSLog(@"Failed to sync : %@", error);
+		else{
+			NSLog(@"Succeeded to sync - item count:%d", [syncItems count]);
+			NSLog(@"syncItems - %@", syncItems);
 		}
 	}];
 }
