@@ -10,6 +10,7 @@
 
 typedef void (^KRiCloudLoadFilesCompletedBlock)(id, NSMetadataQuery*, NSError*);
 typedef void (^KRiCloudSaveFileCompletedBlock)(id, NSError*);
+typedef void (^KRiCloudRemoveAllFilesCompletedBlock)(BOOL, NSError*);
 
 @interface KRiCloudLoadFilesContext : NSObject
 @property (nonatomic) id key;
@@ -38,5 +39,7 @@ typedef void (^KRiCloudSaveFileCompletedBlock)(id, NSError*);
 				  url:(NSURL*)url
 	   destinationURL:(NSURL*)destinationURL
 	   completedBlock:(KRiCloudSaveFileCompletedBlock)block;
+
+-(BOOL)removeAllFiles:(KRiCloudRemoveAllFilesCompletedBlock)block;
 
 @end

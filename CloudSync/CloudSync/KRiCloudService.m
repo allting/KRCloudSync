@@ -13,7 +13,7 @@
 
 @implementation KRiCloudService
 
-+(BOOL)isAvailableiCloudUsingBlock:(KRiCloudAvailableBlock)availableBlock{
++(BOOL)isAvailableUsingBlock:(KRiCloudAvailableBlock)availableBlock{
 	NSAssert(availableBlock, @"Mustn't be nil");
 	if(!availableBlock)
 		return NO;
@@ -31,6 +31,19 @@
 				availableBlock(NO);
 		});
 	});
+	return YES;
+}
+
++(BOOL)removeAllFilesUsingBlock:(KRiCloudRemoveAllFilesBlock)block{
+	NSAssert(block, @"Mustn't be nil");
+	if(!block)
+		return NO;
+	
+	KRiCloud* cloud = [KRiCloud sharedInstance];
+	[cloud removeAllFiles:^(BOOL succeeded, NSError* error){
+		block(succeeded, error);
+	}];
+	
 	return YES;
 }
 

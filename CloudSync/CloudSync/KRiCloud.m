@@ -147,6 +147,50 @@
 	return [fileManager copyItemAtURL:sourceURL toURL:destinationURL error:&error];
 }
 
+-(BOOL)removeAllFiles:(KRiCloudRemoveAllFilesCompletedBlock)block{
+	NSAssert(block, @"Mustn't be nil");
+	if(!block)
+		return NO;
+	
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K like '*')", NSMetadataItemFSNameKey];
+	
+	[self loadFiles:nil
+		  predicate:predicate
+	 completedBlock:^(id key, NSMetadataQuery* query, NSError* error){
+		  [self removeFilesWithItems:[query results] block:block];
+	}];
+
+	return YES;
+}
+
+-(BOOL)removeFilesWithItems:(NSArray*)metadataItems block:(KRiCloudRemoveAllFilesCompletedBlock)block{
+	NSAssert(block, @"Mustn't be nil");
+	if(!block)
+		return NO;
+	
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+		for(NSMetadataItem *item in metadataItems){
+			NSURL* fileURL = [item valueForAttribute:NSMetadataItemURLKey];
+			
+			NSFileCoordinator* fileCoordinator = [[NSFileCoordinator alloc] initWithFilePresenter:nil];
+			[fileCoordinator coordinateWritingItemAtURL:fileURL
+												options:NSFileCoordinatorWritingForDeleting
+												  error:nil
+											 byAccessor:^(NSURL* writingURL) {
+												 NSError* error = nil;
+												 NSFileManager* fileManager = [[NSFileManager alloc] init];
+												 [fileManager removeItemAtURL:writingURL error:&error];
+												 if([error code])
+													 block(NO, error);
+			}];
+		}
+		
+		block(YES, nil);
+	});
+	
+	return YES;
+}
+
 #pragma mark NSFilePresenter protocol
 
 - (NSURL *)presentedItemURL{

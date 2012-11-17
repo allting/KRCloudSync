@@ -16,7 +16,11 @@
 @implementation KRCloudSync
 
 +(BOOL)isAvailableiCloudUsingBlock:(KRiCloudAvailableBlock)availableBlock{
-	return [KRiCloudService isAvailableiCloudUsingBlock:availableBlock];
+	return [KRiCloudService isAvailableUsingBlock:availableBlock];
+}
+
++(BOOL)removeAlliCloudFileUsingBlock:(KRiCloudRemoveAllFilesBlock)block{
+	return [KRiCloudService removeAllFilesUsingBlock:block];
 }
 
 -(id)init{

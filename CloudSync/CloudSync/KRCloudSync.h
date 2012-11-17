@@ -22,6 +22,7 @@ typedef enum {
 @property (nonatomic) KRCloudFactory* factory;
 
 +(BOOL)isAvailableiCloudUsingBlock:(KRiCloudAvailableBlock)availableBlock;
++(BOOL)removeAlliCloudFileUsingBlock:(KRiCloudRemoveAllFilesBlock)block;
 
 -(id)initWithFactory:(KRCloudFactory*)factory;
 

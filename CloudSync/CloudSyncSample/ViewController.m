@@ -20,13 +20,34 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-	[self sync];
+//	[self sync];
+	[self removeAllFiles];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)removeAllFiles{
+	[KRCloudSync isAvailableiCloudUsingBlock:^(BOOL available){
+		if(!available){
+			NSLog(@"Can't use iCloud");
+		}else{
+			[self removeAlliCloudFiles];
+		}
+	}];
+}
+
+-(void)removeAlliCloudFiles{
+	[KRCloudSync removeAlliCloudFileUsingBlock:^(BOOL succeeded, NSError* error){
+		if(succeeded){
+			NSLog(@"Succeeded to remove files");
+		}else{
+			NSLog(@"Failed to remove files");
+		}
+	}];
 }
 
 -(void)sync{

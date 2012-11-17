@@ -14,8 +14,9 @@
 
 @property (nonatomic) NSString* documentPath;
 
-+(BOOL)isAvailableiCloudUsingBlock:(KRiCloudAvailableBlock)availableBlock;
-
++(BOOL)isAvailableUsingBlock:(KRiCloudAvailableBlock)availableBlock;
++(BOOL)removeAllFilesUsingBlock:(KRiCloudRemoveAllFilesBlock)block;
+					   
 -(id)initWithLocalPath:(NSString*)path;
 
 -(BOOL)loadResourcesUsingBlock:(KRResourcesCompletedBlock)completed;
