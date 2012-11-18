@@ -49,6 +49,9 @@
 		DFA04A7716345637008FFF55 /* KRiCloudResourceManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE034C1626A04B0091DF16 /* KRiCloudResourceManager.h */; };
 		DFA04A7816345637008FFF55 /* KRResourceProperty.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE03501626ADA00091DF16 /* KRResourceProperty.h */; };
 		DFA04A7916345637008FFF55 /* KRCloudPreferences.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE03541627F37B0091DF16 /* KRCloudPreferences.h */; };
+		DFC747491657F9DE0019C1B6 /* KRResourceFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = DFC747481657F9DE0019C1B6 /* KRResourceFilter.m */; };
+		DFC7474A1657F9DE0019C1B6 /* KRResourceFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = DFC747481657F9DE0019C1B6 /* KRResourceFilter.m */; };
+		DFC7474E1658B0A60019C1B6 /* ResourceFilterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFC7474D1658B0A60019C1B6 /* ResourceFilterTests.m */; };
 		DFFE0322162575DD0091DF16 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE0321162575DD0091DF16 /* Foundation.framework */; };
 		DFFE0327162575DD0091DF16 /* KRCloudSync.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE0326162575DD0091DF16 /* KRCloudSync.h */; };
 		DFFE0329162575DD0091DF16 /* KRCloudSync.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE0328162575DD0091DF16 /* KRCloudSync.m */; };
@@ -175,6 +178,10 @@
 		DFA04A2816342354008FFF55 /* KRiCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRiCloud.h; sourceTree = "<group>"; };
 		DFA04A2916342354008FFF55 /* KRiCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRiCloud.m; sourceTree = "<group>"; };
 		DFA04A2C163428CF008FFF55 /* CloudSyncSample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CloudSyncSample.entitlements; sourceTree = "<group>"; };
+		DFC747471657F9DE0019C1B6 /* KRResourceFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KRResourceFilter.h; sourceTree = "<group>"; };
+		DFC747481657F9DE0019C1B6 /* KRResourceFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KRResourceFilter.m; sourceTree = "<group>"; };
+		DFC7474C1658B0A60019C1B6 /* ResourceFilterTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceFilterTests.h; sourceTree = "<group>"; };
+		DFC7474D1658B0A60019C1B6 /* ResourceFilterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceFilterTests.m; sourceTree = "<group>"; };
 		DFFE031E162575DD0091DF16 /* libCloudSync.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCloudSync.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFFE0321162575DD0091DF16 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DFFE0325162575DD0091DF16 /* CloudSync-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CloudSync-Prefix.pch"; sourceTree = "<group>"; };
@@ -370,6 +377,8 @@
 				DFFE03511626ADA00091DF16 /* KRResourceProperty.m */,
 				DFFE03541627F37B0091DF16 /* KRCloudPreferences.h */,
 				DFFE03551627F37C0091DF16 /* KRCloudPreferences.m */,
+				DFC747471657F9DE0019C1B6 /* KRResourceFilter.h */,
+				DFC747481657F9DE0019C1B6 /* KRResourceFilter.m */,
 				DFFE0324162575DD0091DF16 /* Supporting Files */,
 			);
 			path = CloudSync;
@@ -400,6 +409,8 @@
 				DF37CA63162C196500BD5725 /* SyncItemTests.m */,
 				DF99A8F21630EF4B00374D4E /* SynchronizerTests.h */,
 				DF99A8F31630EF4B00374D4E /* SynchronizerTests.m */,
+				DFC7474C1658B0A60019C1B6 /* ResourceFilterTests.h */,
+				DFC7474D1658B0A60019C1B6 /* ResourceFilterTests.m */,
 			);
 			path = CloudSyncTests;
 			sourceTree = "<group>";
@@ -668,6 +679,7 @@
 				DF99A9501633BF8500374D4E /* KRLocalFileService.m in Sources */,
 				DF99A9531633C1F700374D4E /* KRiCloudFactory.m in Sources */,
 				DFA04A2A16342354008FFF55 /* KRiCloud.m in Sources */,
+				DFC747491657F9DE0019C1B6 /* KRResourceFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -694,6 +706,8 @@
 				DF37CA60162C191700BD5725 /* KRSyncItem.m in Sources */,
 				DF37CA64162C196500BD5725 /* SyncItemTests.m in Sources */,
 				DF99A8F41630EF4B00374D4E /* SynchronizerTests.m in Sources */,
+				DFC7474A1657F9DE0019C1B6 /* KRResourceFilter.m in Sources */,
+				DFC7474E1658B0A60019C1B6 /* ResourceFilterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

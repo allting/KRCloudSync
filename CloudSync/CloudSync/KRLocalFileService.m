@@ -11,10 +11,11 @@
 
 @implementation KRLocalFileService
 
--(id)initWithLocalPath:(NSString*)path{
+-(id)initWithLocalPath:(NSString*)path filter:(KRResourceFilter*)filter{
 	self = [super init];
 	if(self){
 		self.documentPath = path;
+		self.filter = filter;
 	}
 	return self;
 }
@@ -38,6 +39,9 @@
 	NSMutableArray* resources = [NSMutableArray arrayWithCapacity:[files count]];
 	for(NSString* file in files){
 		NSString* path = [documentPath stringByAppendingPathComponent:file];
+		if(![_filter shouldPass:path])
+			continue;
+		
 		NSError* error = nil;
 		NSDictionary* attributes = [fileManager attributesOfItemAtPath:path error:&error];
 		if([error code])

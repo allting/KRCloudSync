@@ -15,6 +15,7 @@
 	if(self){
 		self.cloudService = [[KRCloudService alloc]init];
 		self.fileService = [[KRFileService alloc]init];
+		self.filter = [[KRResourceFilter alloc]init];
 	}
 	return self;
 }

@@ -20,8 +20,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-//	[self sync];
-	[self removeAllFiles];
+	[self sync];
+//	[self removeAllFiles];
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,7 +80,7 @@
 	
 	[self createDirectory:iCloudDocumentPath];
 	
-	return [[KRiCloudFactory alloc]initWithLocalPath:iCloudDocumentPath];
+	return [[KRiCloudFactory alloc]initWithLocalPath:iCloudDocumentPath filters:@[@"png"]];
 }
 
 -(BOOL)createDirectory:(NSString*)path{

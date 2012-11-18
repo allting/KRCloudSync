@@ -10,6 +10,8 @@
 
 @interface KRFileService : NSObject
 
+@property (nonatomic) NSArray* filters;
+
 -(NSArray*)load;
 
 @end

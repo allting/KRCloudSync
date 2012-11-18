@@ -7,12 +7,14 @@
 //
 
 #import "KRFileService.h"
+#import "KRResourceFilter.h"
 
 @interface KRLocalFileService : KRFileService
 
 @property (nonatomic) NSString* documentPath;
+@property (nonatomic) KRResourceFilter* filter;
 
--(id)initWithLocalPath:(NSString*)path;
+-(id)initWithLocalPath:(NSString*)path filter:(KRResourceFilter *)filter;
 
 -(NSArray*)load;
 

@@ -10,6 +10,6 @@
 
 @interface KRiCloudFactory : KRCloudFactory
 
--(id)initWithLocalPath:(NSString*)path;
+-(id)initWithLocalPath:(NSString*)path filters:(NSArray*)filters;
 
 @end

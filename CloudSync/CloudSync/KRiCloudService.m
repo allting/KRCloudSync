@@ -47,10 +47,11 @@
 	return YES;
 }
 
--(id)initWithLocalPath:(NSString*)path{
+-(id)initWithLocalPath:(NSString*)path filter:(KRResourceFilter*)filter{
 	self = [super init];
 	if(self){
 		self.documentPath = path;
+		self.filter = filter;
 	}
 	return self;
 }
@@ -67,7 +68,7 @@
 	if(!completed)
 		return NO;
 	
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K like '*')", NSMetadataItemFSNameKey];
+	NSPredicate *predicate = [self.filter createPredicate];
 	
 	KRiCloud* cloud = [KRiCloud sharedInstance];
 	[cloud loadFiles:nil

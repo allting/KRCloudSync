@@ -10,6 +10,7 @@
 #import "KRCloudSyncBlocks.h"
 
 @interface KRCloudService : NSObject
+@property (nonatomic) NSArray* filters;
 
 -(BOOL)loadResourcesUsingBlock:(KRResourcesCompletedBlock)completed;
 

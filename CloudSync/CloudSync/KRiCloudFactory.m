@@ -21,11 +21,12 @@
 	return self;
 }
 
--(id)initWithLocalPath:(NSString*)path{
+-(id)initWithLocalPath:(NSString*)path filters:(NSArray*)filters{
 	self = [super init];
 	if(self){
-		self.cloudService = [[KRiCloudService alloc]initWithLocalPath:path];
-		self.fileService = [[KRLocalFileService alloc]initWithLocalPath:path];
+		KRResourceExtensionFilter* filter = [[KRResourceExtensionFilter alloc]initWithFilters:filters];
+		self.cloudService = [[KRiCloudService alloc]initWithLocalPath:path filter:filter];
+		self.fileService = [[KRLocalFileService alloc]initWithLocalPath:path filter:filter];
 	}
 	return self;
 }
