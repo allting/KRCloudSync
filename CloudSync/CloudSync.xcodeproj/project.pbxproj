@@ -52,6 +52,7 @@
 		DFC747491657F9DE0019C1B6 /* KRResourceFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = DFC747481657F9DE0019C1B6 /* KRResourceFilter.m */; };
 		DFC7474A1657F9DE0019C1B6 /* KRResourceFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = DFC747481657F9DE0019C1B6 /* KRResourceFilter.m */; };
 		DFC7474E1658B0A60019C1B6 /* ResourceFilterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFC7474D1658B0A60019C1B6 /* ResourceFilterTests.m */; };
+		DFC747531658C1540019C1B6 /* KRResourceFilter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFC747471657F9DE0019C1B6 /* KRResourceFilter.h */; };
 		DFFE0322162575DD0091DF16 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFFE0321162575DD0091DF16 /* Foundation.framework */; };
 		DFFE0327162575DD0091DF16 /* KRCloudSync.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DFFE0326162575DD0091DF16 /* KRCloudSync.h */; };
 		DFFE0329162575DD0091DF16 /* KRCloudSync.m in Sources */ = {isa = PBXBuildFile; fileRef = DFFE0328162575DD0091DF16 /* KRCloudSync.m */; };
@@ -119,6 +120,7 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				DFC747531658C1540019C1B6 /* KRResourceFilter.h in CopyFiles */,
 				DFA04A6A16345637008FFF55 /* KRResourceLoader.h in CopyFiles */,
 				DFA04A6B16345637008FFF55 /* KRResourceComparer.h in CopyFiles */,
 				DFA04A6C16345637008FFF55 /* KRSynchronizer.h in CopyFiles */,
