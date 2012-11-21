@@ -9,7 +9,10 @@
 #ifndef CloudSync_KRCloudSyncBlocks_h
 #define CloudSync_KRCloudSyncBlocks_h
 
-typedef void (^KRCloudSyncProgressBlock)(float progress);
+@class KRSyncItem;
+
+typedef void (^KRCloudSyncStartBlock)(NSArray* syncItems);
+typedef void (^KRCloudSyncProgressBlock)(KRSyncItem* synItem, float progress);
 typedef void (^KRCloudSyncCompletedBlock)(NSArray* syncItems, NSError* error);
 
 typedef void (^KRResourcesCompletedBlock)(NSArray* resources, NSError* error);

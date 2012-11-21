@@ -14,6 +14,7 @@
 @property (nonatomic) NSDate* modifiedDate;
 @property (nonatomic) NSNumber* size;
 @property (nonatomic) NSString* displayName;
+@property (nonatomic) id<NSObject> userData;
 
 -(id)initWithProperties:(NSURL*)url
 			createdDate:(NSDate*)createDate

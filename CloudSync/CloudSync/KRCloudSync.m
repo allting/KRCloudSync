@@ -8,6 +8,7 @@
 
 #import "KRCloudSync.h"
 #import "KRResourceLoader.h"
+#import "KRResourceProperty.h"
 #import "KRResourceComparer.h"
 #import "KRSynchronizer.h"
 #import "KRiCloudFactory.h"
@@ -44,16 +45,22 @@
 	return YES;
 }
 
--(BOOL)syncUsingBlock:(KRCloudSyncCompletedBlock)completed{
-	NSAssert(completed, @"Mustn't be nil");
+-(BOOL)syncUsingBlock:(KRCloudSyncCompletedBlock)completedBlock{
+	return [self syncUsingBlocks:nil progressBlock:nil completedBlock:completedBlock];
+}
+
+-(BOOL)syncUsingBlocks:(KRCloudSyncStartBlock)startBlock
+		 progressBlock:(KRCloudSyncProgressBlock)progresBlock
+		completedBlock:(KRCloudSyncCompletedBlock)completedBlock{
+	NSAssert(completedBlock, @"Mustn't be nil");
 	NSAssert(_factory, @"Mustn't be nil");
-	if(!completed || !_factory)
+	if(!completedBlock || !_factory)
 		return NO;
 	
 	KRResourceLoader* resourceLoader = [[KRResourceLoader alloc]initWithFactory:_factory];
 	[resourceLoader loadUsingBlock:^(NSArray* remoteResources, NSArray* localResources, NSError* error){
 		if(error){
-			completed(nil, error);
+			completedBlock(nil, error);
 			return;
 		}
 		
@@ -61,23 +68,23 @@
 		[resourceComparer compareUsingBlock:localResources
 							remoteResources:remoteResources
 							 completedBlock:^(NSArray* syncItems, NSError* error){
-			if(error){
-				completed(nil, error);
-				return;
-			}
-			
-			KRSynchronizer* sync = [[KRSynchronizer alloc]initWithFactory:_factory];
-			[sync syncUsingBlock:syncItems completedBlock:^(NSArray* syncItemsResult, NSError* error){
-				completed(syncItemsResult, error);
-			}];
-		}];
+			 if(error){
+				 completedBlock(nil, error);
+				 return;
+			 }
+			 
+			 if(startBlock){
+				 startBlock(syncItems);
+			 }
+			 
+			 KRSynchronizer* sync = [[KRSynchronizer alloc]initWithFactory:_factory];
+			 [sync syncUsingBlock:syncItems completedBlock:^(NSArray* syncItemsResult, NSError* error){
+				 completedBlock(syncItemsResult, error);
+			 }];
+		 }];
 	}];
 	
 	return YES;
 }
 
--(void)syncWithiCloudUsingBlocks:(NSURL*)url
-		 progressBlock:(KRCloudSyncProgressBlock)progres
-		completedBlock:(KRCloudSyncCompletedBlock)completed{
-}
 @end
