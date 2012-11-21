@@ -32,13 +32,13 @@
 -(NSPredicate*)createPredicate{
 	if(1 == [_filters count]){
 		NSString* filter = [_filters objectAtIndex:0];
-		return [NSPredicate predicateWithFormat:@"(%K like '*.%@')", filter];
+		return [NSPredicate predicateWithFormat:@"(%K.pathExtension = %@)", NSMetadataItemFSNameKey, filter];
 	}
 	
 	NSMutableArray* predicates = [NSMutableArray arrayWithCapacity:[_filters count]];
 	
 	for(NSString* filter in _filters){
-		NSPredicate* predicate = [NSPredicate predicateWithFormat:@"(%K like '*.%@')", filter];
+		NSPredicate* predicate = [NSPredicate predicateWithFormat:@"(%K.pathExtension = %@)", NSMetadataItemFSNameKey, filter];
 		[predicates addObject:predicate];
 	}
 	
