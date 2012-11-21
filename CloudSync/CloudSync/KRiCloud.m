@@ -180,8 +180,10 @@
 												 NSError* error = nil;
 												 NSFileManager* fileManager = [[NSFileManager alloc] init];
 												 [fileManager removeItemAtURL:writingURL error:&error];
-												 if([error code])
+												 if([error code]){
 													 block(NO, error);
+													 return;
+												 }
 			}];
 		}
 		
