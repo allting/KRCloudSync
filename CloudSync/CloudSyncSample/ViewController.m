@@ -55,7 +55,9 @@
 		if(!available){
 			NSLog(@"Can't use iCloud");
 		}else{
-			[self syncDocumentFiles];
+//			[self syncDocumentFiles];
+			
+			[self syncFilesAndCheckProgress];
 		}
 	}];
 }
@@ -65,6 +67,32 @@
 	
 	KRCloudSync* syncer = [[KRCloudSync alloc]initWithFactory:factory];
 	[syncer syncUsingBlock:^(NSArray* syncItems, NSError* error){
+		if(error)
+			NSLog(@"Failed to sync : %@", error);
+		else{
+			NSLog(@"Succeeded to sync - item count:%d", [syncItems count]);
+			NSLog(@"syncItems - %@", syncItems);
+		}
+	}];
+}
+
+-(void)syncFilesAndCheckProgress{
+	KRCloudFactory* factory = [self createFactoryAndDirectory:@"iCloud"];
+
+	KRCloudSyncStartBlock startBlock = ^(NSArray* syncItems){
+		NSLog(@"-------Start sync with items:%d-----------", [syncItems count]);
+		for(KRSyncItem* item in syncItems){
+			NSLog(@"item:%@", item);
+		}
+	};
+	KRCloudSyncProgressBlock progressBlock = ^(KRSyncItem* item, float progress){
+		NSLog(@"item:%@, progress:%f", item, progress);
+	};
+	
+	KRCloudSync* syncer = [[KRCloudSync alloc]initWithFactory:factory];
+	[syncer syncUsingBlocks:startBlock
+			  progressBlock:progressBlock
+			 completedBlock:^(NSArray* syncItems, NSError* error){
 		if(error)
 			NSLog(@"Failed to sync : %@", error);
 		else{
