@@ -20,15 +20,9 @@
 	return self;
 }
 
--(void)compareUsingBlock:(NSArray*)localResources
-		  remoteResources:(NSArray*)remoteResources
-		  completedBlock:(KRResourceComparerCompletedBlock)completed{
-	NSAssert(completed, @"Mustn't be nil");
-	if(!completed)
-		return;
-
-	NSArray* syncItems = [self compareResourcesAndCreateSyncItems:localResources remoteResources:remoteResources];
-	completed(syncItems, nil);
+-(NSArray*)compare:(NSArray*)localResources
+   remoteResources:(NSArray*)remoteResources{
+	return [self compareResourcesAndCreateSyncItems:localResources remoteResources:remoteResources];
 }
 
 -(NSArray*)compareResourcesAndCreateSyncItems:(NSArray*)localResources remoteResources:(NSArray*)remoteResources{

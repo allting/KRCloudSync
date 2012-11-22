@@ -45,19 +45,4 @@
 	return factory;
 }
 
--(void)testSyncUsingBlock{
-	NSURL* url = [NSURL fileURLWithPath:@"/test/test.zip"];
-	
-	KRCloudSync* cloudSync = [[KRCloudSync alloc]init];
-	KRCloudSyncProgressBlock progress = ^(float progress){
-		
-	};
-	KRCloudSyncCompletedBlock completed = ^(NSArray* syncItems, NSError* error){
-		
-	};
-	
-	[cloudSync syncWithiCloudUsingBlocks:url
-					   progressBlock:progress
-					  completedBlock:completed];
-}
 @end

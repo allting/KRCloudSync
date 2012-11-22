@@ -15,8 +15,7 @@ typedef void (^KRResourceComparerCompletedBlock)(NSArray* comparedResources, NSE
 
 -(id)initWithFactory:(KRCloudFactory*)factory;
 
--(void)compareUsingBlock:(NSArray*)localResources
-		  remoteResources:(NSArray*)remoteResources
-		  completedBlock:(KRResourceComparerCompletedBlock)completed;
+-(NSArray*)compare:(NSArray*)localResources
+   remoteResources:(NSArray*)remoteResources;
 
 @end

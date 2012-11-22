@@ -65,23 +65,16 @@
 		}
 		
 		KRResourceComparer* resourceComparer = [[KRResourceComparer alloc]initWithFactory:_factory];
-		[resourceComparer compareUsingBlock:localResources
-							remoteResources:remoteResources
-							 completedBlock:^(NSArray* syncItems, NSError* error){
-			 if(error){
-				 completedBlock(nil, error);
-				 return;
-			 }
-			 
-			 if(startBlock){
-				 startBlock(syncItems);
-			 }
-			 
-			 KRSynchronizer* sync = [[KRSynchronizer alloc]initWithFactory:_factory];
-			 [sync syncUsingBlock:syncItems completedBlock:^(NSArray* syncItemsResult, NSError* error){
-				 completedBlock(syncItemsResult, error);
-			 }];
-		 }];
+		NSArray* syncItems = [resourceComparer compare:localResources
+									   remoteResources:remoteResources];
+		if(startBlock){
+		 startBlock(syncItems);
+		}
+		 
+		KRSynchronizer* sync = [[KRSynchronizer alloc]initWithFactory:_factory];
+		[sync syncUsingBlock:syncItems completedBlock:^(NSArray* syncItemsResult, NSError* error){
+			completedBlock(syncItemsResult, error);
+		}];
 	}];
 	
 	return YES;
