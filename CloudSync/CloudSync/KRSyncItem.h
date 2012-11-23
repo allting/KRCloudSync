@@ -27,6 +27,7 @@ typedef enum {
 @property (nonatomic) KRResourceProperty* localResource;
 @property (nonatomic) KRResourceProperty* remoteResource;
 @property (nonatomic, assign) KRSyncItemResult result;
+@property (nonatomic) NSError* error;
 
 -(id)initWithResources:(KRResourceProperty*)localResource
 		remoteResource:(KRResourceProperty*)remoteResource

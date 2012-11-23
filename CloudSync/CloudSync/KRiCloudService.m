@@ -92,16 +92,69 @@
 	if(!completed)
 		return NO;
 	
-	for(KRSyncItem* item in syncItems){
-		if(KRSyncItemDirectionNone == item.direction)
-			continue;
-		else if(KRSyncItemDirectionToRemote == item.direction)
-			[self syncToRemote:item];
-		else
-			[self syncToLocal:item];
-	}
-	completed(syncItems, nil);
+	dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+	dispatch_async(globalQueue, ^{
+		
+		NSUInteger count = [syncItems count];
+		
+		NSMutableDictionary* binder = [NSMutableDictionary dictionaryWithCapacity:count];
+		
+		NSMutableArray* readingURLs = [NSMutableArray arrayWithCapacity:count];
+		NSMutableArray* toLocalURLs = [NSMutableArray arrayWithCapacity:count];
+		NSMutableArray* writingURLs = [NSMutableArray arrayWithCapacity:count];
+		NSMutableArray* fromLocalURLs = [NSMutableArray arrayWithCapacity:count];
+		
+		for(KRSyncItem* item in syncItems){
+			if(KRSyncItemDirectionNone == item.direction)
+				continue;
+			else if(KRSyncItemDirectionToRemote == item.direction){
+				[writingURLs addObject:item.remoteResource.URL];
+				[fromLocalURLs addObject:item.localResource.URL];
+				
+				[binder setObject:item forKey:item.localResource.URL];
+			}else{
+				[readingURLs addObject:item.remoteResource.URL];
+				[toLocalURLs addObject:item.localResource.URL];
+				
+				[binder setObject:item forKey:item.remoteResource.URL];
+			}
+		}
+		
+		NSError* error = nil;
+		KRiCloud* iCloud = [[KRiCloud alloc]init];
+		[iCloud batchLockAndSync:readingURLs
+					 toLocalURLs:toLocalURLs
+					 writingURLs:writingURLs
+				   fromLocalURLs:fromLocalURLs
+						   error:&error
+				  completedBlock:^(NSArray *toLocalURLs, NSArray *toLocalURLErrors,
+								 NSArray *fromLocalURLs, NSArray *fromLocalURLErrors) {
+					NSUInteger count=[toLocalURLs count];
+					for(NSUInteger i=0; i<count; i++){
+						NSURL* url = [toLocalURLs objectAtIndex:i];
+						KRSyncItem* item = [binder objectForKey:url];
+						item.error = [toLocalURLErrors objectAtIndex:i];
+					}
+					count = [fromLocalURLs count];
+					for(NSUInteger i=0; i<count; i++){
+						NSURL* url = [fromLocalURLs objectAtIndex:i];
+						KRSyncItem* item = [binder objectForKey:url];
+						item.error = [fromLocalURLErrors objectAtIndex:i];
+					}
+				}];
+		
+		dispatch_queue_t mainQueue = dispatch_get_main_queue();
+		dispatch_async(mainQueue, ^{
+			completed(syncItems, error);
+		});
+	});
 	return YES;
+}
+
+-(void)applyResults:(NSArray*)syncItems
+		toLocalURLs:(NSArray*)toLocalUrls toLocalURLErrors:(NSArray*)toLocalErrors
+	  fromLocalURLs:(NSArray*)fromLocalURLs fromLocalURLErrors:(NSArray*)fromLocalURLErrors{
+	
 }
 
 -(void)syncToRemote:(KRSyncItem*)item{

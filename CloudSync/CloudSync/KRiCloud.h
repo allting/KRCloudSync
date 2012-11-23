@@ -11,6 +11,9 @@
 typedef void (^KRiCloudLoadFilesCompletedBlock)(id, NSMetadataQuery*, NSError*);
 typedef void (^KRiCloudSaveFileCompletedBlock)(id, NSError*);
 typedef void (^KRiCloudRemoveAllFilesCompletedBlock)(BOOL, NSError*);
+typedef void (^KRiCloudBatchSyncCompeletedBlock)
+				(NSArray* toLocalURLs, NSArray* toLocalURLErrors,
+					NSArray* fromLocalURLs, NSArray* fromLocalURLErrors);
 
 @interface KRiCloudLoadFilesContext : NSObject
 @property (nonatomic) id key;
@@ -41,5 +44,10 @@ typedef void (^KRiCloudRemoveAllFilesCompletedBlock)(BOOL, NSError*);
 	   completedBlock:(KRiCloudSaveFileCompletedBlock)block;
 
 -(BOOL)removeAllFiles:(KRiCloudRemoveAllFilesCompletedBlock)block;
+
+-(BOOL)batchLockAndSync:(NSArray*)readingURLs toLocalURLs:(NSArray*)toLocalURLs
+			writingURLs:(NSArray*)writingURLs fromLocalURLs:(NSArray*)fromLocalURLs
+				  error:(NSError**)outError
+		 completedBlock:(KRiCloudBatchSyncCompeletedBlock)block;
 
 @end

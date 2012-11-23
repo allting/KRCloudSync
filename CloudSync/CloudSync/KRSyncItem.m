@@ -48,8 +48,8 @@
 	else
 		result = @"Completed";
 	
-	return [NSString stringWithFormat:@"direction:%@,result:%@,localResources:%@,remoteResources:%@",
-										direction, result, _localResource, _remoteResource];
+	return [NSString stringWithFormat:@"direction:%@,result:%@,localResources:%@,remoteResources:%@, error:%@",
+										direction, result, _localResource, _remoteResource, _error];
 }
 
 @end
