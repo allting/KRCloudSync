@@ -108,13 +108,21 @@
 			if(KRSyncItemDirectionNone == item.direction)
 				continue;
 			else if(KRSyncItemDirectionToRemote == item.direction){
-				[writingURLs addObject:item.remoteResource.URL];
+				NSURL* remoteURL = item.remoteResource.URL;
+				if(!remoteURL)
+					remoteURL = [self createRemoteURL:item.localResource.URL];
+				
+				[writingURLs addObject:remoteURL];
 				[fromLocalURLs addObject:item.localResource.URL];
 				
 				[binder setObject:item forKey:item.localResource.URL];
 			}else{
+				NSURL* localURL = item.localResource.URL;
+				if(!localURL)
+					localURL = [self createLocalURL:item.remoteResource.URL];
+				
 				[readingURLs addObject:item.remoteResource.URL];
-				[toLocalURLs addObject:item.localResource.URL];
+				[toLocalURLs addObject:localURL];
 				
 				[binder setObject:item forKey:item.remoteResource.URL];
 			}
@@ -133,13 +141,15 @@
 					for(NSUInteger i=0; i<count; i++){
 						NSURL* url = [toLocalURLs objectAtIndex:i];
 						KRSyncItem* item = [binder objectForKey:url];
-						item.error = [toLocalURLErrors objectAtIndex:i];
+						if([toLocalURLErrors objectAtIndex:i] != [NSNull null])
+							item.error = [toLocalURLErrors objectAtIndex:i];
 					}
 					count = [fromLocalURLs count];
 					for(NSUInteger i=0; i<count; i++){
 						NSURL* url = [fromLocalURLs objectAtIndex:i];
 						KRSyncItem* item = [binder objectForKey:url];
-						item.error = [fromLocalURLErrors objectAtIndex:i];
+						if([fromLocalURLErrors objectAtIndex:i] != [NSNull null])
+							item.error = [fromLocalURLErrors objectAtIndex:i];
 					}
 				}];
 		

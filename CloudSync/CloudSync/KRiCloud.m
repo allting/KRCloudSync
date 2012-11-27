@@ -99,19 +99,27 @@
 	if(!block)
 		return NO;
 
-	NSError* outError = nil;
     NSFileCoordinator* fc = [[NSFileCoordinator alloc] initWithFilePresenter:self];
-    [fc coordinateWritingItemAtURL:destinationURL
-                           options:NSFileCoordinatorWritingForReplacing
-                             error:&outError
-                        byAccessor:^(NSURL *updatedURL) {
+	return [self saveToUbiquityContainerWithFileCoordinator:fc key:key url:url destinationURL:destinationURL completedBlock:block];
+}
+
+-(BOOL)saveToUbiquityContainerWithFileCoordinator:(NSFileCoordinator*)fileCoordinator key:(id)key url:(NSURL*)url destinationURL:(NSURL*)destinationURL completedBlock:(KRiCloudSaveFileCompletedBlock)block{
+	NSAssert(block, @"Mustn't be nil");
+	if(!block)
+		return NO;
+	
+	NSError* outError = nil;
+    [fileCoordinator coordinateWritingItemAtURL:destinationURL
+										options:NSFileCoordinatorWritingForReplacing
+										  error:&outError
+									 byAccessor:^(NSURL *updatedURL) {
 							NSError* error = nil;
 							
 							[self overwriteFile:url destinationURL:updatedURL error:&error];
 							
 							block(key, error);
 						}];
-
+	
     return YES;
 }
 
@@ -120,14 +128,22 @@
 	if(!block)
 		return NO;
 	
-	NSError* outError = nil;
     NSFileCoordinator* fc = [[NSFileCoordinator alloc] initWithFilePresenter:self];
-    [fc coordinateReadingItemAtURL:url
-                           options:NSFileCoordinatorReadingWithoutChanges
-                             error:&outError
-                        byAccessor:^(NSURL *updatedURL) {
-							NSError* error = nil;
+	return [self saveToDocumentWithFileCoordinator:fc key:key url:url destinationURL:destinationURL completedBlock:block];
+}
 
+-(BOOL)saveToDocumentWithFileCoordinator:(NSFileCoordinator*)fileCoordinator key:(id)key url:(NSURL*)url destinationURL:(NSURL*)destinationURL completedBlock:(KRiCloudSaveFileCompletedBlock)block{
+	NSAssert(block, @"Mustn't be nil");
+	if(!block)
+		return NO;
+	
+	NSError* outError = nil;
+    [fileCoordinator coordinateReadingItemAtURL:url
+										options:NSFileCoordinatorReadingWithoutChanges
+										  error:&outError
+									 byAccessor:^(NSURL *updatedURL) {
+							NSError* error = nil;
+							
 							[self overwriteFile:updatedURL destinationURL:destinationURL error:&error];
 							
 							block(key, error);
@@ -207,8 +223,8 @@
 	if([writingURLs count]!=[fromLocalURLs count])
 		return NO;
 	
-	__block NSMutableArray* toLocalErrors = [NSMutableArray arrayWithCapacity:[readingURLs count]];
-	__block NSMutableArray* fromLocalErrors = [NSMutableArray arrayWithCapacity:[writingURLs count]];
+	NSMutableArray* toLocalErrors = [NSMutableArray arrayWithCapacity:[readingURLs count]];
+	NSMutableArray* fromLocalErrors = [NSMutableArray arrayWithCapacity:[writingURLs count]];
 	
 	NSFileCoordinator* fileCoordinator = [[NSFileCoordinator alloc]initWithFilePresenter:self];
 	[fileCoordinator prepareForReadingItemsAtURLs:readingURLs options:NSFileCoordinatorReadingWithoutChanges
@@ -216,8 +232,9 @@
 											error:outError
 									   byAccessor:^(void(^prepareCompletionHandler)(void)){
 
-										   [self batchSync:readingURLs toLocalURLs:toLocalURLs toLocalErrors:toLocalErrors
-														writingURLs:writingURLs fromLocalURLs:fromLocalURLs fromLocalErrors:fromLocalErrors];
+										   [self batchSync:fileCoordinator
+											   readingURLs:readingURLs toLocalURLs:toLocalURLs toLocalErrors:toLocalErrors
+											   writingURLs:writingURLs fromLocalURLs:fromLocalURLs fromLocalErrors:fromLocalErrors];
 									   }];
 		
 	block(readingURLs, toLocalErrors, fromLocalURLs, fromLocalErrors);
@@ -225,27 +242,34 @@
 	return YES;
 }
 
--(void)batchSync:(NSArray*)readingURLs toLocalURLs:(NSArray*)toLocalURLs toLocalErrors:(NSMutableArray*)toLocalErrors
+-(void)batchSync:(NSFileCoordinator*)fileCoordinator
+	 readingURLs:(NSArray*)readingURLs toLocalURLs:(NSArray*)toLocalURLs toLocalErrors:(NSMutableArray*)toLocalErrors
 	 writingURLs:(NSArray*)writingURLs fromLocalURLs:(NSArray*)fromLocalURLs fromLocalErrors:(NSMutableArray*)fromLocalErrors{
 	
 	NSUInteger count = [readingURLs count];
 	for(NSUInteger i=0; i<count; i++){
-		[self saveToDocument:nil
-						 url:[readingURLs objectAtIndex:i]
-			  destinationURL:[toLocalURLs objectAtIndex:i]
-			  completedBlock:^(id key, NSError *error) {
-				  [toLocalErrors addObject:error];
-		}];
+		[self saveToDocumentWithFileCoordinator:fileCoordinator key:nil
+											url:[readingURLs objectAtIndex:i]
+								 destinationURL:[toLocalURLs objectAtIndex:i]
+								 completedBlock:^(id key, NSError *error) {
+									 if([error code])
+										 [toLocalErrors addObject:error];
+									 else
+										 [toLocalErrors addObject:[NSNull null]];
+								 }];
 	}
 	
 	count = [writingURLs count];
 	for(NSUInteger i=0; i<count; i++){
-		[self saveToUbiquityContainer:nil
-								  url:[fromLocalURLs objectAtIndex:i]
-					   destinationURL:[writingURLs objectAtIndex:i]
-					   completedBlock:^(id key, NSError *error) {
-						   [fromLocalErrors addObject:error];
-					   }];
+		[self saveToUbiquityContainerWithFileCoordinator:fileCoordinator key:nil
+													 url:[fromLocalURLs objectAtIndex:i]
+										  destinationURL:[writingURLs objectAtIndex:i]
+										  completedBlock:^(id key, NSError *error) {
+											  if([error code])
+												  [fromLocalErrors addObject:error];
+											  else
+												  [fromLocalErrors addObject:[NSNull null]];
+										  }];
 	}
 }
 
