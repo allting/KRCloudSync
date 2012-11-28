@@ -15,15 +15,23 @@ typedef void (^KRiCloudBatchSyncCompeletedBlock)
 				(NSArray* toLocalURLs, NSArray* toLocalURLErrors,
 					NSArray* fromLocalURLs, NSArray* fromLocalURLErrors);
 
+typedef void (^KRiCloudMonitorFilesCompletedBlock)(id key, NSMetadataQuery* query, NSError* error);
+
 @interface KRiCloudLoadFilesContext : NSObject
 @property (nonatomic) id key;
 @property (nonatomic) NSMetadataQuery* query;
 @property (nonatomic, copy) KRiCloudLoadFilesCompletedBlock block;
 @end
 
+@interface KRiCloudMonitorFilesContext : NSObject
+@property (nonatomic) id key;
+@property (nonatomic) NSMetadataQuery* query;
+@property (nonatomic, copy) KRiCloudMonitorFilesCompletedBlock block;
+@end
+
 @interface KRiCloud : NSObject<NSFilePresenter>{
 	NSURL* _ubiquityContainer;
-	NSMutableDictionary* _loadFilesContexts;
+	NSMutableDictionary* _queryContexts;
 	NSOperationQueue* _presentedItemOperationQueue;
 }
 
@@ -32,6 +40,10 @@ typedef void (^KRiCloudBatchSyncCompeletedBlock)
 -(BOOL)loadFiles:(id)key
 	   predicate:(NSPredicate*)predicate
   completedBlock:(KRiCloudLoadFilesCompletedBlock)block;
+
+-(BOOL)monitorFiles:(id)key
+		  predicate:(NSPredicate*)predicate
+	 completedBlock:(KRiCloudMonitorFilesCompletedBlock)block;
 
 -(BOOL)saveToUbiquityContainer:(id)key
 						   url:(NSURL*)url

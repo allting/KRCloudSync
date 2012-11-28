@@ -9,9 +9,10 @@
 #import "ViewController.h"
 #import "KRCloudSync.h"
 #import "KRiCloudFactory.h"
+#import "KRiCloud.h"
 
 @interface ViewController ()
-
+@property (nonatomic) KRiCloud* iCloudForMonitor;
 @end
 
 @implementation ViewController
@@ -20,6 +21,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+	[self monitoriCloudFiles];
+	
 	[self sync];
 //	[self removeAllFiles];
 }
@@ -28,6 +31,20 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)monitoriCloudFiles{
+	KRiCloud* iCloud = [[KRiCloud alloc]init];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K like '*')", NSMetadataItemFSNameKey];
+	
+	[iCloud monitorFiles:nil predicate:predicate completedBlock:^(id key, NSMetadataQuery *query, NSError *error) {
+		NSLog(@"MonitorFiles:%@, count:%d", query, [query resultCount]);
+		for(NSMetadataItem* item in [query results]){
+			NSLog(@"Item:%@", item);
+		}
+	}];
+	
+	self.iCloudForMonitor = iCloud;
 }
 
 -(void)removeAllFiles{

@@ -12,6 +12,9 @@
 
 @end
 
+@implementation KRiCloudMonitorFilesContext
+
+@end
 
 @implementation KRiCloud
 
@@ -31,7 +34,7 @@
 	self = [super init];
 	if(self){
 		_ubiquityContainer = nil;
-		_loadFilesContexts = [NSMutableDictionary dictionaryWithCapacity:3];
+		_queryContexts = [NSMutableDictionary dictionaryWithCapacity:3];
 		_presentedItemOperationQueue = [[NSOperationQueue alloc] init];
 		[_presentedItemOperationQueue setName:[NSString stringWithFormat:@"presenter queue -- %@", self]];
 		[_presentedItemOperationQueue setMaxConcurrentOperationCount:1];
@@ -41,10 +44,11 @@
 
 -(void)dealloc{
 	_ubiquityContainer = nil;
-	_loadFilesContexts = nil;
+	_queryContexts = nil;
 	_presentedItemOperationQueue = nil;
 }
 
+#pragma mark - loadFiles
 -(BOOL)loadFiles:(id)key predicate:(NSPredicate*)predicate completedBlock:(KRiCloudLoadFilesCompletedBlock)block{
 	NSAssert(block, @"Mustn't be nil");
 	if(!block)
@@ -67,11 +71,10 @@
 	[query startQuery];
 	
 	NSValue* value = [NSValue valueWithNonretainedObject:query];
-	[_loadFilesContexts setObject:context forKey:value];
+	[_queryContexts setObject:context forKey:value];
 	return YES;
 }
 
-#pragma mark - loadFiles internal methods
 - (void)queryDidFinishGatheringForLoading:(NSNotification *)notification {
 	NSMetadataQuery* query = [notification object];
     [query disableUpdates];
@@ -82,10 +85,10 @@
                                                   object:query];
     
 	NSValue* value = [NSValue valueWithNonretainedObject:query];
-	KRiCloudLoadFilesContext* context = [_loadFilesContexts objectForKey:value];
+	KRiCloudLoadFilesContext* context = [_queryContexts objectForKey:value];
     [self raiseLoadFilesBlock:context];
 	
-	[_loadFilesContexts removeObjectForKey:query];
+	[_queryContexts removeObjectForKey:query];
 }
 
 - (void)raiseLoadFilesBlock:(KRiCloudLoadFilesContext*)context{
@@ -94,6 +97,56 @@
 	}
 }
 
+#pragma mark - monitorFiles
+-(BOOL)monitorFiles:(id)key predicate:(NSPredicate*)predicate completedBlock:(KRiCloudMonitorFilesCompletedBlock)block{
+	NSAssert(block, @"Mustn't be nil");
+	if(!block)
+		return NO;
+	
+	NSMetadataQuery* query = [[NSMetadataQuery alloc] init];
+	[query setSearchScopes:[NSArray arrayWithObject:NSMetadataQueryUbiquitousDocumentsScope]];
+	[query setPredicate:predicate];
+	
+	KRiCloudMonitorFilesContext* context = [[KRiCloudMonitorFilesContext alloc]init];
+	context.key = key;
+	context.query = query;
+	context.block = block;
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(queryDidUpdateNotification:)
+												 name:NSMetadataQueryDidUpdateNotification
+											   object:query];
+	
+	[query startQuery];
+	
+	NSValue* value = [NSValue valueWithNonretainedObject:query];
+	[_queryContexts setObject:context forKey:value];
+	return YES;
+}
+
+-(void)queryDidUpdateNotification:(NSNotification *)notification {
+	NSMetadataQuery* query = [notification object];
+    [query disableUpdates];
+    [query stopQuery];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:NSMetadataQueryDidUpdateNotification
+                                                  object:query];
+    
+	NSValue* value = [NSValue valueWithNonretainedObject:query];
+	KRiCloudMonitorFilesContext* context = [_queryContexts objectForKey:value];
+    [self raiseMonitorFilesBlock:context];
+	
+	[_queryContexts removeObjectForKey:query];
+}
+
+- (void)raiseMonitorFilesBlock:(KRiCloudMonitorFilesContext*)context{
+	if(context.block){
+		context.block(context.key, context.query, nil);
+	}
+}
+
+#pragma mark - save
 -(BOOL)saveToUbiquityContainer:(id)key url:(NSURL*)url destinationURL:(NSURL*)destinationURL completedBlock:(KRiCloudSaveFileCompletedBlock)block{
 	NSAssert(block, @"Mustn't be nil");
 	if(!block)
