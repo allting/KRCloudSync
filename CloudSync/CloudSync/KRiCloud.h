@@ -8,25 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^KRiCloudLoadFilesCompletedBlock)(id, NSMetadataQuery*, NSError*);
+typedef void (^KRiCloudCompletedBlock)(NSMetadataQuery*, NSError*);
 typedef void (^KRiCloudSaveFileCompletedBlock)(id, NSError*);
 typedef void (^KRiCloudRemoveAllFilesCompletedBlock)(BOOL, NSError*);
 typedef void (^KRiCloudBatchSyncCompeletedBlock)
 				(NSArray* toLocalURLs, NSArray* toLocalURLErrors,
 					NSArray* fromLocalURLs, NSArray* fromLocalURLErrors);
 
-typedef void (^KRiCloudMonitorFilesCompletedBlock)(id key, NSMetadataQuery* query, NSError* error);
-
-@interface KRiCloudLoadFilesContext : NSObject
+@interface KRiCloudContext : NSObject
 @property (nonatomic) id key;
 @property (nonatomic) NSMetadataQuery* query;
-@property (nonatomic, copy) KRiCloudLoadFilesCompletedBlock block;
-@end
-
-@interface KRiCloudMonitorFilesContext : NSObject
-@property (nonatomic) id key;
-@property (nonatomic) NSMetadataQuery* query;
-@property (nonatomic, copy) KRiCloudMonitorFilesCompletedBlock block;
+@property (nonatomic, copy) KRiCloudCompletedBlock block;
 @end
 
 @interface KRiCloud : NSObject<NSFilePresenter>{
@@ -37,13 +29,11 @@ typedef void (^KRiCloudMonitorFilesCompletedBlock)(id key, NSMetadataQuery* quer
 
 +(KRiCloud*)sharedInstance;
 
--(BOOL)loadFiles:(id)key
-	   predicate:(NSPredicate*)predicate
-  completedBlock:(KRiCloudLoadFilesCompletedBlock)block;
+-(BOOL)loadFilesWithPredicate:(NSPredicate*)predicate
+			   completedBlock:(KRiCloudCompletedBlock)block;
 
--(BOOL)monitorFiles:(id)key
-		  predicate:(NSPredicate*)predicate
-	 completedBlock:(KRiCloudMonitorFilesCompletedBlock)block;
+-(BOOL)monitorFilesWithPredicate:(NSPredicate*)predicate
+				  completedBlock:(KRiCloudCompletedBlock)block;
 
 -(BOOL)saveToUbiquityContainer:(id)key
 						   url:(NSURL*)url

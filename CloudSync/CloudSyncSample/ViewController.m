@@ -37,7 +37,7 @@
 	KRiCloud* iCloud = [[KRiCloud alloc]init];
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K like '*')", NSMetadataItemFSNameKey];
 	
-	[iCloud monitorFiles:nil predicate:predicate completedBlock:^(id key, NSMetadataQuery *query, NSError *error) {
+	[iCloud monitorFilesWithPredicate:predicate completedBlock:^(NSMetadataQuery *query, NSError *error) {
 		NSLog(@"MonitorFiles:%@, count:%d", query, [query resultCount]);
 		for(NSMetadataItem* item in [query results]){
 			NSLog(@"Item:%@", item);

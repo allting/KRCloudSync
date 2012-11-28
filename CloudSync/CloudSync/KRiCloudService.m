@@ -71,9 +71,8 @@
 	NSPredicate *predicate = [self.filter createPredicate];
 	
 	KRiCloud* cloud = [KRiCloud sharedInstance];
-	[cloud loadFiles:nil
-		   predicate:predicate
-	  completedBlock:^(id key, NSMetadataQuery* query, NSError* error){
+	[cloud loadFilesWithPredicate:predicate
+				   completedBlock:^(NSMetadataQuery* query, NSError* error){
 		NSMutableArray* resources  = [NSMutableArray arrayWithCapacity:[query resultCount]];
 		for(NSMetadataItem *item in [query results]){
 			KRResourceProperty* resource = [[KRResourceProperty alloc]initWithMetadataItem:item];

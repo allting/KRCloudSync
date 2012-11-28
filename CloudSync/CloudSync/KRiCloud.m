@@ -8,11 +8,7 @@
 
 #import "KRiCloud.h"
 
-@implementation KRiCloudLoadFilesContext
-
-@end
-
-@implementation KRiCloudMonitorFilesContext
+@implementation KRiCloudContext
 
 @end
 
@@ -49,7 +45,7 @@
 }
 
 #pragma mark - loadFiles
--(BOOL)loadFiles:(id)key predicate:(NSPredicate*)predicate completedBlock:(KRiCloudLoadFilesCompletedBlock)block{
+-(BOOL)loadFilesWithPredicate:(NSPredicate*)predicate completedBlock:(KRiCloudCompletedBlock)block{
 	NSAssert(block, @"Mustn't be nil");
 	if(!block)
 		return NO;
@@ -58,8 +54,7 @@
 	[query setSearchScopes:[NSArray arrayWithObject:NSMetadataQueryUbiquitousDocumentsScope]];
 	[query setPredicate:predicate];
 	
-	KRiCloudLoadFilesContext* context = [[KRiCloudLoadFilesContext alloc]init];
-	context.key = key;
+	KRiCloudContext* context = [[KRiCloudContext alloc]init];
 	context.query = query;
 	context.block = block;
 	
@@ -85,20 +80,20 @@
                                                   object:query];
     
 	NSValue* value = [NSValue valueWithNonretainedObject:query];
-	KRiCloudLoadFilesContext* context = [_queryContexts objectForKey:value];
-    [self raiseLoadFilesBlock:context];
+	KRiCloudContext* context = [_queryContexts objectForKey:value];
+    [self raiseCompletedBlock:context];
 	
 	[_queryContexts removeObjectForKey:query];
 }
 
-- (void)raiseLoadFilesBlock:(KRiCloudLoadFilesContext*)context{
+- (void)raiseCompletedBlock:(KRiCloudContext*)context{
 	if(context.block){
-		context.block(context.key, context.query, nil);
+		context.block(context.query, nil);
 	}
 }
 
 #pragma mark - monitorFiles
--(BOOL)monitorFiles:(id)key predicate:(NSPredicate*)predicate completedBlock:(KRiCloudMonitorFilesCompletedBlock)block{
+-(BOOL)monitorFilesWithPredicate:(NSPredicate*)predicate completedBlock:(KRiCloudCompletedBlock)block{
 	NSAssert(block, @"Mustn't be nil");
 	if(!block)
 		return NO;
@@ -107,8 +102,7 @@
 	[query setSearchScopes:[NSArray arrayWithObject:NSMetadataQueryUbiquitousDocumentsScope]];
 	[query setPredicate:predicate];
 	
-	KRiCloudMonitorFilesContext* context = [[KRiCloudMonitorFilesContext alloc]init];
-	context.key = key;
+	KRiCloudContext* context = [[KRiCloudContext alloc]init];
 	context.query = query;
 	context.block = block;
 	
@@ -134,16 +128,10 @@
                                                   object:query];
     
 	NSValue* value = [NSValue valueWithNonretainedObject:query];
-	KRiCloudMonitorFilesContext* context = [_queryContexts objectForKey:value];
-    [self raiseMonitorFilesBlock:context];
+	KRiCloudContext* context = [_queryContexts objectForKey:value];
+    [self raiseCompletedBlock:context];
 	
 	[_queryContexts removeObjectForKey:query];
-}
-
-- (void)raiseMonitorFilesBlock:(KRiCloudMonitorFilesContext*)context{
-	if(context.block){
-		context.block(context.key, context.query, nil);
-	}
 }
 
 #pragma mark - save
@@ -222,9 +210,8 @@
 	
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K like '*')", NSMetadataItemFSNameKey];
 	
-	[self loadFiles:nil
-		  predicate:predicate
-	 completedBlock:^(id key, NSMetadataQuery* query, NSError* error){
+	[self loadFilesWithPredicate:predicate
+				  completedBlock:^(NSMetadataQuery* query, NSError* error){
 		  [self removeFilesWithItems:[query results] block:block];
 	}];
 
