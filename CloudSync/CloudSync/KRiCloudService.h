@@ -17,7 +17,8 @@
 @property (nonatomic) KRResourceFilter* filter;
 
 +(BOOL)isAvailableUsingBlock:(KRiCloudAvailableBlock)availableBlock;
-+(BOOL)removeAllFilesUsingBlock:(KRiCloudRemoveAllFilesBlock)block;
++(BOOL)removeFileUsingBlock:(NSString*)fileName completedBlock:(KRiCloudRemoveFileBlock)block;
++(BOOL)removeAllFilesUsingBlock:(KRiCloudRemoveFileBlock)block;
 					   
 -(id)initWithLocalPath:(NSString*)path filter:(KRResourceFilter*)filter;
 

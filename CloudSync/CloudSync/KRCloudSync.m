@@ -20,7 +20,7 @@
 	return [KRiCloudService isAvailableUsingBlock:availableBlock];
 }
 
-+(BOOL)removeAlliCloudFileUsingBlock:(KRiCloudRemoveAllFilesBlock)block{
++(BOOL)removeAlliCloudFileUsingBlock:(KRiCloudRemoveFileBlock)block{
 	return [KRiCloudService removeAllFilesUsingBlock:block];
 }
 

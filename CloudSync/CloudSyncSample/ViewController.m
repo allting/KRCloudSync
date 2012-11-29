@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "KRCloudSync.h"
 #import "KRiCloudFactory.h"
+#import "KRiCloudService.h"
 #import "KRiCloud.h"
 
 @interface ViewController ()
@@ -110,12 +111,19 @@
 	[syncer syncUsingBlocks:startBlock
 			  progressBlock:progressBlock
 			 completedBlock:^(NSArray* syncItems, NSError* error){
-		if(error)
-			NSLog(@"Failed to sync : %@", error);
-		else{
-			NSLog(@"Succeeded to sync - item count:%d", [syncItems count]);
-			NSLog(@"syncItems - %@", syncItems);
-		}
+				 if(error)
+					 NSLog(@"Failed to sync : %@", error);
+				 else{
+					 NSLog(@"Succeeded to sync - item count:%d", [syncItems count]);
+					 NSLog(@"syncItems - %@", syncItems);
+				 }
+				 
+				 [KRiCloudService removeFileUsingBlock:@"test1.png" completedBlock:^(BOOL succeeded, NSError *error) {
+					 if(succeeded)
+						 NSLog(@"Succeeded to remove file");
+					 else
+						 NSLog(@"Failed to remove file - %@", error);
+				 }];
 	}];
 }
 

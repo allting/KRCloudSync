@@ -203,7 +203,22 @@
 	return [fileManager copyItemAtURL:sourceURL toURL:destinationURL error:&error];
 }
 
--(BOOL)removeAllFiles:(KRiCloudRemoveAllFilesCompletedBlock)block{
+#pragma mark - remove files
+-(BOOL)removeFile:(NSString*)fileName completedBlock:(KRiCloudRemoveFileCompletedBlock)block{
+	NSAssert(block, @"Mustn't be nil");
+	if(!block)
+		return NO;
+
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K == %@)", NSMetadataItemFSNameKey, fileName];
+	
+	[self loadFilesWithPredicate:predicate
+				  completedBlock:^(NSMetadataQuery* query, NSError* error){
+					  [self removeFilesWithItems:[query results] block:block];
+				  }];
+	return YES;
+}
+
+-(BOOL)removeAllFiles:(KRiCloudRemoveFileCompletedBlock)block{
 	NSAssert(block, @"Mustn't be nil");
 	if(!block)
 		return NO;
@@ -218,7 +233,7 @@
 	return YES;
 }
 
--(BOOL)removeFilesWithItems:(NSArray*)metadataItems block:(KRiCloudRemoveAllFilesCompletedBlock)block{
+-(BOOL)removeFilesWithItems:(NSArray*)metadataItems block:(KRiCloudRemoveFileCompletedBlock)block{
 	NSAssert(block, @"Mustn't be nil");
 	if(!block)
 		return NO;

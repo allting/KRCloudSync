@@ -34,7 +34,20 @@
 	return YES;
 }
 
-+(BOOL)removeAllFilesUsingBlock:(KRiCloudRemoveAllFilesBlock)block{
++(BOOL)removeFileUsingBlock:(NSString*)fileName completedBlock:(KRiCloudRemoveFileBlock)block{
+	NSAssert(block, @"Mustn't be nil");
+	if(!block)
+		return NO;
+	
+	KRiCloud* cloud = [KRiCloud sharedInstance];
+	[cloud removeFile:fileName completedBlock:^(BOOL succeeded, NSError* error){
+		block(succeeded, error);
+	}];
+	
+	return YES;
+}
+
++(BOOL)removeAllFilesUsingBlock:(KRiCloudRemoveFileBlock)block{
 	NSAssert(block, @"Mustn't be nil");
 	if(!block)
 		return NO;
