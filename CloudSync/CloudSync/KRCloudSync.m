@@ -68,7 +68,7 @@
 		NSArray* syncItems = [resourceComparer compare:localResources
 									   remoteResources:remoteResources];
 		if(startBlock){
-		 startBlock(syncItems);
+			startBlock(syncItems);
 		}
 		 
 		KRSynchronizer* sync = [[KRSynchronizer alloc]initWithFactory:_factory];

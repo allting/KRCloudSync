@@ -30,6 +30,14 @@
 	self = [super init];
 	if(self){
 		_ubiquityContainer = nil;
+		
+		_query = [[NSMetadataQuery alloc] init];
+		[_query setSearchScopes:[NSArray arrayWithObject:NSMetadataQueryUbiquitousDocumentsScope]];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(queryDidFinishGatheringForLoading:)
+													 name:NSMetadataQueryDidFinishGatheringNotification
+												   object:_query];
+		
 		_queryContexts = [NSMutableDictionary dictionaryWithCapacity:3];
 		_presentedItemOperationQueue = [[NSOperationQueue alloc] init];
 		[_presentedItemOperationQueue setName:[NSString stringWithFormat:@"presenter queue -- %@", self]];
@@ -39,6 +47,13 @@
 }
 
 -(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:NSMetadataQueryDidFinishGatheringNotification
+                                                  object:_query];
+	[_query disableUpdates];
+    [_query stopQuery];
+	_query = nil;
+
 	_ubiquityContainer = nil;
 	_queryContexts = nil;
 	_presentedItemOperationQueue = nil;
@@ -49,47 +64,28 @@
 	NSAssert(block, @"Mustn't be nil");
 	if(!block)
 		return NO;
+
+	if([_query isStarted]){
+		block(_query, nil);
+		return YES;
+	}
 	
-	NSMetadataQuery* query = [[NSMetadataQuery alloc] init];
-	[query setSearchScopes:[NSArray arrayWithObject:NSMetadataQueryUbiquitousDocumentsScope]];
-	[query setPredicate:predicate];
+	_block = block;
+
+	[_query setPredicate:predicate];
+	[_query startQuery];
 	
-	KRiCloudContext* context = [[KRiCloudContext alloc]init];
-	context.query = query;
-	context.block = block;
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(queryDidFinishGatheringForLoading:)
-												 name:NSMetadataQueryDidFinishGatheringNotification
-											   object:query];
-	
-	[query startQuery];
-	
-	NSValue* value = [NSValue valueWithNonretainedObject:query];
-	[_queryContexts setObject:context forKey:value];
 	return YES;
 }
 
 - (void)queryDidFinishGatheringForLoading:(NSNotification *)notification {
-	NSMetadataQuery* query = [notification object];
-    [query disableUpdates];
-    [query stopQuery];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:NSMetadataQueryDidFinishGatheringNotification
-                                                  object:query];
-    
-	NSValue* value = [NSValue valueWithNonretainedObject:query];
-	KRiCloudContext* context = [_queryContexts objectForKey:value];
-    [self raiseCompletedBlock:context];
-	
-	[_queryContexts removeObjectForKey:query];
+	if(_block)
+		_block(_query, nil);
 }
 
-- (void)raiseCompletedBlock:(KRiCloudContext*)context{
-	if(context.block){
-		context.block(context.query, nil);
-	}
+-(void)raiseCompletedBlock:(KRiCloudContext*)context{
+	NSMetadataQuery* query = context.query;
+	context.block(query, nil);
 }
 
 #pragma mark - monitorFiles

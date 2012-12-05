@@ -23,8 +23,10 @@ typedef void (^KRiCloudBatchSyncCompeletedBlock)
 
 @interface KRiCloud : NSObject<NSFilePresenter>{
 	NSURL* _ubiquityContainer;
+	NSMetadataQuery* _query;
 	NSMutableDictionary* _queryContexts;
 	NSOperationQueue* _presentedItemOperationQueue;
+	KRiCloudCompletedBlock _block;
 }
 
 +(KRiCloud*)sharedInstance;

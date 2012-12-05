@@ -22,7 +22,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-	[self monitoriCloudFiles];
+//	[self monitoriCloudFiles];
 	
 	[self sync];
 //	[self removeAllFiles];
@@ -99,31 +99,28 @@
 
 	KRCloudSyncStartBlock startBlock = ^(NSArray* syncItems){
 		NSLog(@"-------Start sync with items:%d-----------", [syncItems count]);
-		for(KRSyncItem* item in syncItems){
-			NSLog(@"item:%@", item);
-		}
+//		for(KRSyncItem* item in syncItems){
+//			NSLog(@"item:%@", item);
+//		}
 	};
 	KRCloudSyncProgressBlock progressBlock = ^(KRSyncItem* item, float progress){
 		NSLog(@"item:%@, progress:%f", item, progress);
 	};
 	
-	KRCloudSync* syncer = [[KRCloudSync alloc]initWithFactory:factory];
-	[syncer syncUsingBlocks:startBlock
-			  progressBlock:progressBlock
-			 completedBlock:^(NSArray* syncItems, NSError* error){
-				 if(error)
-					 NSLog(@"Failed to sync : %@", error);
-				 else{
-					 NSLog(@"Succeeded to sync - item count:%d", [syncItems count]);
-					 NSLog(@"syncItems - %@", syncItems);
-				 }
-				 
-				 [KRiCloudService removeFileUsingBlock:@"test1.png" completedBlock:^(BOOL succeeded, NSError *error) {
-					 if(succeeded)
-						 NSLog(@"Succeeded to remove file");
-					 else
-						 NSLog(@"Failed to remove file - %@", error);
-				 }];
+	KRCloudSync* cloudSync = [[KRCloudSync alloc]initWithFactory:factory];
+	[cloudSync syncUsingBlocks:startBlock
+				 progressBlock:progressBlock
+				completedBlock:^(NSArray* syncItems, NSError* error){
+					if(error)
+						NSLog(@"Failed to sync : %@", error);
+					else{
+						NSLog(@"Succeeded to sync - item count:%d", [syncItems count]);
+						NSLog(@"syncItems - %@", syncItems);
+						static int count = 0;
+						if(0 == count)
+							[self syncFilesAndCheckProgress];
+						++count;
+					}
 	}];
 }
 
