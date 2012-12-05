@@ -65,6 +65,7 @@
 	if(self){
 		self.documentPath = path;
 		self.filter = filter;
+		_iCloud = [[KRiCloud alloc]init];
 	}
 	return self;
 }
@@ -83,8 +84,7 @@
 	
 	NSPredicate *predicate = [self.filter createPredicate];
 	
-	KRiCloud* cloud = [KRiCloud sharedInstance];
-	[cloud loadFilesWithPredicate:predicate
+	[_iCloud loadFilesWithPredicate:predicate
 				   completedBlock:^(NSMetadataQuery* query, NSError* error){
 		NSMutableArray* resources  = [NSMutableArray arrayWithCapacity:[query resultCount]];
 		for(NSMetadataItem *item in [query results]){
@@ -173,10 +173,35 @@
 	return YES;
 }
 
--(void)applyResults:(NSArray*)syncItems
-		toLocalURLs:(NSArray*)toLocalUrls toLocalURLErrors:(NSArray*)toLocalErrors
-	  fromLocalURLs:(NSArray*)fromLocalURLs fromLocalURLErrors:(NSArray*)fromLocalURLErrors{
+-(BOOL)renameFileUsingBlock:(NSString*)fileName
+				newFileName:(NSString*)newFileName
+			 completedBlock:(KRCloudSyncResultBlock)block{
+	NSAssert(block, @"Mustn't be nil");
+	if(!block)
+		return NO;
 	
+	if([fileName isEqualToString:newFileName])
+		return NO;
+	
+	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+	dispatch_async(queue, ^{
+		NSFileManager *fileManager = [NSFileManager defaultManager];
+		NSURL *ubiquityContainer = [fileManager URLForUbiquityContainerIdentifier:nil];
+		
+		NSString* filePath = [NSString stringWithFormat:@"Documents/%@", fileName];
+		NSString* newFilePath = [NSString stringWithFormat:@"Documents/%@", newFileName];
+		
+		NSURL* url = [ubiquityContainer URLByAppendingPathComponent:filePath];
+		NSURL* newURL = [ubiquityContainer URLByAppendingPathComponent:newFilePath];
+
+		NSError* error = nil;
+		BOOL ret = [_iCloud renameFile:url newURL:newURL error:&error];
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			block(ret, error);
+		});
+	});
+	return YES;
 }
 
 -(void)syncToRemote:(KRSyncItem*)item{
@@ -205,7 +230,7 @@
 	[cloud saveToDocument:nil url:item.remoteResource.URL
 						 destinationURL:localURL
 						 completedBlock:^(id key, NSError* error) {
-							NSLog(@"syncToRemote - Error:%@", error);
+							NSLog(@"syncToLocal - Error:%@", error);
 						}];
 }
 

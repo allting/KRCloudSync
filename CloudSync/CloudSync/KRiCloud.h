@@ -15,6 +15,8 @@ typedef void (^KRiCloudBatchSyncCompeletedBlock)
 				(NSArray* toLocalURLs, NSArray* toLocalURLErrors,
 					NSArray* fromLocalURLs, NSArray* fromLocalURLErrors);
 
+typedef void (^KRiCloudResultBlock)(BOOL succeeded, NSError* error);
+
 @interface KRiCloudContext : NSObject
 @property (nonatomic) id key;
 @property (nonatomic) NSMetadataQuery* query;
@@ -33,6 +35,10 @@ typedef void (^KRiCloudBatchSyncCompeletedBlock)
 
 -(BOOL)loadFilesWithPredicate:(NSPredicate*)predicate
 			   completedBlock:(KRiCloudCompletedBlock)block;
+
+-(BOOL)renameFile:(NSURL*)destinationURL
+		   newURL:(NSURL*)newURL
+			error:(NSError**)error;
 
 -(BOOL)monitorFilesWithPredicate:(NSPredicate*)predicate
 				  completedBlock:(KRiCloudCompletedBlock)block;

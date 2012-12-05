@@ -88,6 +88,28 @@
 	context.block(query, nil);
 }
 
+#pragma mark - renameFile
+-(BOOL)renameFile:(NSURL*)destinationURL
+		   newURL:(NSURL*)newURL
+			error:(NSError**)error{
+	NSError* outError = nil;
+	__block BOOL result = NO;
+	NSFileCoordinator* fileCoordinator = [[NSFileCoordinator alloc] initWithFilePresenter:self];
+    [fileCoordinator coordinateWritingItemAtURL:destinationURL
+										options:NSFileCoordinatorWritingForReplacing
+										  error:&outError
+									 byAccessor:^(NSURL *updatedURL) {
+										 NSFileManager* fileManager = [NSFileManager defaultManager];
+										 result = [fileManager moveItemAtURL:destinationURL toURL:newURL error:error];
+									 }];
+	if([outError code]){
+		*error = outError;
+		return NO;
+	}
+	
+    return result;
+}
+
 #pragma mark - monitorFiles
 -(BOOL)monitorFilesWithPredicate:(NSPredicate*)predicate completedBlock:(KRiCloudCompletedBlock)block{
 	NSAssert(block, @"Mustn't be nil");

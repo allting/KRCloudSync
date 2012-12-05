@@ -15,6 +15,8 @@ typedef void (^KRCloudSyncStartBlock)(NSArray* syncItems);
 typedef void (^KRCloudSyncProgressBlock)(KRSyncItem* synItem, float progress);
 typedef void (^KRCloudSyncCompletedBlock)(NSArray* syncItems, NSError* error);
 
+typedef void (^KRCloudSyncResultBlock)(BOOL succeeded, NSError* error);
+
 typedef void (^KRResourcesCompletedBlock)(NSArray* resources, NSError* error);
 typedef void (^KRSynchronizerCompletedBlock)(NSArray* syncResources, NSError* error);
 

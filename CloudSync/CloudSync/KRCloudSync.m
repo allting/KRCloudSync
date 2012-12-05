@@ -41,6 +41,11 @@
 	return self;
 }
 
+-(KRCloudService*)service{
+	return _factory.cloudService;
+}
+
+
 -(BOOL)sync{
 	return YES;
 }

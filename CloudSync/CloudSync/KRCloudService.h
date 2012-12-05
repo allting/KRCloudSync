@@ -17,4 +17,7 @@
 -(BOOL)syncUsingBlock:(NSArray*)syncItems
 	   completedBlock:(KRSynchronizerCompletedBlock)completed;
 
+-(BOOL)renameFileUsingBlock:(NSString*)fileName
+				newFileName:(NSString*)newFileName
+			 completedBlock:(KRCloudSyncResultBlock)block;
 @end

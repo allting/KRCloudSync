@@ -10,8 +10,11 @@
 #import "KRCloudService.h"
 #import "KRCloudSyncBlocks.h"
 #import "KRResourceFilter.h"
+#import "KRiCloud.h"
 
-@interface KRiCloudService : KRCloudService
+@interface KRiCloudService : KRCloudService{
+	KRiCloud* _iCloud;
+}
 
 @property (nonatomic) NSString* documentPath;
 @property (nonatomic) KRResourceFilter* filter;
@@ -27,4 +30,7 @@
 -(BOOL)syncUsingBlock:(NSArray*)syncItems
 	   completedBlock:(KRSynchronizerCompletedBlock)completed;
 
+-(BOOL)renameFileUsingBlock:(NSString*)fileName
+				newFileName:(NSString*)newFileName
+			 completedBlock:(KRCloudSyncResultBlock)block;
 @end

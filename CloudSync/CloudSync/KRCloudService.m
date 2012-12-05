@@ -24,4 +24,10 @@
 	return YES;
 }
 
+-(BOOL)renameFileUsingBlock:(NSString*)fileName
+				newFileName:(NSString*)newFileName
+			 completedBlock:(KRCloudSyncResultBlock)block{
+	return NO;
+}
+
 @end

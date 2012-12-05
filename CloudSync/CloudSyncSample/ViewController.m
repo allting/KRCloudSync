@@ -69,6 +69,9 @@
 }
 
 -(void)sync{
+	KRCloudFactory* factory = [self createFactoryAndDirectory:@"iCloud"];
+	self.cloudSync = [[KRCloudSync alloc]initWithFactory:factory];
+	
 	[KRCloudSync isAvailableiCloudUsingBlock:^(BOOL available){
 		if(!available){
 			NSLog(@"Can't use iCloud");
@@ -95,8 +98,6 @@
 }
 
 -(void)syncFilesAndCheckProgress{
-	KRCloudFactory* factory = [self createFactoryAndDirectory:@"iCloud"];
-
 	KRCloudSyncStartBlock startBlock = ^(NSArray* syncItems){
 		NSLog(@"-------Start sync with items:%d-----------", [syncItems count]);
 //		for(KRSyncItem* item in syncItems){
@@ -107,20 +108,23 @@
 		NSLog(@"item:%@, progress:%f", item, progress);
 	};
 	
-	KRCloudSync* cloudSync = [[KRCloudSync alloc]initWithFactory:factory];
-	[cloudSync syncUsingBlocks:startBlock
+	[_cloudSync syncUsingBlocks:startBlock
 				 progressBlock:progressBlock
 				completedBlock:^(NSArray* syncItems, NSError* error){
-					if(error)
+					if(error){
 						NSLog(@"Failed to sync : %@", error);
-					else{
-						NSLog(@"Succeeded to sync - item count:%d", [syncItems count]);
-						NSLog(@"syncItems - %@", syncItems);
-						static int count = 0;
-						if(0 == count)
-							[self syncFilesAndCheckProgress];
-						++count;
+						return;
 					}
+					
+					NSLog(@"Succeeded to sync - item count:%d", [syncItems count]);
+					NSLog(@"syncItems - %@", syncItems);
+					
+					KRCloudService* service = [_cloudSync service];
+					[service renameFileUsingBlock:@"test1.png"
+									  newFileName:@"test2.png"
+								   completedBlock:^(BOOL succeeded, NSError* error){
+						NSLog(@"%@ to rename - error:%@", succeeded?@"Succeeded":@"Failed", error);
+					}];
 	}];
 }
 

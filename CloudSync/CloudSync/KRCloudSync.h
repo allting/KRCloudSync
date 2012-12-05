@@ -26,10 +26,13 @@ typedef enum {
 
 -(id)initWithFactory:(KRCloudFactory*)factory;
 
+-(KRCloudService*)service;
+
 -(BOOL)sync;
 -(BOOL)syncUsingBlock:(KRCloudSyncCompletedBlock)completed;
 -(BOOL)syncUsingBlocks:(KRCloudSyncStartBlock)startBlock
 		 progressBlock:(KRCloudSyncProgressBlock)progresBlock
 		completedBlock:(KRCloudSyncCompletedBlock)completedBlock;
+
 
 @end
