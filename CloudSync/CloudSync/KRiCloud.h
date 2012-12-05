@@ -36,8 +36,8 @@ typedef void (^KRiCloudResultBlock)(BOOL succeeded, NSError* error);
 -(BOOL)loadFilesWithPredicate:(NSPredicate*)predicate
 			   completedBlock:(KRiCloudCompletedBlock)block;
 
--(BOOL)renameFile:(NSURL*)destinationURL
-		   newURL:(NSURL*)newURL
+-(BOOL)renameFile:(NSURL*)sourceURL
+		   newURL:(NSURL*)destinationURL
 			error:(NSError**)error;
 
 -(BOOL)monitorFilesWithPredicate:(NSPredicate*)predicate

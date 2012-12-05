@@ -120,8 +120,8 @@
 					NSLog(@"syncItems - %@", syncItems);
 					
 					KRCloudService* service = [_cloudSync service];
-					[service renameFileUsingBlock:@"test1.png"
-									  newFileName:@"test2.png"
+					[service renameFileUsingBlock:@"test3.png"
+									  newFileName:@"test5.png"
 								   completedBlock:^(BOOL succeeded, NSError* error){
 						NSLog(@"%@ to rename - error:%@", succeeded?@"Succeeded":@"Failed", error);
 					}];

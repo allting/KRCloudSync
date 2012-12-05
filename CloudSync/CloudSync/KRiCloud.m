@@ -89,18 +89,22 @@
 }
 
 #pragma mark - renameFile
--(BOOL)renameFile:(NSURL*)destinationURL
-		   newURL:(NSURL*)newURL
+-(BOOL)renameFile:(NSURL*)sourceURL
+		   newURL:(NSURL*)destinationURL
 			error:(NSError**)error{
 	NSError* outError = nil;
 	__block BOOL result = NO;
 	NSFileCoordinator* fileCoordinator = [[NSFileCoordinator alloc] initWithFilePresenter:self];
-    [fileCoordinator coordinateWritingItemAtURL:destinationURL
+    [fileCoordinator coordinateWritingItemAtURL:sourceURL
+										options:NSFileCoordinatorWritingForMoving
+							   writingItemAtURL:destinationURL
 										options:NSFileCoordinatorWritingForReplacing
 										  error:&outError
-									 byAccessor:^(NSURL *updatedURL) {
+									 byAccessor:^(NSURL *newURL1, NSURL* newURL2) {
 										 NSFileManager* fileManager = [NSFileManager defaultManager];
-										 result = [fileManager moveItemAtURL:destinationURL toURL:newURL error:error];
+										 result = [fileManager moveItemAtURL:newURL1 toURL:newURL2 error:error];
+										 if(result)
+											 [fileCoordinator itemAtURL:newURL1 didMoveToURL:newURL2];
 									 }];
 	if([outError code]){
 		*error = outError;
