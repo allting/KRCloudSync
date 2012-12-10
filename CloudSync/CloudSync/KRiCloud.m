@@ -156,6 +156,80 @@
 	[_queryContexts removeObjectForKey:query];
 }
 
+#pragma mark - batch sync
+-(BOOL)batchLockAndSync:(NSArray*)readingURLs toLocalURLs:(NSArray*)toLocalURLs
+			writingURLs:(NSArray*)writingURLs fromLocalURLs:(NSArray*)fromLocalURLs
+				  error:(NSError**)outError
+		 completedBlock:(KRiCloudBatchSyncCompeletedBlock)block{
+	NSAssert(block, @"Mustn't be nil");
+	if(!block)
+		return NO;
+	
+	NSAssert([readingURLs count]==[toLocalURLs count], @"Must be equal");
+	NSAssert([writingURLs count]==[fromLocalURLs count], @"Must be equal");
+	if([readingURLs count]!=[toLocalURLs count])
+		return NO;
+	if([writingURLs count]!=[fromLocalURLs count])
+		return NO;
+	
+	NSMutableArray* toLocalErrors = [NSMutableArray arrayWithCapacity:[readingURLs count]];
+	NSMutableArray* fromLocalErrors = [NSMutableArray arrayWithCapacity:[writingURLs count]];
+	
+	NSFileCoordinator* fileCoordinator = [[NSFileCoordinator alloc]initWithFilePresenter:self];
+	[fileCoordinator prepareForReadingItemsAtURLs:readingURLs options:NSFileCoordinatorReadingWithoutChanges
+							   writingItemsAtURLs:writingURLs options:NSFileCoordinatorWritingForReplacing
+											error:outError
+									   byAccessor:^(void(^prepareCompletionHandler)(void)){
+										   
+										   [self batchSync:fileCoordinator
+											   readingURLs:readingURLs toLocalURLs:toLocalURLs toLocalErrors:toLocalErrors
+											   writingURLs:writingURLs fromLocalURLs:fromLocalURLs fromLocalErrors:fromLocalErrors];
+									   }];
+	
+	block(readingURLs, toLocalErrors, fromLocalURLs, fromLocalErrors);
+	
+	return YES;
+}
+
+-(void)batchSync:(NSFileCoordinator*)fileCoordinator
+	 readingURLs:(NSArray*)readingURLs toLocalURLs:(NSArray*)toLocalURLs toLocalErrors:(NSMutableArray*)toLocalErrors
+	 writingURLs:(NSArray*)writingURLs fromLocalURLs:(NSArray*)fromLocalURLs fromLocalErrors:(NSMutableArray*)fromLocalErrors{
+	
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	
+	NSUInteger count = [readingURLs count];
+	for(NSUInteger i=0; i<count; i++){
+		NSError* error = nil;
+		BOOL ret = [fileManager startDownloadingUbiquitousItemAtURL:[readingURLs objectAtIndex:i] error:&error];
+		NSLog(@"startDownloadingUbiquitousItemAtURL - ret:%@, error:%@", ret?@"YES":@"NO", error);
+		
+		[self saveToDocumentWithFileCoordinator:fileCoordinator key:nil
+											url:[readingURLs objectAtIndex:i]
+								 destinationURL:[toLocalURLs objectAtIndex:i]
+								 completedBlock:^(id key, NSError *error) {
+									 if([error code])
+										 [toLocalErrors addObject:error];
+									 else
+										 [toLocalErrors addObject:[NSNull null]];
+								 }];
+	}
+	NSAssert([toLocalURLs count] == [toLocalErrors count], @"Must be equl");
+	
+	count = [writingURLs count];
+	for(NSUInteger i=0; i<count; i++){
+		[self saveToUbiquityContainerWithFileCoordinator:fileCoordinator key:nil
+													 url:[fromLocalURLs objectAtIndex:i]
+										  destinationURL:[writingURLs objectAtIndex:i]
+										  completedBlock:^(id key, NSError *error) {
+											  if([error code])
+												  [fromLocalErrors addObject:error];
+											  else
+												  [fromLocalErrors addObject:[NSNull null]];
+										  }];
+	}
+	NSAssert([fromLocalURLs count] == [fromLocalErrors count], @"Must be equl");
+}
+
 #pragma mark - save
 -(BOOL)saveToUbiquityContainer:(id)key url:(NSURL*)url destinationURL:(NSURL*)destinationURL completedBlock:(KRiCloudSaveFileCompletedBlock)block{
 	NSAssert(block, @"Mustn't be nil");
@@ -283,77 +357,6 @@
 	});
 	
 	return YES;
-}
-
--(BOOL)batchLockAndSync:(NSArray*)readingURLs toLocalURLs:(NSArray*)toLocalURLs
-			writingURLs:(NSArray*)writingURLs fromLocalURLs:(NSArray*)fromLocalURLs
-				  error:(NSError**)outError
-		 completedBlock:(KRiCloudBatchSyncCompeletedBlock)block{
-	NSAssert(block, @"Mustn't be nil");
-	if(!block)
-		return NO;
-	
-	NSAssert([readingURLs count]==[toLocalURLs count], @"Must be equal");
-	NSAssert([writingURLs count]==[fromLocalURLs count], @"Must be equal");
-	if([readingURLs count]!=[toLocalURLs count])
-		return NO;
-	if([writingURLs count]!=[fromLocalURLs count])
-		return NO;
-	
-	NSMutableArray* toLocalErrors = [NSMutableArray arrayWithCapacity:[readingURLs count]];
-	NSMutableArray* fromLocalErrors = [NSMutableArray arrayWithCapacity:[writingURLs count]];
-	
-	NSFileCoordinator* fileCoordinator = [[NSFileCoordinator alloc]initWithFilePresenter:self];
-	[fileCoordinator prepareForReadingItemsAtURLs:readingURLs options:NSFileCoordinatorReadingWithoutChanges
-							   writingItemsAtURLs:writingURLs options:NSFileCoordinatorWritingForReplacing
-											error:outError
-									   byAccessor:^(void(^prepareCompletionHandler)(void)){
-
-										   [self batchSync:fileCoordinator
-											   readingURLs:readingURLs toLocalURLs:toLocalURLs toLocalErrors:toLocalErrors
-											   writingURLs:writingURLs fromLocalURLs:fromLocalURLs fromLocalErrors:fromLocalErrors];
-									   }];
-		
-	block(readingURLs, toLocalErrors, fromLocalURLs, fromLocalErrors);
-
-	return YES;
-}
-
--(void)batchSync:(NSFileCoordinator*)fileCoordinator
-	 readingURLs:(NSArray*)readingURLs toLocalURLs:(NSArray*)toLocalURLs toLocalErrors:(NSMutableArray*)toLocalErrors
-	 writingURLs:(NSArray*)writingURLs fromLocalURLs:(NSArray*)fromLocalURLs fromLocalErrors:(NSMutableArray*)fromLocalErrors{
-	
-	NSFileManager* fileManager = [NSFileManager defaultManager];
-
-	NSUInteger count = [readingURLs count];
-	for(NSUInteger i=0; i<count; i++){
-		NSError* error = nil;
-		BOOL ret = [fileManager startDownloadingUbiquitousItemAtURL:[readingURLs objectAtIndex:i] error:&error];
-		NSLog(@"startDownloadingUbiquitousItemAtURL - ret:%@, error:%@", ret?@"YES":@"NO", error);
-		
-		[self saveToDocumentWithFileCoordinator:fileCoordinator key:nil
-											url:[readingURLs objectAtIndex:i]
-								 destinationURL:[toLocalURLs objectAtIndex:i]
-								 completedBlock:^(id key, NSError *error) {
-									 if([error code])
-										 [toLocalErrors addObject:error];
-									 else
-										 [toLocalErrors addObject:[NSNull null]];
-								 }];
-	}
-	
-	count = [writingURLs count];
-	for(NSUInteger i=0; i<count; i++){
-		[self saveToUbiquityContainerWithFileCoordinator:fileCoordinator key:nil
-													 url:[fromLocalURLs objectAtIndex:i]
-										  destinationURL:[writingURLs objectAtIndex:i]
-										  completedBlock:^(id key, NSError *error) {
-											  if([error code])
-												  [fromLocalErrors addObject:error];
-											  else
-												  [fromLocalErrors addObject:[NSNull null]];
-										  }];
-	}
 }
 
 #pragma mark NSFilePresenter protocol
