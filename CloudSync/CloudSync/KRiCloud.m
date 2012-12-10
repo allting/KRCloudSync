@@ -323,8 +323,14 @@
 	 readingURLs:(NSArray*)readingURLs toLocalURLs:(NSArray*)toLocalURLs toLocalErrors:(NSMutableArray*)toLocalErrors
 	 writingURLs:(NSArray*)writingURLs fromLocalURLs:(NSArray*)fromLocalURLs fromLocalErrors:(NSMutableArray*)fromLocalErrors{
 	
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+
 	NSUInteger count = [readingURLs count];
 	for(NSUInteger i=0; i<count; i++){
+		NSError* error = nil;
+		BOOL ret = [fileManager startDownloadingUbiquitousItemAtURL:[readingURLs objectAtIndex:i] error:&error];
+		NSLog(@"startDownloadingUbiquitousItemAtURL - ret:%@, error:%@", ret?@"YES":@"NO", error);
+		
 		[self saveToDocumentWithFileCoordinator:fileCoordinator key:nil
 											url:[readingURLs objectAtIndex:i]
 								 destinationURL:[toLocalURLs objectAtIndex:i]
