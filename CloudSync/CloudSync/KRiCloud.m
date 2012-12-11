@@ -250,12 +250,14 @@
 										options:NSFileCoordinatorWritingForReplacing
 										  error:&outError
 									 byAccessor:^(NSURL *updatedURL) {
-							NSError* error = nil;
+										 NSError* error = nil;
 							
-							[self overwriteFile:url destinationURL:updatedURL error:&error];
-							
-							block(key, error);
-						}];
+										 BOOL ret = [self overwriteFile:url destinationURL:updatedURL error:&error];
+										 if(ret)
+											 [fileCoordinator itemAtURL:url didMoveToURL:updatedURL];
+
+										 block(key, error);
+									 }];
 	
     return YES;
 }
@@ -279,12 +281,14 @@
 										options:NSFileCoordinatorReadingWithoutChanges
 										  error:&outError
 									 byAccessor:^(NSURL *updatedURL) {
-							NSError* error = nil;
+										 NSError* error = nil;
 							
-							[self overwriteFile:updatedURL destinationURL:destinationURL error:&error];
+										 BOOL ret = [self overwriteFile:updatedURL destinationURL:destinationURL error:&error];
+										 if(ret)
+											 [fileCoordinator itemAtURL:updatedURL didMoveToURL:destinationURL];
 							
-							block(key, error);
-						}];
+										 block(key, error);
+									 }];
 	
     return YES;
 }
