@@ -106,6 +106,59 @@
 	
 	dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 	dispatch_async(globalQueue, ^{
+		NSError* error = nil;
+		KRiCloud* iCloud = [[KRiCloud alloc]init];
+		[NSFileCoordinator addFilePresenter:iCloud];
+		
+		NSFileCoordinator* fileCoordinator = [[NSFileCoordinator alloc]initWithFilePresenter:iCloud];
+		for(KRSyncItem* item in syncItems){
+			if(KRSyncItemDirectionNone == item.direction)
+				continue;
+			
+			NSError* error = nil;
+
+			if(KRSyncItemDirectionToRemote == item.direction){
+				NSURL* remoteURL = item.remoteResource.URL;
+				if(!remoteURL)
+					remoteURL = [self createRemoteURL:item.localResource.URL];
+				NSURL* localURL = item.localResource.URL;
+				
+				[iCloud saveToUbiquityContainerWithFileCoordinator:fileCoordinator
+															   url:localURL
+													destinationURL:remoteURL
+															 error:&error];
+				item.error = error;
+			}else{
+				NSURL* localURL = item.localResource.URL;
+				if(!localURL)
+					localURL = [self createLocalURL:item.remoteResource.URL];
+				NSURL* remoteURL = item.remoteResource.URL;
+				
+				[iCloud saveToDocumentWithFileCoordinator:fileCoordinator
+													  url:remoteURL
+										   destinationURL:localURL
+													error:&error];
+				item.error = error;
+			}
+		}
+		[NSFileCoordinator removeFilePresenter:iCloud];
+		
+		dispatch_queue_t mainQueue = dispatch_get_main_queue();
+		dispatch_async(mainQueue, ^{
+			completed(syncItems, error);
+		});
+	});
+	return YES;
+}
+
+-(BOOL)batchSyncUsingBlock:(NSArray*)syncItems
+	   completedBlock:(KRSynchronizerCompletedBlock)completed{
+	NSAssert(completed, @"Mustn't be nil");
+	if(!completed)
+		return NO;
+	
+	dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+	dispatch_async(globalQueue, ^{
 		
 		NSUInteger count = [syncItems count];
 		
@@ -142,6 +195,8 @@
 		
 		NSError* error = nil;
 		KRiCloud* iCloud = [[KRiCloud alloc]init];
+		[NSFileCoordinator addFilePresenter:iCloud];
+
 		[iCloud batchLockAndSync:readingURLs
 					 toLocalURLs:toLocalURLs
 					 writingURLs:writingURLs
@@ -164,6 +219,8 @@
 							item.error = [fromLocalURLErrors objectAtIndex:i];
 					}
 				}];
+
+		[NSFileCoordinator removeFilePresenter:iCloud];
 		
 		dispatch_queue_t mainQueue = dispatch_get_main_queue();
 		dispatch_async(mainQueue, ^{

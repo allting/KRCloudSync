@@ -24,7 +24,7 @@ typedef void (^KRiCloudResultBlock)(BOOL succeeded, NSError* error);
 @end
 
 @interface KRiCloud : NSObject<NSFilePresenter>{
-	NSURL* _ubiquityContainer;
+	NSURL* _presentedItemURL;
 	NSMetadataQuery* _query;
 	NSMutableDictionary* _queryContexts;
 	NSOperationQueue* _presentedItemOperationQueue;
@@ -48,10 +48,20 @@ typedef void (^KRiCloudResultBlock)(BOOL succeeded, NSError* error);
 				destinationURL:(NSURL*)destinationURL
 				completedBlock:(KRiCloudSaveFileCompletedBlock)block;
 
+-(BOOL)saveToUbiquityContainerWithFileCoordinator:(NSFileCoordinator*)fileCoordinator
+											  url:(NSURL*)url
+								   destinationURL:(NSURL*)destinationURL
+											error:(NSError**)error;
+
 -(BOOL)saveToDocument:(id)key
 				  url:(NSURL*)url
 	   destinationURL:(NSURL*)destinationURL
 	   completedBlock:(KRiCloudSaveFileCompletedBlock)block;
+
+-(BOOL)saveToDocumentWithFileCoordinator:(NSFileCoordinator*)fileCoordinator
+									 url:(NSURL*)url
+						  destinationURL:(NSURL*)destinationURL
+								   error:(NSError**)error;
 
 -(BOOL)removeFile:(NSString*)fileName completedBlock:(KRiCloudRemoveFileCompletedBlock)block;
 -(BOOL)removeAllFiles:(KRiCloudRemoveFileCompletedBlock)block;

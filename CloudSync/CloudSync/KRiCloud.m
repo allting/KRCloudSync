@@ -29,7 +29,15 @@
 -(KRiCloud*)init{
 	self = [super init];
 	if(self){
-		_ubiquityContainer = nil;
+		_presentedItemURL = nil;
+		dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+		dispatch_async(queue, ^{
+			NSFileManager* fileManager = [NSFileManager defaultManager];
+			NSURL* url = [fileManager URLForUbiquityContainerIdentifier:nil];
+			dispatch_async(dispatch_get_main_queue(), ^{
+				_presentedItemURL = url;
+			});
+		});
 		
 		_query = [[NSMetadataQuery alloc] init];
 		[_query setSearchScopes:[NSArray arrayWithObject:NSMetadataQueryUbiquitousDocumentsScope]];
@@ -54,7 +62,7 @@
     [_query stopQuery];
 	_query = nil;
 
-	_ubiquityContainer = nil;
+	_presentedItemURL = nil;
 	_queryContexts = nil;
 	_presentedItemOperationQueue = nil;
 }
@@ -172,6 +180,13 @@
 	if([writingURLs count]!=[fromLocalURLs count])
 		return NO;
 	
+#ifdef DEBUG
+	if([readingURLs count])
+		NSLog(@"readingURLs:%@", readingURLs);
+	if([writingURLs count])
+		NSLog(@"writingURLs:%@", writingURLs);
+#endif
+	
 	NSMutableArray* toLocalErrors = [NSMutableArray arrayWithCapacity:[readingURLs count]];
 	NSMutableArray* fromLocalErrors = [NSMutableArray arrayWithCapacity:[writingURLs count]];
 	
@@ -184,9 +199,9 @@
 										   [self batchSync:fileCoordinator
 											   readingURLs:readingURLs toLocalURLs:toLocalURLs toLocalErrors:toLocalErrors
 											   writingURLs:writingURLs fromLocalURLs:fromLocalURLs fromLocalErrors:fromLocalErrors];
+										   
+										   block(readingURLs, toLocalErrors, fromLocalURLs, fromLocalErrors);
 									   }];
-	
-	block(readingURLs, toLocalErrors, fromLocalURLs, fromLocalErrors);
 	
 	return YES;
 }
@@ -195,37 +210,31 @@
 	 readingURLs:(NSArray*)readingURLs toLocalURLs:(NSArray*)toLocalURLs toLocalErrors:(NSMutableArray*)toLocalErrors
 	 writingURLs:(NSArray*)writingURLs fromLocalURLs:(NSArray*)fromLocalURLs fromLocalErrors:(NSMutableArray*)fromLocalErrors{
 	
-	NSFileManager* fileManager = [NSFileManager defaultManager];
-	
 	NSUInteger count = [readingURLs count];
 	for(NSUInteger i=0; i<count; i++){
 		NSError* error = nil;
-		BOOL ret = [fileManager startDownloadingUbiquitousItemAtURL:[readingURLs objectAtIndex:i] error:&error];
-		NSLog(@"startDownloadingUbiquitousItemAtURL - ret:%@, error:%@", ret?@"YES":@"NO", error);
-		
-		[self saveToDocumentWithFileCoordinator:fileCoordinator key:nil
-											url:[readingURLs objectAtIndex:i]
-								 destinationURL:[toLocalURLs objectAtIndex:i]
-								 completedBlock:^(id key, NSError *error) {
-									 if([error code])
-										 [toLocalErrors addObject:error];
-									 else
-										 [toLocalErrors addObject:[NSNull null]];
-								 }];
+		BOOL ret = [self saveToDocumentWithFileCoordinator:fileCoordinator
+												  url:[readingURLs objectAtIndex:i]
+									   destinationURL:[toLocalURLs objectAtIndex:i]
+												error:&error];
+		if(!ret || [error code])
+			[toLocalErrors addObject:error];
+		else
+			[toLocalErrors addObject:[NSNull null]];
 	}
 	NSAssert([toLocalURLs count] == [toLocalErrors count], @"Must be equl");
 	
 	count = [writingURLs count];
 	for(NSUInteger i=0; i<count; i++){
-		[self saveToUbiquityContainerWithFileCoordinator:fileCoordinator key:nil
-													 url:[fromLocalURLs objectAtIndex:i]
-										  destinationURL:[writingURLs objectAtIndex:i]
-										  completedBlock:^(id key, NSError *error) {
-											  if([error code])
-												  [fromLocalErrors addObject:error];
-											  else
-												  [fromLocalErrors addObject:[NSNull null]];
-										  }];
+		NSError* error = nil;
+		BOOL ret = [self saveToUbiquityContainerWithFileCoordinator:fileCoordinator
+																url:[fromLocalURLs objectAtIndex:i]
+													 destinationURL:[writingURLs objectAtIndex:i]
+															  error:&error];
+		if(!ret || [error code])
+			[fromLocalErrors addObject:error];
+		else
+			[fromLocalErrors addObject:[NSNull null]];
 	}
 	NSAssert([fromLocalURLs count] == [fromLocalErrors count], @"Must be equl");
 }
@@ -236,30 +245,44 @@
 	if(!block)
 		return NO;
 
+	NSError* error = nil;
     NSFileCoordinator* fc = [[NSFileCoordinator alloc] initWithFilePresenter:self];
-	return [self saveToUbiquityContainerWithFileCoordinator:fc key:key url:url destinationURL:destinationURL completedBlock:block];
+	return [self saveToUbiquityContainerWithFileCoordinator:fc url:url destinationURL:destinationURL error:&error];
 }
 
--(BOOL)saveToUbiquityContainerWithFileCoordinator:(NSFileCoordinator*)fileCoordinator key:(id)key url:(NSURL*)url destinationURL:(NSURL*)destinationURL completedBlock:(KRiCloudSaveFileCompletedBlock)block{
-	NSAssert(block, @"Mustn't be nil");
-	if(!block)
-		return NO;
-	
+-(BOOL)saveToUbiquityContainerWithFileCoordinator:(NSFileCoordinator*)fileCoordinator url:(NSURL*)url destinationURL:(NSURL*)destinationURL error:(NSError**)error{
+	__block NSError* innerError = nil;
+	__block BOOL ret = NO;
 	NSError* outError = nil;
     [fileCoordinator coordinateWritingItemAtURL:destinationURL
 										options:NSFileCoordinatorWritingForReplacing
 										  error:&outError
 									 byAccessor:^(NSURL *updatedURL) {
-										 NSError* error = nil;
-							
-										 BOOL ret = [self overwriteFile:url destinationURL:updatedURL error:&error];
-										 if(ret)
-											 [fileCoordinator itemAtURL:url didMoveToURL:updatedURL];
-
-										 block(key, error);
+										 ret = [self checkIn:url toURL:updatedURL error:&innerError];
 									 }];
+	if([outError code]){
+		*error = outError;
+		return NO;
+	}
+	if(!ret){
+		*error = innerError;
+		return NO;
+	}
 	
     return YES;
+}
+
+
+-(BOOL)checkIn:(NSURL*)url toURL:(NSURL*)toURL error:(NSError**)outError{
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	BOOL ret = NO;
+	if([fileManager fileExistsAtPath:[toURL path]]){
+		ret = [fileManager replaceItemAtURL:toURL withItemAtURL:url backupItemName:nil options:NSFileManagerItemReplacementUsingNewMetadataOnly resultingItemURL:&toURL error:outError];
+	}else{
+		ret = [fileManager moveItemAtURL:url toURL:toURL error:outError];
+	}
+	
+	return ret;
 }
 
 -(BOOL)saveToDocument:(id)key url:(NSURL*)url destinationURL:(NSURL*)destinationURL completedBlock:(KRiCloudSaveFileCompletedBlock)block{
@@ -267,40 +290,48 @@
 	if(!block)
 		return NO;
 	
+	NSError* error = nil;
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	BOOL ret = [fileManager startDownloadingUbiquitousItemAtURL:url error:&error];
+	NSLog(@"startDownloadingUbiquitousItemAtURL - ret:%@, error:%@", ret?@"YES":@"NO", error);
+
     NSFileCoordinator* fc = [[NSFileCoordinator alloc] initWithFilePresenter:self];
-	return [self saveToDocumentWithFileCoordinator:fc key:key url:url destinationURL:destinationURL completedBlock:block];
+	return [self saveToDocumentWithFileCoordinator:fc url:url destinationURL:destinationURL error:&error];
 }
 
--(BOOL)saveToDocumentWithFileCoordinator:(NSFileCoordinator*)fileCoordinator key:(id)key url:(NSURL*)url destinationURL:(NSURL*)destinationURL completedBlock:(KRiCloudSaveFileCompletedBlock)block{
-	NSAssert(block, @"Mustn't be nil");
-	if(!block)
-		return NO;
-	
+-(BOOL)saveToDocumentWithFileCoordinator:(NSFileCoordinator*)fileCoordinator
+									 url:(NSURL*)url
+						  destinationURL:(NSURL*)destinationURL
+								   error:(NSError**)error{
+	__block NSError* innerError = nil;
 	NSError* outError = nil;
     [fileCoordinator coordinateReadingItemAtURL:url
 										options:NSFileCoordinatorReadingWithoutChanges
 										  error:&outError
 									 byAccessor:^(NSURL *updatedURL) {
-										 NSError* error = nil;
-							
-										 BOOL ret = [self overwriteFile:updatedURL destinationURL:destinationURL error:&error];
-										 if(ret)
-											 [fileCoordinator itemAtURL:updatedURL didMoveToURL:destinationURL];
-							
-										 block(key, error);
+										 [self checkOut:updatedURL toURL:destinationURL error:&innerError];
 									 }];
+	if([outError code]){
+		*error = outError;
+		return NO;
+	}
+	if([innerError code]){
+		*error = innerError;
+		return NO;
+	}
 	
     return YES;
 }
 
--(BOOL)overwriteFile:(NSURL*)sourceURL destinationURL:(NSURL*)destinationURL error:(NSError**)outError{
-	NSError* error = nil;
+-(BOOL)checkOut:(NSURL*)url toURL:(NSURL*)toURL error:(NSError**)outError{
 	NSFileManager* fileManager = [NSFileManager defaultManager];
+	if([fileManager fileExistsAtPath:[toURL path]]){
+		BOOL ret = [fileManager removeItemAtURL:toURL error:outError];
+		if(!ret)
+			return ret;
+	}
 	
-	if([fileManager fileExistsAtPath:[destinationURL path]])
-		[fileManager removeItemAtURL:destinationURL error:&error];
-	
-	return [fileManager copyItemAtURL:sourceURL toURL:destinationURL error:&error];
+	return [fileManager copyItemAtURL:url toURL:toURL error:outError];
 }
 
 #pragma mark - remove files
@@ -366,13 +397,80 @@
 #pragma mark NSFilePresenter protocol
 
 - (NSURL *)presentedItemURL{
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	return [fileManager URLForUbiquityContainerIdentifier:nil];
+	if(!_presentedItemURL){
+		NSFileManager* fileManager = [NSFileManager defaultManager];
+		_presentedItemURL = [fileManager URLForUbiquityContainerIdentifier:nil];
+	}
+	return _presentedItemURL;
 }
 
 - (NSOperationQueue *)presentedItemOperationQueue{
+	NSLog(@"presentedItemOperationQueue");
     return _presentedItemOperationQueue;
 }
 
+- (void)relinquishPresentedItemToReader:(void (^)(void (^reacquirer)(void))) reader{
+	NSLog(@"relinquishPresentedItemToReader");
+}
+- (void)relinquishPresentedItemToWriter:(void (^)(void (^reacquirer)(void)))writer;{
+	NSLog(@"relinquishPresentedItemToWriter");
+}
+
+- (void)savePresentedItemChangesWithCompletionHandler:(void (^)(NSError *errorOrNil))completionHandler{
+    NSLog(@"savePresentedItemChangesWithCompletionHandler");
+}
+
+- (void)accommodatePresentedItemDeletionWithCompletionHandler:(void (^)(NSError *errorOrNil))completionHandler{
+    NSLog(@"accommodatePresentedItemDeletionWithCompletionHandler");
+}
+
+- (void)presentedItemDidMoveToURL:(NSURL *)newURL;{
+    NSLog(@"presentedItemDidMoveToURL: %@", newURL);
+}
+
+// This gets called for local coordinated writes and for unsolicited incoming edits from iCloud. From the header, "Your NSFileProvider may be sent this message without being sent -relinquishPresentedItemToWriter: first. Make your application do the best it can in that case."
+- (void)presentedItemDidChange;{
+    NSLog(@"presentedItemDidChange");
+}
+
+- (void)presentedItemDidGainVersion:(NSFileVersion *)version;{
+    NSLog(@"presentedItemDidGainVersion");
+}
+
+- (void)presentedItemDidLoseVersion:(NSFileVersion *)version;{
+    NSLog(@"presentedItemDidLoseVersion");
+}
+
+- (void)presentedItemDidResolveConflictVersion:(NSFileVersion *)version;{
+    NSLog(@"presentedItemDidResolveConflictVersion");
+}
+
+- (void)presentedSubitemAtURL:(NSURL *)url didGainVersion:(NSFileVersion *)version{
+	NSLog(@"presentedSubitemAtURL-url:%@, didGainVersion:%@", url, version);
+}
+
+- (void)presentedSubitemAtURL:(NSURL *)url didLoseVersion:(NSFileVersion *)version{
+	NSLog(@"presentedSubitemAtURL-url:%@, didLoseVersion:%@", url, version);
+}
+
+- (void)presentedSubitemAtURL:(NSURL *)url didResolveConflictVersion:(NSFileVersion *)version{
+	NSLog(@"presentedSubitemAtURL-url:%@, didResolveConflictVersion:%@", url, version);
+}
+
+- (void)accommodatePresentedSubitemDeletionAtURL:(NSURL *)url completionHandler:(void (^)(NSError *errorOrNil))completionHandler{
+	NSLog(@"accommodatePresentedSubitemDeletionAtURL-url:%@", url);
+}
+
+- (void)presentedSubitemDidAppearAtURL:(NSURL *)url{
+	NSLog(@"presentedSubitemDidAppearAtURL:%@", url);
+}
+
+- (void)presentedSubitemAtURL:(NSURL *)oldURL didMoveToURL:(NSURL *)newURL{
+	NSLog(@"presentedSubitemAtURL - oldURL:%@, didMoveToURL:%@", oldURL, newURL);
+}
+
+- (void)presentedSubitemDidChangeAtURL:(NSURL *)url{
+	NSLog(@"presentedSubitemDidChangeAtURL:%@", url);
+}
 
 @end
